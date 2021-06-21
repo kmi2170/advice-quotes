@@ -1,0 +1,58 @@
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
+import { red } from '@material-ui/core/colors';
+
+const breakpoints = createBreakpoints({});
+
+// breakpoints.values.lg = 1024
+// breakpoints.values['xxl'] = 3000
+// '@media (min-width:600px)': {
+//     fontSize: '1.5rem',
+//   },
+
+// Create a theme instance.
+let theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#556cd6',
+    },
+    secondary: {
+      main: '#F53689',
+      dark: '#19857b',
+    },
+    info: {
+      main: '#2196f3',
+      light: '#2196f3',
+    },
+    error: {
+      main: red.A400,
+    },
+    background: {
+      default: '#fff',
+    },
+  },
+  typography: {
+    fontFamily: [
+      'Roboto',
+      'Lobster',
+      'Raleway',
+      'sans-serif',
+      // 'Roboto Condensed',
+      'Rubik',
+      'Oswald',
+      'Viaoda Libre',
+      'Playfair Display',
+    ].join(','),
+    // h4: {
+    //   fontSize: '2.125rem',
+    //   [breakpoints.down('sm')]: {
+    //     fontSize: '1.5rem',
+    //   },
+    // },
+  },
+  overrides: {},
+});
+
+theme = responsiveFontSizes(theme);
+
+export default theme;
