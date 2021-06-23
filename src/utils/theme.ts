@@ -1,4 +1,7 @@
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+//import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { responsiveFontSizes } from '@material-ui/core/styles';
+import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core';
+
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 import { red } from '@material-ui/core/colors';
 
@@ -18,7 +21,7 @@ let theme = createMuiTheme({
     },
     secondary: {
       main: '#F53689',
-      dark: '#19857b',
+      // dark: '#19857b',
     },
     info: {
       main: '#2196f3',
@@ -33,9 +36,9 @@ let theme = createMuiTheme({
   },
   typography: {
     fontFamily: [
+      'Raleway',
       'Roboto',
       'Lobster',
-      'Raleway',
       'sans-serif',
       // 'Roboto Condensed',
       'Rubik',
@@ -50,7 +53,15 @@ let theme = createMuiTheme({
     //   },
     // },
   },
-  overrides: {},
+  overrides: {
+    MuiPopover: {
+      paper: {
+        borderRadius: '0.5rem',
+        backgroundColor: '#555',
+        padding: '1rem',
+      },
+    },
+  },
 });
 
 theme = responsiveFontSizes(theme);
