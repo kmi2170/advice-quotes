@@ -28,7 +28,7 @@ const SEO = () => {
 export default SEO;
 
 const config = {
-  title: 'Advice App',
+  title: 'Advice/Quotes App',
   author: 'Kmi, Web developer/programmer',
   // author: {
   //   name: 'Kmi',

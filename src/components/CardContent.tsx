@@ -39,6 +39,7 @@ const CardContent: React.FC<CardContentProps> = ({
 }) => {
   const classes = useStyles();
 
+  // console.log(content);
   return (
     <div className={classes.textBox}>
       {isButtonSelected[0] && content ? (

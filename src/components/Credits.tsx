@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 // import Button from '@material-ui/core/Button';
@@ -65,7 +65,7 @@ export default function Credits() {
           Town Photo by Yelena Odintsova from Pexels
         </Typography>
         <Typography variant="body2" className={classes.text}>
-          Flowers Photo by Yelena Odintsova from Pexels
+          Flowers Photo by Ellie Burgin from Pexels
         </Typography>
       </Popover>
     </div>

@@ -13,18 +13,45 @@ import CardComponent from '../components/Card';
 import SwitchComponent from '../components/Switch';
 import Credits from '../components/Credits';
 import Footer from '../components/Footer';
+import { useCookies } from 'react-cookie';
 
 const url_advice = 'https://api.adviceslip.com/advice';
 
 const fetchAdvice = async () => {
   try {
     const { data } = await axios(url_advice);
+    let advice = data.slip.advice;
+
+    if (checkString(advice)) {
+      console.log('find string to filter out', advice);
+      advice = filterOut(url_advice);
+    }
+
     console.log('fetchAdvice');
-    // console.log(data.slip.advice);
-    return data.slip.advice;
+    return advice;
   } catch (error) {
     console.error();
   }
+};
+
+const checkString = (string: string): boolean => {
+  return string.toLowerCase().includes('sex');
+};
+
+const filterOut = async (url: string) => {
+  let count = 0;
+  let advice: string;
+  while (count < 30) {
+    await new Promise((cb) => setTimeout(cb, 1000));
+
+    const { data } = await axios(url);
+    advice = data.slip.advice;
+
+    if (!checkString(advice)) break;
+
+    count++;
+  }
+  return advice;
 };
 
 const url_quotes = 'https://api.quotable.io/random';
@@ -35,7 +62,6 @@ const fetchQuote = async () => {
     const { content, author } = data;
     console.log('fetchQuote');
     // console.log({ content, author });
-    // return content + '   ' + author;
     return { content, author };
   } catch (error) {
     console.error();
@@ -50,21 +76,21 @@ export type contentType =
 const Home: React.FC = () => {
   const classes = useStyles();
 
-  //const [content, setContent] = useState<string | {} | undefined>(null);
   const [content, setContent] = useState<contentType>(undefined);
+
+  const [cookies, setCookie] = useCookies(['user']);
+
   const [wallpaper, setWallpaper] = useState<boolean>(false);
 
-  const [isGetAnother, setIsGetAnother] = useState<boolean>(false);
   const [isButtonSelected, setIsButtonSelected] = useState<boolean[]>([
     true,
     false,
   ]);
-  // console.log(isButtonSelected);
-  console.log(content);
+
+  const [selectedFetcher, setSelectedFetcher] = useState<boolean[]>(undefined);
 
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
-  // const [isRandom, setIsRandom] = useState<boolean>(true);
 
   const fetchFunc = async (
     state: string | {},
@@ -76,14 +102,16 @@ const Home: React.FC = () => {
 
       let newState = await fetcher();
 
-      let count = 0;
-      while (newState == state) {
-        newState = await fetcher();
+      if (newState == state) {
+        let count = 0;
+        while (count < 20) {
+          await new Promise((cb) => setTimeout(cb, 1000));
+          newState = await fetcher();
 
-        count++;
-        console.log(count, newState);
-
-        await new Promise((cb) => setTimeout(cb, 1000));
+          console.log(count, newState);
+          if (newState != state) break;
+          count++;
+        }
       }
 
       setState(newState);
@@ -96,19 +124,45 @@ const Home: React.FC = () => {
     }
   };
 
+  const cookiesOptions = {
+    path: '/',
+    maxAge: 3600,
+    sameSite: true,
+  };
+
+  const setCookieWallpaper = (value: boolean): void => {
+    setCookie('wallpaper', value, cookiesOptions);
+  };
+
+  const setCookieButton = (value: boolean[]): void => {
+    setCookie('button', value, cookiesOptions);
+  };
+
   useEffect(() => {
-    if (isButtonSelected[0]) {
-      fetchFunc(content, setContent, fetchAdvice);
-    } else if (isButtonSelected[1]) {
-      fetchFunc(content, setContent, fetchQuote);
+    if (!cookies.wallpaper) {
+      setCookieWallpaper(wallpaper);
+    } else if (typeof JSON.parse(cookies.wallpaper) === 'boolean') {
+      setWallpaper(JSON.parse(cookies.wallpaper));
+      // console.log('wallpaper ', wallpaper);
+    } else {
+      setCookieWallpaper(wallpaper);
     }
-    setIsGetAnother(false);
-  }, [isButtonSelected, isGetAnother]);
-  // }, [isButtonSelected]);
+
+    if (!cookies.button) {
+      setCookieButton(isButtonSelected);
+      setSelectedFetcher(isButtonSelected);
+    } else if (typeof cookies.button === 'object') {
+      setIsButtonSelected(cookies.button);
+      setSelectedFetcher(cookies.button);
+      console.log('cookies ', cookies.button);
+    } else {
+      setCookieButton(isButtonSelected);
+      setSelectedFetcher(isButtonSelected);
+    }
+  }, []);
 
   return (
     <div
-      //className={classes.root}
       className={`${classes.root}  ${
         wallpaper == true ? classes.wallpaperNature : classes.wallpaperTown
       }`}
@@ -123,26 +177,31 @@ const Home: React.FC = () => {
             isButtonSelected={isButtonSelected}
             setIsButtonSelected={setIsButtonSelected}
             setContent={setContent}
+            setCookieButton={setCookieButton}
+            setSelectedFetcher={setSelectedFetcher}
           />
           <div className={classes.textWrapper}>
             <CardComponent
               content={content}
               isButtonSelected={isButtonSelected}
-              setIsGetAnother={setIsGetAnother}
-              // fetchFunc={
-              //   isButtonSelected[0]
-              //     ? () => fetchFunc(content, setContent, fetchAdvice)
-              //     : isButtonSelected[1]
-              //     ? () => fetchFunc(content, setContent, fetchQuote)
-              //     : null
-              // }
+              selectedFetcher={selectedFetcher}
+              fetchFuncAdvice={() =>
+                fetchFunc(content, setContent, fetchAdvice)
+              }
+              fetchFuncQuote={() => fetchFunc(content, setContent, fetchQuote)}
               isLoading={isLoading}
               isError={isError}
             />
           </div>
           <Grid container justify="space-around" alignItems="center">
             <Grid item>
-              <SwitchComponent state={wallpaper} setState={setWallpaper} />
+              <div className={classes.switchWrapper}>
+                <SwitchComponent
+                  state={wallpaper}
+                  setState={setWallpaper}
+                  setCookieWallpaper={setCookieWallpaper}
+                />
+              </div>
             </Grid>
             <Grid item>
               <Credits />
@@ -208,7 +267,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: '1.0rem',
   },
   switchWrapper: {
-    marginTop: '0.5rem',
+    marginTop: '0.3rem',
+    // backgroundColor: 'white',
+    backgroundColor: 'rgba(180,180,255,0.8)',
+    padding: '0 0.5rem',
+    borderRadius: '0.5rem',
   },
   creditWrapper: {},
 

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import {
   Grid,
   Card,
@@ -43,37 +44,62 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface CardContentProps {
   content: contentType;
-  setIsGetAnother: (isGetAnother: boolean) => void;
   isButtonSelected: boolean[];
   isLoading: boolean;
   isError: boolean;
-  // fetchFunc: () => void;
+  fetchFuncAdvice: () => void;
+  fetchFuncQuote: () => void;
+  selectedFetcher: boolean[];
 }
 
 const CardComponent: React.FC<CardContentProps> = ({
   content,
-  setIsGetAnother,
   isButtonSelected,
   isLoading,
   isError,
-  // fetchFunc,
+  fetchFuncAdvice,
+  fetchFuncQuote,
+  selectedFetcher,
 }) => {
   const classes = useStyles();
 
-  // const onClickHandler = () => fetchFunc();
-  const onClickHandler = () => setIsGetAnother(true);
+  const onClickHandler = () => {
+    if (selectedFetcher[0]) {
+      console.log('card Advice ', selectedFetcher);
+      fetchFuncAdvice();
+    } else if (selectedFetcher[1]) {
+      console.log('card Quote ', selectedFetcher);
+      fetchFuncQuote();
+    }
+  };
+
+  useEffect(() => {
+    if (selectedFetcher !== undefined) {
+      console.log('card useEffect ', selectedFetcher);
+      onClickHandler();
+    }
+  }, [selectedFetcher]);
 
   return (
     <Grid container justify="center" alignItems="center">
       <Grid item>
         <Card className={classes.card} elevation={6}>
+          {isButtonSelected[0] ? (
+            <Typography variant="body2" color="error">
+              - Advice -
+            </Typography>
+          ) : isButtonSelected[1] ? (
+            <Typography variant="body2" color="error">
+              - Quote -
+            </Typography>
+          ) : null}
           {isError ? (
             <Typography variant="body2" color="error">
               Error. Loading Data Failed. Please try again later.
             </Typography>
           ) : (
             <>
-              {isLoading && !content ? (
+              {isLoading ? (
                 <CircularProgress />
               ) : (
                 <CardContent
@@ -81,16 +107,6 @@ const CardComponent: React.FC<CardContentProps> = ({
                   isButtonSelected={isButtonSelected}
                 />
               )}
-
-              {/* 
-          {isLoading ? (
-            <CircularProgress />
-          ) : isButtonSelected[0] ? (
-            <CardContent content={content} />
-          ) : isButtonSelected[1] ? (
-            <div>{JSON.stringify(content)}</div>
-          ) : null}
-          */}
 
               <div className={classes.buttonWrapper}>
                 <Button

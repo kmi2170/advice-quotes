@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   Grid,
   Button,
@@ -29,12 +30,16 @@ interface ButtonGroupProps {
   isButtonSelected: boolean[];
   setIsButtonSelected: (isButtonSelected: boolean[]) => void;
   setContent: (content: string | {} | undefined) => void;
+  setCookieButton: (value: boolean[]) => void;
+  setSelectedFetcher: (value: boolean[]) => void;
 }
 
 const ButtonGroup: React.FC<ButtonGroupProps> = ({
   isButtonSelected,
   setIsButtonSelected,
   setContent,
+  setCookieButton,
+  setSelectedFetcher,
 }) => {
   // const classes = useStyles();
 
@@ -43,10 +48,10 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
       let newIsButtonSelected = [false, false];
       newIsButtonSelected[index] = true;
 
+      setCookieButton(newIsButtonSelected);
       setIsButtonSelected(newIsButtonSelected);
+      setSelectedFetcher(newIsButtonSelected);
       setContent(undefined);
-      // } else {
-      //   console.log('same button');
     }
   };
 
