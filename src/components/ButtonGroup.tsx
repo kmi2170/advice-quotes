@@ -7,6 +7,9 @@ import {
 } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
+// import SelectCategory from './SelectCategory';
+import CatergorySelectButton from './CategorySelectButton';
+
 const buttonData = [
   {
     tooltipTitle: 'Randomly Chosen Advice',
@@ -32,6 +35,7 @@ interface ButtonGroupProps {
   setContent: (content: string | {} | undefined) => void;
   setCookieButton: (value: boolean[]) => void;
   setSelectedFetcher: (value: boolean[]) => void;
+  setCategory: (category: string) => void;
 }
 
 const ButtonGroup: React.FC<ButtonGroupProps> = ({
@@ -40,6 +44,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
   setContent,
   setCookieButton,
   setSelectedFetcher,
+  setCategory,
 }) => {
   // const classes = useStyles();
 
@@ -68,6 +73,9 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
             />
           </Grid>
         ))}
+        <Grid item>
+          <CatergorySelectButton setCategory={setCategory} />
+        </Grid>
       </Grid>
     </div>
   );

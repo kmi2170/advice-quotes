@@ -5,10 +5,16 @@ import Typography from '@material-ui/core/Typography';
 // import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  credits: { color: 'white' },
-  text: {
+  credits: {
     color: 'white',
-    fontSize: '0.75rem',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '0.50rem',
+    },
+  },
+  text: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '0.65rem',
+    },
   },
 }));
 

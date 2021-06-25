@@ -50,6 +50,8 @@ interface CardContentProps {
   fetchFuncAdvice: () => void;
   fetchFuncQuote: () => void;
   selectedFetcher: boolean[];
+  category: string;
+  setCategory: (category: string) => void;
 }
 
 const CardComponent: React.FC<CardContentProps> = ({
@@ -60,6 +62,8 @@ const CardComponent: React.FC<CardContentProps> = ({
   fetchFuncAdvice,
   fetchFuncQuote,
   selectedFetcher,
+  category,
+  setCategory,
 }) => {
   const classes = useStyles();
 
@@ -86,12 +90,18 @@ const CardComponent: React.FC<CardContentProps> = ({
         <Card className={classes.card} elevation={6}>
           {isButtonSelected[0] ? (
             <Typography variant="body2" color="error">
-              - Advice -
+              Advice
             </Typography>
           ) : isButtonSelected[1] ? (
-            <Typography variant="body2" color="error">
-              - Quote -
-            </Typography>
+            category === 'all' ? (
+              <Typography variant="body2" color="error">
+                Quote
+              </Typography>
+            ) : (
+              <Typography variant="body2" color="error">
+                Quote - <em>{category}</em>
+              </Typography>
+            )
           ) : null}
           {isError ? (
             <Typography variant="body2" color="error">

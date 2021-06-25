@@ -54,11 +54,28 @@ let theme = createMuiTheme({
     // },
   },
   overrides: {
+    // Credits
     MuiPopover: {
       paper: {
-        borderRadius: '0.5rem',
-        backgroundColor: '#555',
-        padding: '1rem',
+        borderRadius: '0.2rem',
+        padding: '0.5rem',
+        // backgroundColor: '#555',
+      },
+    },
+    // Slect Category
+    MuiMenu: {
+      list: {
+        paddingTop: 0,
+        paddingBottom: 0,
+      },
+    },
+    MuiMenuItem: {
+      root: {
+        paddingTop: 0,
+        paddingBottom: 0,
+        minHeight: 0,
+        // lineHeight: 0,
+        fontSize: '0.8rem',
       },
     },
   },

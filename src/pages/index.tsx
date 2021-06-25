@@ -89,6 +89,8 @@ const Home: React.FC = () => {
 
   const [selectedFetcher, setSelectedFetcher] = useState<boolean[]>(undefined);
 
+  const [category, setCategory] = useState<string>('');
+
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
@@ -179,6 +181,7 @@ const Home: React.FC = () => {
             setContent={setContent}
             setCookieButton={setCookieButton}
             setSelectedFetcher={setSelectedFetcher}
+            setCategory={setCategory}
           />
           <div className={classes.textWrapper}>
             <CardComponent
@@ -191,6 +194,8 @@ const Home: React.FC = () => {
               fetchFuncQuote={() => fetchFunc(content, setContent, fetchQuote)}
               isLoading={isLoading}
               isError={isError}
+              category={category}
+              setCategory={setCategory}
             />
           </div>
           <Grid container justify="space-around" alignItems="center">
