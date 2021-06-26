@@ -36,7 +36,7 @@ export default function Credits() {
   const id = open ? 'simple-popover' : undefined;
 
   return (
-    <div>
+    <>
       <Typography
         variant="body2"
         onClick={handleClick}
@@ -68,12 +68,17 @@ export default function Credits() {
           Wallpaper /
         </Typography>
         <Typography variant="body2" className={classes.text}>
+          Mountains Photo by Simon Berger from Pexels
+        </Typography>
+        {/* 
+        <Typography variant="body2" className={classes.text}>
           Town Photo by Yelena Odintsova from Pexels
         </Typography>
+        */}
         <Typography variant="body2" className={classes.text}>
           Flowers Photo by Ellie Burgin from Pexels
         </Typography>
       </Popover>
-    </div>
+    </>
   );
 }

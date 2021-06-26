@@ -68,6 +68,19 @@ const fetchQuote = async () => {
   }
 };
 
+const fetchQuoteCategory = async (category: string) => {
+  try {
+    const url = `${url_quotes}?tags=${category}`;
+    const { data } = await axios(url);
+    const { content, author } = data;
+    console.log('fetchQuoteCategory, url', url);
+    // console.log({ content, author });
+    return { content, author };
+  } catch (error) {
+    console.error();
+  }
+};
+
 export type contentType =
   | string
   | { content: string; author: string }
@@ -89,7 +102,7 @@ const Home: React.FC = () => {
 
   const [selectedFetcher, setSelectedFetcher] = useState<boolean[]>(undefined);
 
-  const [category, setCategory] = useState<string>('');
+  const [category, setCategory] = useState<string>('all');
 
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
@@ -97,14 +110,15 @@ const Home: React.FC = () => {
   const fetchFunc = async (
     state: string | {},
     setState: (state: string | {}) => void,
-    fetcher: () => Promise<any>
+    fetcher: (category?: string) => Promise<any>,
+    category?: string
   ) => {
     try {
       setisLoading(true);
 
-      let newState = await fetcher();
+      let newState = category ? await fetcher(category) : await fetcher();
 
-      if (newState == state) {
+      if (newState == state && !category) {
         let count = 0;
         while (count < 20) {
           await new Promise((cb) => setTimeout(cb, 1000));
@@ -192,6 +206,9 @@ const Home: React.FC = () => {
                 fetchFunc(content, setContent, fetchAdvice)
               }
               fetchFuncQuote={() => fetchFunc(content, setContent, fetchQuote)}
+              fetchFuncQuoteCategory={() =>
+                fetchFunc(content, setContent, fetchQuoteCategory, category)
+              }
               isLoading={isLoading}
               isError={isError}
               category={category}
@@ -252,8 +269,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     //   'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(255,255,255,0.0)))',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    //backgroundSize: 'fit',
-    //backgroundSize: 'fit',
+    backgroundSize: 'fit',
+    // backgroundSize: 'contain',
   },
   wallpaperNature: {
     backgroundImage:
@@ -261,8 +278,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   wallpaperTown: {
     backgroundImage:
-      // 'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(255,255,255,0.0), rgba(0,0,0,1.0)), url("/images/sea_night_2.jpg")',
-      'linear-gradient(to bottom, rgba(0,20,0,1.0), rgba(0,20,0,0.0), rgba(0,20,0,1.0)), url("/images/town1.jpg")',
+      // 'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(255,255,255,0.0), rgba(0,0,0,1.0)), url("/images/sea_night_2.jpg"))',',
+      // 'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(0,20,0,0.0), rgba(0,0,0,0.6)), url("/images/town1.jpg")',
+      'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(0,20,0,0.0), rgba(0,0,0,1.0)), url("/images/mountains1.jpg")',
   },
   appTitleWrapper: {
     paddingTop: '1.0rem',

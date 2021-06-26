@@ -19,7 +19,6 @@ const AppTitle: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <div>
       <Typography
         variant="h3"
         component="h1"
@@ -29,7 +28,6 @@ const AppTitle: React.FC = () => {
       >
         Advice/Quotes App
       </Typography>
-    </div>
   );
 };
 

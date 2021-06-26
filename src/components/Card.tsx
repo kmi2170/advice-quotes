@@ -49,6 +49,7 @@ interface CardContentProps {
   isError: boolean;
   fetchFuncAdvice: () => void;
   fetchFuncQuote: () => void;
+  fetchFuncQuoteCategory: () => void;
   selectedFetcher: boolean[];
   category: string;
   setCategory: (category: string) => void;
@@ -61,6 +62,7 @@ const CardComponent: React.FC<CardContentProps> = ({
   isError,
   fetchFuncAdvice,
   fetchFuncQuote,
+  fetchFuncQuoteCategory,
   selectedFetcher,
   category,
   setCategory,
@@ -70,10 +72,15 @@ const CardComponent: React.FC<CardContentProps> = ({
   const onClickHandler = () => {
     if (selectedFetcher[0]) {
       console.log('card Advice ', selectedFetcher);
+      if (category !== 'all') setCategory('all');
       fetchFuncAdvice();
     } else if (selectedFetcher[1]) {
-      console.log('card Quote ', selectedFetcher);
-      fetchFuncQuote();
+      console.log('card Quote ', category, selectedFetcher);
+      if (category === 'all') {
+        fetchFuncQuote();
+      } else {
+        fetchFuncQuoteCategory();
+      }
     }
   };
 
@@ -82,7 +89,7 @@ const CardComponent: React.FC<CardContentProps> = ({
       console.log('card useEffect ', selectedFetcher);
       onClickHandler();
     }
-  }, [selectedFetcher]);
+  }, [selectedFetcher, category]);
 
   return (
     <Grid container justify="center" alignItems="center">

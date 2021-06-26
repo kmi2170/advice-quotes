@@ -21,13 +21,24 @@ const buttonData = [
   },
 ];
 
-// const useStyles = makeStyles((theme: Theme) => ({
-//   buttonWrapper: {
-//     display: 'flex',
-//     justifyContent: 'center',
-//     marginTop: '2rem',
-//   },
-// }));
+const useStyles = makeStyles((theme: Theme) => ({
+  quoteButtonWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    // justifyContent: 'center',
+    alignItems: 'center',
+    // border: '1px solid',
+    // borderColor: theme.palette.info.light,
+    // borderRadius: '0.2rem',
+    // padding: '0.2rem',
+  },
+  categoryButton: {
+    marginLeft: '0.5rem',
+  },
+  categoryButtonOff: {
+    display: 'none',
+  },
+}));
 
 interface ButtonGroupProps {
   isButtonSelected: boolean[];
@@ -46,7 +57,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
   setSelectedFetcher,
   setCategory,
 }) => {
-  // const classes = useStyles();
+  const classes = useStyles();
 
   const onClickHandler = (index: number) => {
     if (!isButtonSelected[index]) {
@@ -61,23 +72,51 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
   };
 
   return (
-    <div>
-      <Grid container justify="space-around" alignItems="center">
-        {buttonData.map((el, index) => (
-          <Grid item key={index}>
-            <ButtonBody
-              tooltipTitle={el.tooltipTitle}
-              buttonTitle={el.buttonTitle}
-              isSelected={isButtonSelected[index]}
-              onClickHandler={() => onClickHandler(index)}
-            />
-          </Grid>
-        ))}
-        <Grid item>
-          <CatergorySelectButton setCategory={setCategory} />
-        </Grid>
+    <Grid container justify="space-around" alignItems="center">
+      {buttonData.map((el, index) => {
+        if (index === 0)
+          return (
+            <Grid item key={index}>
+              <ButtonBody
+                tooltipTitle={el.tooltipTitle}
+                buttonTitle={el.buttonTitle}
+                isSelected={isButtonSelected[index]}
+                onClickHandler={() => onClickHandler(index)}
+              />
+            </Grid>
+          );
+      })}
+
+      <Grid item>
+        <div
+          className={classes.quoteButtonWrapper}
+          //className={isButtonSelected[1] ? classes.quoteButtonWrapper : null}
+        >
+          {buttonData.map((el, index) => {
+            if (index === 1)
+              return (
+                <ButtonBody
+                  key={index}
+                  tooltipTitle={el.tooltipTitle}
+                  buttonTitle={el.buttonTitle}
+                  isSelected={isButtonSelected[index]}
+                  onClickHandler={() => onClickHandler(index)}
+                />
+              );
+          })}
+
+          <div
+            className={
+              isButtonSelected[1]
+                ? classes.categoryButton
+                : classes.categoryButtonOff
+            }
+          >
+            <CatergorySelectButton setCategory={setCategory} />
+          </div>
+        </div>
       </Grid>
-    </div>
+    </Grid>
   );
 };
 

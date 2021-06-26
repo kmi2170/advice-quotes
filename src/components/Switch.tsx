@@ -23,7 +23,7 @@ import { Grid, Typography, Tooltip } from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) => ({
   switchName1: {
     // color: 'white',
-    marginRight: '1rem',
+    // marginRight: '1rem',
   },
   switchName2: {
     // color: 'white',
@@ -62,7 +62,7 @@ const SwitchComponent: React.FC<SwitchComponentProps> = ({
     <Grid container justify="center" alignItems="center">
       <Grid item>
         <Typography className={classes.switchName1} variant="body2">
-          Town
+          Mountain
         </Typography>
       </Grid>
       <Grid item>

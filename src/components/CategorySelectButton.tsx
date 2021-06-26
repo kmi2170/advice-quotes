@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
     },
     paper: {
-      marginRight: theme.spacing(2),
+      // marginRight: theme.spacing(5),
+      marginTop: theme.spacing(5),
     },
     button: {
       backgroundColor: 'white',
@@ -100,7 +101,8 @@ const CatergorySelectButton: React.FC<CatergorySelectButtonProps> = ({
           anchorEl={anchorRef.current}
           role={undefined}
           transition
-          disablePortal
+          disablePorta
+          className={classes.paper}
         >
           {({ TransitionProps, placement }) => (
             <Grow

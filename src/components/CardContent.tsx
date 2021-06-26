@@ -46,7 +46,7 @@ const CardContent: React.FC<CardContentProps> = ({
         <Typography
           className={classes.content}
           // className={`${classes.contetn} ${styles.fadeInText}`}
-          variant="h4"
+          variant="h5"
           align="center"
         >
           {content}
@@ -56,7 +56,7 @@ const CardContent: React.FC<CardContentProps> = ({
           <Typography
             className={classes.content}
             // className={`${classes.contetn} ${styles.fadeInText}`}
-            variant="h4"
+            variant="h5"
             align="center"
           >
             {content.content}
@@ -64,7 +64,7 @@ const CardContent: React.FC<CardContentProps> = ({
           <Typography
             className={classes.content}
             // className={`${classes.contetn} ${styles.fadeInText}`}
-            variant="h4"
+            variant="h6"
             align="center"
             style={{ fontStyle: 'italic', marginTop: '1rem' }}
           >
