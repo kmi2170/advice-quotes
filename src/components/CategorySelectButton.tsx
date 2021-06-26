@@ -101,7 +101,7 @@ const CatergorySelectButton: React.FC<CatergorySelectButtonProps> = ({
           anchorEl={anchorRef.current}
           role={undefined}
           transition
-          disablePorta
+          disablePortal
           className={classes.paper}
         >
           {({ TransitionProps, placement }) => (

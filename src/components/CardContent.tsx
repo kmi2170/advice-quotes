@@ -10,9 +10,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     overflowY: 'auto',
   },
   content: {
-    // fontFamily: 'Raleway',
-    // fontFamily: 'Viaoda Libre',
-    fontFamily: 'Playfair Display',
+    //fontFamily: 'Raleway',
+    fontFamily: 'Oswald',
+    //fontFamily: 'Viaoda Libre',
+    // fontFamily: 'Playfair Display',
     //fontSize: '2.25rem',
     // [theme.breakpoints.down('sm')]: {
     //   fontSize: '1.25rem',
@@ -39,10 +40,9 @@ const CardContent: React.FC<CardContentProps> = ({
 }) => {
   const classes = useStyles();
 
-  // console.log(content);
   return (
     <div className={classes.textBox}>
-      {isButtonSelected[0] && content ? (
+      {isButtonSelected[0] && content !== undefined ? (
         <Typography
           className={classes.content}
           // className={`${classes.contetn} ${styles.fadeInText}`}
@@ -51,7 +51,7 @@ const CardContent: React.FC<CardContentProps> = ({
         >
           {content}
         </Typography>
-      ) : isButtonSelected[1] && content ? (
+      ) : isButtonSelected[1] && content !== undefined ? (
         <div>
           <Typography
             className={classes.content}
@@ -59,7 +59,7 @@ const CardContent: React.FC<CardContentProps> = ({
             variant="h5"
             align="center"
           >
-            {content.content}
+            {content['content']}
           </Typography>
           <Typography
             className={classes.content}
@@ -68,7 +68,7 @@ const CardContent: React.FC<CardContentProps> = ({
             align="center"
             style={{ fontStyle: 'italic', marginTop: '1rem' }}
           >
-            {content.author}
+            {content['author']}
           </Typography>
           {/*
            */}

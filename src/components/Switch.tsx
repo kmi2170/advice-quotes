@@ -62,7 +62,7 @@ const SwitchComponent: React.FC<SwitchComponentProps> = ({
     <Grid container justify="center" alignItems="center">
       <Grid item>
         <Typography className={classes.switchName1} variant="body2">
-          Mountain
+          Bamboos
         </Typography>
       </Grid>
       <Grid item>

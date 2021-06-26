@@ -280,7 +280,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundImage:
       // 'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(255,255,255,0.0), rgba(0,0,0,1.0)), url("/images/sea_night_2.jpg"))',',
       // 'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(0,20,0,0.0), rgba(0,0,0,0.6)), url("/images/town1.jpg")',
-      'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(0,20,0,0.0), rgba(0,0,0,1.0)), url("/images/mountains1.jpg")',
+      // 'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(0,20,0,0.0), rgba(0,0,0,1.0)), url("/images/mountains1.jpg")',
+      'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(0,20,0,0.0), rgba(0,0,0,1.0)), url("/images/bamboo1.jpg")',
   },
   appTitleWrapper: {
     paddingTop: '1.0rem',

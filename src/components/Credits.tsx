@@ -68,9 +68,11 @@ export default function Credits() {
           Wallpaper /
         </Typography>
         <Typography variant="body2" className={classes.text}>
-          Mountains Photo by Simon Berger from Pexels
+          Bamboos Photo by Andre Moura from Pexels
         </Typography>
         {/* 
+          bamboo2 Photo by JV Gardens from Pexels
+          Mountains Photo by Simon Berger from Pexels
         <Typography variant="body2" className={classes.text}>
           Town Photo by Yelena Odintsova from Pexels
         </Typography>
