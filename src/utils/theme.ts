@@ -45,6 +45,8 @@ let theme = createMuiTheme({
       'Oswald',
       'Viaoda Libre',
       'Playfair Display',
+      'Jua',
+      'Acme',
     ].join(','),
     // h4: {
     //   fontSize: '2.125rem',

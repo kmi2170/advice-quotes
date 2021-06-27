@@ -11,7 +11,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   content: {
     //fontFamily: 'Raleway',
-    fontFamily: 'Oswald',
+    //fontFamily: 'Oswald',
+    fontFamily: 'Jua',
+    //fontFamily: 'Acme',
     //fontFamily: 'Viaoda Libre',
     // fontFamily: 'Playfair Display',
     //fontSize: '2.25rem',
