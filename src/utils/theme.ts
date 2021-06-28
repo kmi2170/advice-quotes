@@ -38,6 +38,7 @@ let theme = createMuiTheme({
     fontFamily: [
       'Raleway',
       'Roboto',
+      'Acme',
       'Lobster',
       'sans-serif',
       // 'Roboto Condensed',
@@ -46,7 +47,6 @@ let theme = createMuiTheme({
       'Viaoda Libre',
       'Playfair Display',
       'Jua',
-      'Acme',
     ].join(','),
     // h4: {
     //   fontSize: '2.125rem',

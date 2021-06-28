@@ -4,7 +4,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme: Theme) => ({
   footer: {
     color: '#fff',
-    fontFamily: 'Raleway',
+    // fontFamily: 'Raleway',
     fontSize: '0.875rem',
     [theme.breakpoints.down('xs')]: {
       fontSize: '0.6rem',
@@ -22,12 +22,7 @@ const Footer: React.FC = () => {
     <footer>
       <Grid container>
         <Grid item xs={12}>
-          <Typography
-            variant="body2"
-            align="center"
-            style={{ fontFamily: 'Raleway' }}
-            className={classes.footer}
-          >
+          <Typography variant="body2" align="center" className={classes.footer}>
             Copyrihgt &copy; kmi {year}. All rights reserved.
           </Typography>
         </Grid>

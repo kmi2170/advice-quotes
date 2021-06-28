@@ -34,8 +34,9 @@ const config = {
   //   name: 'Kmi',
   //   summary: 'Web developer/programmer',
   // },
-  description: '',
-  keywords: '',
+  description:
+    'A simple web application that displays randomly chosen Advice or Quote, created with Next.js, Typescript adn Material-UI. It is switchable between Advice and Quote. Quote can be narrowed down by selecting a category. A little addition is that you can choose between two background images, bamboos and flowers. Your selections of Advice/Quote and background image are stored in cookie if available and peresisted when you come back to this app next time',
+  keywords: 'Next.js, TypeScript, Material-UI, Advice, Quote',
   social: {
     twitter: '',
   },

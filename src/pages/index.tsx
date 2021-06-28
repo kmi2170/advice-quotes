@@ -142,7 +142,7 @@ const Home: React.FC = () => {
 
   const cookiesOptions = {
     path: '/',
-    maxAge: 3600,
+    maxAge: 2600000,
     sameSite: true,
   };
 
