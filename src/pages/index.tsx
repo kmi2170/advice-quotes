@@ -19,7 +19,9 @@ const url_advice = 'https://api.adviceslip.com/advice';
 
 const fetchAdvice = async () => {
   try {
-    const { data } = await axios(url_advice);
+    const { data } = await axios.get(url_advice, {
+      params: { timeStamp: new Date().getTime() },
+    });
     let advice = data.slip.advice;
 
     if (checkString(advice)) {
@@ -44,7 +46,9 @@ const filterOut = async (url: string) => {
   while (count < 30) {
     await new Promise((cb) => setTimeout(cb, 1000));
 
-    const { data } = await axios(url);
+    const { data } = await axios.get(url, {
+      params: { timeStamp: new Date().getTime() },
+    });
     advice = data.slip.advice;
 
     if (!checkString(advice)) break;
@@ -58,7 +62,9 @@ const url_quotes = 'https://api.quotable.io/random';
 
 const fetchQuote = async () => {
   try {
-    const { data } = await axios(url_quotes);
+    const { data } = await axios.get(url_quotes, {
+      params: { timeStamp: new Date().getTime() },
+    });
     const { content, author } = data;
     console.log('fetchQuote');
     // console.log({ content, author });
@@ -71,7 +77,9 @@ const fetchQuote = async () => {
 const fetchQuoteCategory = async (category: string) => {
   try {
     const url = `${url_quotes}?tags=${category}`;
-    const { data } = await axios(url);
+    const { data } = await axios.get(url, {
+      params: { timeStamp: new Date().getTime() },
+    });
     const { content, author } = data;
     console.log('fetchQuoteCategory, url', url);
     // console.log({ content, author });
