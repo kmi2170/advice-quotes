@@ -5,10 +5,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   footer: {
     color: '#fff',
     // fontFamily: 'Raleway',
-    fontSize: '0.875rem',
-    [theme.breakpoints.down('xs')]: {
-      fontSize: '0.6rem',
-    },
+    // fontSize: '0.875rem',
+    // [theme.breakpoints.down('xs')]: {
+    //   fontSize: '0.6rem',
+    // },
   },
 }));
 
@@ -22,7 +22,11 @@ const Footer: React.FC = () => {
     <footer>
       <Grid container>
         <Grid item xs={12}>
-          <Typography variant="body2" align="center" className={classes.footer}>
+          <Typography
+            variant="subtitle1"
+            align="center"
+            className={classes.footer}
+          >
             Copyrihgt &copy; kmi {year}. All rights reserved.
           </Typography>
         </Grid>

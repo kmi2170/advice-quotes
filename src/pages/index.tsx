@@ -292,14 +292,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(0,20,0,0.0), rgba(0,0,0,1.0)), url("/images/bamboo1.jpg")',
   },
   appTitleWrapper: {
-    paddingTop: '1.0rem',
-    paddingBottom: '1.0rem',
+    paddingTop: '1.5rem',
+    paddingBottom: '2.0rem',
   },
   textWrapper: {
     marginTop: '1.0rem',
   },
   switchWrapper: {
-    marginTop: '0.3rem',
+    marginTop: '1.5rem',
     // backgroundColor: 'white',
     backgroundColor: 'rgba(180,180,255,0.8)',
     padding: '0 0.5rem',
@@ -308,6 +308,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   creditWrapper: {},
 
   footerWrapper: {
-    marginTop: '1.0rem',
+    marginTop: '2.0rem',
   },
 }));

@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import {
+  Typography,
   Grid,
   Button,
-  //  ButtonGroup as Buttons,
   Tooltip,
+  //  ButtonGroup as Buttons,
 } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
@@ -159,7 +160,7 @@ const ButtonBody: React.FC<ButtonBodyProps> = ({
         // }`}
         onClick={onClickHandler}
       >
-        {buttonTitle}
+        <Typography variant="h6">{buttonTitle}</Typography>
       </Button>
     </Tooltip>
   );

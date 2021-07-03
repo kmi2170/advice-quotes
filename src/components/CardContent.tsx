@@ -6,7 +6,7 @@ import { contentType } from '../pages/index';
 const useStyles = makeStyles((theme: Theme) => ({
   textBox: {
     display: 'block',
-    height: '30vh',
+    minHeight: '30vh',
     overflowY: 'auto',
   },
   content: {
@@ -23,11 +23,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     //   //   fontSize: '1.25rem',
     //   // },
     // },
-    [theme.breakpoints.down('xs')]: {
-      '@media (orientation: portrait)': {
-        fontSize: '1.0rem',
-      },
-    },
+    // [theme.breakpoints.down('xs')]: {
+    //   '@media (orientation: portrait)': {
+    //     fontSize: '1.0rem',
+    //   },
+    // },
   },
 }));
 
@@ -48,7 +48,7 @@ const CardContent: React.FC<CardContentProps> = ({
         <Typography
           className={classes.content}
           // className={`${classes.contetn} ${styles.fadeInText}`}
-          variant="h5"
+          variant="h4"
           align="center"
         >
           {content}
@@ -58,7 +58,7 @@ const CardContent: React.FC<CardContentProps> = ({
           <Typography
             className={classes.content}
             // className={`${classes.contetn} ${styles.fadeInText}`}
-            variant="h5"
+            variant="h4"
             align="center"
           >
             {content['content']}
@@ -66,7 +66,7 @@ const CardContent: React.FC<CardContentProps> = ({
           <Typography
             className={classes.content}
             // className={`${classes.contetn} ${styles.fadeInText}`}
-            variant="h6"
+            variant="h4"
             align="center"
             style={{ fontStyle: 'italic', marginTop: '1rem' }}
           >

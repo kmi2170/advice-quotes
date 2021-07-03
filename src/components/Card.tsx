@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import {
   Grid,
   Card,
@@ -96,22 +96,22 @@ const CardComponent: React.FC<CardContentProps> = ({
       <Grid item>
         <Card className={classes.card} elevation={6}>
           {isButtonSelected[0] ? (
-            <Typography variant="body2" color="error">
+            <Typography variant="h6" color="error">
               Advice
             </Typography>
           ) : isButtonSelected[1] ? (
             category === 'all' ? (
-              <Typography variant="body2" color="error">
+              <Typography variant="subtitle1" color="error">
                 Quote
               </Typography>
             ) : (
-              <Typography variant="body2" color="error">
+              <Typography variant="subtitle1" color="error">
                 Quote - <em>{category}</em>
               </Typography>
             )
           ) : null}
           {isError ? (
-            <Typography variant="body2" color="error">
+            <Typography variant="h6" color="error">
               Error. Loading Data Failed. Please try again later.
             </Typography>
           ) : (
@@ -129,12 +129,12 @@ const CardComponent: React.FC<CardContentProps> = ({
                 <Button
                   variant="contained"
                   color="primary"
-                  size="small"
+                  // size="small"
                   // className={classes.button}
                   className={`${classes.button} ${styles.button}`}
                   onClick={onClickHandler}
                 >
-                  Get another!
+                  <Typography variant="h5">Get another!</Typography>
                 </Button>
               </div>
             </>

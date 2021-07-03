@@ -9,9 +9,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     // textShadow: '2px 2px #2196f3',
     textShadow: '2px 2px #19857b',
     // dark: '#19857b',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: '1.75rem',
-    },
+    // [theme.breakpoints.down('sm')]: {
+    //   fontSize: '1.75rem',
+    // },
   },
 }));
 
@@ -19,15 +19,15 @@ const AppTitle: React.FC = () => {
   const classes = useStyles();
 
   return (
-      <Typography
-        variant="h3"
-        component="h1"
-        align="center"
-        className={classes.titleApp}
-        // style={{ fontSize: '1rem' }}
-      >
-        Advice/Quotes App
-      </Typography>
+    <Typography
+      variant="h3"
+      component="h1"
+      align="center"
+      className={classes.titleApp}
+      // style={{ fontSize: '1rem' }}
+    >
+      Advice/Quotes App
+    </Typography>
   );
 };
 
