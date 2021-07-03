@@ -129,7 +129,7 @@ const CardComponent: React.FC<CardContentProps> = ({
                 <Button
                   variant="contained"
                   color="primary"
-                  // size="small"
+                  size="small"
                   // className={classes.button}
                   className={`${classes.button} ${styles.button}`}
                   onClick={onClickHandler}
