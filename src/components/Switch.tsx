@@ -1,24 +1,6 @@
-import React, { useEffect } from 'react';
-// import { withStyles } from '@material-ui/core/styles';
-// import { purple } from '@material-ui/core/colors';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Grid, Typography, Tooltip } from '@material-ui/core';
-
-// const PurpleSwitch = withStyles({
-//   switchBase: {
-//     color: purple[500],
-//     '&$checked': {
-//       color: purple[500],
-//     },
-//     '&$checked + $track': {
-//       backgroundColor: 'white',
-//     },
-//   },
-//   checked: {},
-//   track: {},
-// })(Switch);
 
 const useStyles = makeStyles((theme: Theme) => ({
   switchName1: {
@@ -32,30 +14,23 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface SwitchComponentProps {
   state: boolean;
-  setState: (state: boolean) => void;
-  setCookieWallpaper: (value: boolean) => void;
+  setWallpaper: (state: boolean | ((state: boolean) => boolean)) => void;
+  setCookieWallpaper: (state: boolean | ((state: boolean) => boolean)) => void;
 }
 
 const SwitchComponent: React.FC<SwitchComponentProps> = ({
   state,
-  setState,
+  setWallpaper,
   setCookieWallpaper,
 }) => {
   const classes = useStyles();
 
-  // console.log('switch comp ', state, typeof state);
-
   const handleChange = () => {
-    if (state) {
-      setState(false);
-      setCookieWallpaper(false);
-    } else {
-      setState(true);
-      setCookieWallpaper(true);
-    }
+    setWallpaper((prev) => !prev);
+    setCookieWallpaper((prev) => !prev);
   };
   // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setState({ ...state, [event.target.name]: event.target.checked });
+  //   setWallpaper({ ...state, [event.target.name]: event.target.checked });
   // };
 
   return (
@@ -71,20 +46,8 @@ const SwitchComponent: React.FC<SwitchComponentProps> = ({
             color="default"
             checked={state}
             onChange={handleChange}
-            // inputProps={{ 'aria-label': 'checkbox with default color' }}
+            inputProps={{ 'aria-label': 'switch the wallpaer' }}
           />
-          {/* 
-          <FormControlLabel
-            control={
-              <PurpleSwitch
-                checked={state}
-                onChange={handleChange}
-                // name="checkedA"
-              />
-            }
-            label=""
-          />
-      */}
         </Tooltip>
       </Grid>
       <Grid item>

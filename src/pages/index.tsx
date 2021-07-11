@@ -228,7 +228,7 @@ const Home: React.FC = () => {
               <div className={classes.switchWrapper}>
                 <SwitchComponent
                   state={wallpaper}
-                  setState={setWallpaper}
+                  setWallpaper={setWallpaper}
                   setCookieWallpaper={setCookieWallpaper}
                 />
               </div>
