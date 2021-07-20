@@ -31,7 +31,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({ isRandom, setIsRandom }) => {
 
   return (
     <div>
-      <Grid container justify="center" alignItems="center">
+      <Grid container justifyContent="center" alignItems="center">
         <Grid item>
           <Buttons aria-label="contained primary button group">
             <Tooltip title="Randomly Chosen Advise">

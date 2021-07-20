@@ -73,7 +73,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
   };
 
   return (
-    <Grid container justify="space-around" alignItems="center">
+    <Grid container justifyContent="space-around" alignItems="center">
       {buttonData.map((el, index) => {
         if (index === 0)
           return (

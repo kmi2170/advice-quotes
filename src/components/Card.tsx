@@ -92,7 +92,7 @@ const CardComponent: React.FC<CardContentProps> = ({
   }, [selectedFetcher, category]);
 
   return (
-    <Grid container justify="center" alignItems="center">
+    <Grid container justifyContent="center" alignItems="center">
       <Grid item>
         <Card className={classes.card} elevation={6}>
           {isButtonSelected[0] ? (

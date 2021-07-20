@@ -223,12 +223,12 @@ const Home: React.FC = () => {
               setCategory={setCategory}
             />
           </div>
-          <Grid container justify="space-around" alignItems="center">
+          <Grid container justifyContent="space-around" alignItems="center">
             <Grid item>
               <div className={classes.switchWrapper}>
                 <SwitchComponent
                   state={wallpaper}
-                  setWallpaper={setWallpaper}
+                  setState={setWallpaper}
                   setCookieWallpaper={setCookieWallpaper}
                 />
               </div>

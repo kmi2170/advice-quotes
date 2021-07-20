@@ -14,27 +14,24 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface SwitchComponentProps {
   state: boolean;
-  setWallpaper: (state: boolean | ((state: boolean) => boolean)) => void;
+  setState: (state: boolean | ((state: boolean) => boolean)) => void;
   setCookieWallpaper: (state: boolean | ((state: boolean) => boolean)) => void;
 }
 
 const SwitchComponent: React.FC<SwitchComponentProps> = ({
   state,
-  setWallpaper,
+  setState,
   setCookieWallpaper,
 }) => {
   const classes = useStyles();
 
   const handleChange = () => {
-    setWallpaper((prev) => !prev);
+    setState((prev) => !prev);
     setCookieWallpaper((prev) => !prev);
   };
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setWallpaper({ ...state, [event.target.name]: event.target.checked });
-  // };
 
   return (
-    <Grid container justify="center" alignItems="center">
+    <Grid container justifyContent="center" alignItems="center">
       <Grid item>
         <Typography className={classes.switchName1} variant="h6">
           Bamboos
