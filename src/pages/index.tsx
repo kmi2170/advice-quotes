@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
 
-import axios from 'axios';
 import { Grow, Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-
-// import { GetServerSideProps, GetStaticProps } from 'next';
 
 import SEO from '../components/SEO';
 import AppTitle from '../components/AppTitle';
@@ -15,79 +12,8 @@ import Credits from '../components/Credits';
 import Footer from '../components/Footer';
 import { useCookies } from 'react-cookie';
 
-const url_advice = 'https://api.adviceslip.com/advice';
-
-const fetchAdvice = async () => {
-  try {
-    const { data } = await axios.get(url_advice, {
-      params: { timeStamp: new Date().getTime() },
-    });
-    let advice = data.slip.advice;
-
-    if (checkString(advice)) {
-      console.log('find string to filter out', advice);
-      advice = filterOut(url_advice);
-    }
-
-    console.log('fetchAdvice');
-    return advice;
-  } catch (error) {
-    console.error();
-  }
-};
-
-const checkString = (string: string): boolean => {
-  return string.toLowerCase().includes('sex');
-};
-
-const filterOut = async (url: string) => {
-  let count = 0;
-  let advice: string;
-  while (count < 30) {
-    await new Promise((cb) => setTimeout(cb, 1000));
-
-    const { data } = await axios.get(url, {
-      params: { timeStamp: new Date().getTime() },
-    });
-    advice = data.slip.advice;
-
-    if (!checkString(advice)) break;
-
-    count++;
-  }
-  return advice;
-};
-
-const url_quotes = 'https://api.quotable.io/random';
-
-const fetchQuote = async () => {
-  try {
-    const { data } = await axios.get(url_quotes, {
-      params: { timeStamp: new Date().getTime() },
-    });
-    const { content, author } = data;
-    console.log('fetchQuote');
-    // console.log({ content, author });
-    return { content, author };
-  } catch (error) {
-    console.error();
-  }
-};
-
-const fetchQuoteCategory = async (category: string) => {
-  try {
-    const url = `${url_quotes}?tags=${category}`;
-    const { data } = await axios.get(url, {
-      params: { timeStamp: new Date().getTime() },
-    });
-    const { content, author } = data;
-    console.log('fetchQuoteCategory, url', url);
-    // console.log({ content, author });
-    return { content, author };
-  } catch (error) {
-    console.error();
-  }
-};
+import { fetchAdvice } from '../api/lib/fetchAdvice';
+import { fetchQuotes } from '../api/lib/fetchQuotes';
 
 export type contentType =
   | string
@@ -213,9 +139,9 @@ const Home: React.FC = () => {
               fetchFuncAdvice={() =>
                 fetchFunc(content, setContent, fetchAdvice)
               }
-              fetchFuncQuote={() => fetchFunc(content, setContent, fetchQuote)}
+              fetchFuncQuote={() => fetchFunc(content, setContent, fetchQuotes)}
               fetchFuncQuoteCategory={() =>
-                fetchFunc(content, setContent, fetchQuoteCategory, category)
+                fetchFunc(content, setContent, fetchQuotes, category)
               }
               isLoading={isLoading}
               isError={isError}
@@ -247,17 +173,6 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   // export const getStaticProps: GetStaticProps = async () => {
-//   const res = await fetcher(url);
-
-//   return {
-//     props: {
-//       res,
-//     },
-//   };
-// };
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
