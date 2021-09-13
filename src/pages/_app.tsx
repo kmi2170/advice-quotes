@@ -14,6 +14,8 @@ import theme from '../utils/theme';
 
 import '../styles/globals.css';
 
+import AdviceContextProvider from '../context';
+
 // const queryClient = new QueryClient();
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
@@ -39,7 +41,9 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         </Head>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Component {...pageProps} />
+        <AdviceContextProvider>
+          <Component {...pageProps} />
+        </AdviceContextProvider>
         {/* <ReactQueryDevtools />
         </Hydrate>
       </QueryClientProvider> */}
