@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 
-import { Grow, Container, Grid, Typography } from '@material-ui/core';
+import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import SEO from '../components/SEO';
-import AppTitle from '../components/AppTitle';
 import ButtonGroup from '../components/ButtonGroup';
-import CardComponent from '../components/Card';
+import Card from '../components/Card';
 import SwitchComponent from '../components/Switch';
 import Credits from '../components/Credits';
 import Footer from '../components/Footer';
-import { useCookies } from 'react-cookie';
 
 import { fetchAdvice } from '../api/lib/fetchAdvice';
 import { fetchQuotes } from '../api/lib/fetchQuotes';
@@ -118,56 +117,58 @@ const Home: React.FC = () => {
       }`}
     >
       <SEO />
-      <Grow in>
-        <Container>
-          <div className={classes.appTitleWrapper}>
-            <AppTitle />
-          </div>
-          <ButtonGroup
+      <Container>
+        <Typography
+          variant="h3"
+          component="h1"
+          align="center"
+          className={classes.titleApp}
+        >
+          Advice/Quotes App
+        </Typography>
+        <ButtonGroup
+          isButtonSelected={isButtonSelected}
+          setIsButtonSelected={setIsButtonSelected}
+          setContent={setContent}
+          setCookieButton={setCookieButton}
+          setSelectedFetcher={setSelectedFetcher}
+          setCategory={setCategory}
+        />
+
+        <div className={classes.cardContainer}>
+          <Card
+            content={content}
             isButtonSelected={isButtonSelected}
-            setIsButtonSelected={setIsButtonSelected}
-            setContent={setContent}
-            setCookieButton={setCookieButton}
-            setSelectedFetcher={setSelectedFetcher}
+            selectedFetcher={selectedFetcher}
+            fetchFuncAdvice={() => fetchFunc(content, setContent, fetchAdvice)}
+            fetchFuncQuote={() => fetchFunc(content, setContent, fetchQuotes)}
+            fetchFuncQuoteCategory={() =>
+              fetchFunc(content, setContent, fetchQuotes, category)
+            }
+            isLoading={isLoading}
+            isError={isError}
+            category={category}
             setCategory={setCategory}
           />
-          <div className={classes.textWrapper}>
-            <CardComponent
-              content={content}
-              isButtonSelected={isButtonSelected}
-              selectedFetcher={selectedFetcher}
-              fetchFuncAdvice={() =>
-                fetchFunc(content, setContent, fetchAdvice)
-              }
-              fetchFuncQuote={() => fetchFunc(content, setContent, fetchQuotes)}
-              fetchFuncQuoteCategory={() =>
-                fetchFunc(content, setContent, fetchQuotes, category)
-              }
-              isLoading={isLoading}
-              isError={isError}
-              category={category}
-              setCategory={setCategory}
-            />
-          </div>
-          <Grid container justifyContent="space-around" alignItems="center">
-            <Grid item>
-              <div className={classes.switchWrapper}>
-                <SwitchComponent
-                  state={wallpaper}
-                  setState={setWallpaper}
-                  setCookieWallpaper={setCookieWallpaper}
-                />
-              </div>
-            </Grid>
-            <Grid item>
-              <Credits />
-            </Grid>
+        </div>
+        <Grid container justifyContent="space-around" alignItems="center">
+          <Grid item>
+            <div className={classes.switchContainer}>
+              <SwitchComponent
+                state={wallpaper}
+                setState={setWallpaper}
+                setCookieWallpaper={setCookieWallpaper}
+              />
+            </div>
           </Grid>
-          <div className={classes.footerWrapper}>
-            <Footer />
-          </div>
-        </Container>
-      </Grow>
+          <Grid item>
+            <Credits />
+          </Grid>
+        </Grid>
+        <div className={classes.footerContainer}>
+          <Footer />
+        </div>
+      </Container>
     </div>
   );
 };
@@ -188,12 +189,15 @@ const useStyles = makeStyles((theme: Theme) => ({
         height: '100vh',
       },
     },
-    // backgroundImage:
-    //   'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(255,255,255,0.0)))',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
     backgroundSize: 'fit',
-    // backgroundSize: 'contain',
+  },
+  titleApp: {
+    fontFamily: 'Lobster',
+    color: 'white',
+    textShadow: '2px 2px #19857b',
+    padding: theme.spacing(4, 0),
   },
   wallpaperNature: {
     backgroundImage:
@@ -201,28 +205,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   wallpaperTown: {
     backgroundImage:
-      // 'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(255,255,255,0.0), rgba(0,0,0,1.0)), url("/images/sea_night_2.jpg"))',',
-      // 'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(0,20,0,0.0), rgba(0,0,0,0.6)), url("/images/town1.jpg")',
-      // 'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(0,20,0,0.0), rgba(0,0,0,1.0)), url("/images/mountains1.jpg")',
       'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(0,20,0,0.0), rgba(0,0,0,1.0)), url("/images/bamboo1.jpg")',
   },
-  appTitleWrapper: {
-    paddingTop: '1.5rem',
-    paddingBottom: '2.0rem',
-  },
-  textWrapper: {
+  cardContainer: {
     marginTop: '1.0rem',
   },
-  switchWrapper: {
+  switchContainer: {
     marginTop: '1.5rem',
-    // backgroundColor: 'white',
     backgroundColor: 'rgba(180,180,255,0.8)',
     padding: '0 0.5rem',
     borderRadius: '0.5rem',
   },
-  creditWrapper: {},
 
-  footerWrapper: {
-    marginTop: '2.0rem',
+  footerContainer: {
+    marginTop: theme.spacing(5),
   },
 }));
