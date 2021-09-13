@@ -2,29 +2,26 @@ import { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 
 import { Container, Grid, Typography } from '@material-ui/core';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { useStyles } from '../styles/Home.styles';
 
 import SEO from '../components/SEO';
 import ButtonGroup from '../components/ButtonGroup';
-import Card from '../components/Card';
-import SwitchComponent from '../components/Switch';
+import Card from '../components/Card/Card';
+import Switch from '../components/Switch';
 import Credits from '../components/Credits';
 import Footer from '../components/Footer';
 
 import { fetchAdvice } from '../api/lib/fetchAdvice';
 import { fetchQuotes } from '../api/lib/fetchQuotes';
 
-export type contentType =
-  | string
-  | { content: string; author: string }
-  | undefined;
+import { ContentType } from '../api/types';
 
 const Home: React.FC = () => {
   const classes = useStyles();
 
-  const [content, setContent] = useState<contentType>(undefined);
+  const [content, setContent] = useState<ContentType>(undefined);
 
-  const [cookies, setCookie] = useCookies(['user']);
+  const [cookies, setCookie] = useCookies(['button', 'wallpaper']);
 
   const [wallpaper, setWallpaper] = useState<boolean>(false);
 
@@ -111,13 +108,14 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div
-      className={`${classes.root}  ${
-        wallpaper == true ? classes.wallpaperNature : classes.wallpaperTown
-      }`}
-    >
+    <div className={classes.root}>
       <SEO />
-      <Container>
+      <Container
+        maxWidth="lg"
+        className={`${classes.container} ${
+          wallpaper == true ? classes.wallpaperNature : classes.wallpaperTown
+        }`}
+      >
         <Typography
           variant="h3"
           component="h1"
@@ -154,7 +152,7 @@ const Home: React.FC = () => {
         <Grid container justifyContent="space-around" alignItems="center">
           <Grid item>
             <div className={classes.switchContainer}>
-              <SwitchComponent
+              <Switch
                 state={wallpaper}
                 setState={setWallpaper}
                 setCookieWallpaper={setCookieWallpaper}
@@ -174,50 +172,3 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    flexGrow: 1,
-    height: '100vh',
-    [theme.breakpoints.down('sm')]: {
-      '@media (orientation: landscape)': {
-        backgroundSize: 'auto 100vw',
-        height: '100vw',
-      },
-      '@media (orientation: portrait)': {
-        backgroundSize: 'auto 100vh',
-        height: '100vh',
-      },
-    },
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    backgroundSize: 'fit',
-  },
-  titleApp: {
-    fontFamily: 'Lobster',
-    color: 'white',
-    textShadow: '2px 2px #19857b',
-    padding: theme.spacing(4, 0),
-  },
-  wallpaperNature: {
-    backgroundImage:
-      'linear-gradient(to bottom, rgba(0,20,0,1.0), rgba(0,50,0,0.0), rgba(0,20,1.0)), url("/images/flowers1.jpg")',
-  },
-  wallpaperTown: {
-    backgroundImage:
-      'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(0,20,0,0.0), rgba(0,0,0,1.0)), url("/images/bamboo1.jpg")',
-  },
-  cardContainer: {
-    marginTop: '1.0rem',
-  },
-  switchContainer: {
-    marginTop: '1.5rem',
-    backgroundColor: 'rgba(180,180,255,0.8)',
-    padding: '0 0.5rem',
-    borderRadius: '0.5rem',
-  },
-
-  footerContainer: {
-    marginTop: theme.spacing(5),
-  },
-}));

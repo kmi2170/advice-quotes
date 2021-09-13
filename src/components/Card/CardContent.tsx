@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import { contentType } from '../pages/index';
+import { ContentType } from '../../api/types';
 
 const useStyles = makeStyles((theme: Theme) => ({
   textBox: {
@@ -10,8 +10,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     overflowY: 'auto',
   },
   content: {
-    //fontFamily: 'Raleway',
-    //fontFamily: 'Oswald',
+    // fontFamily: 'Raleway',
+    // fontFamily: 'Oswald',
     // fontFamily: 'Jua',
     fontFamily: 'Acme',
     //fontFamily: 'Viaoda Libre',
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface CardContentProps {
-  content: contentType;
+  content: ContentType;
   isButtonSelected: boolean[];
 }
 

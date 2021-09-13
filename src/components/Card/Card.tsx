@@ -9,7 +9,7 @@ import {
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import CardContent from './CardContent';
-import { contentType } from '../pages/index';
+import { ContentType } from '../../api/types';
 
 import styles from './Card.module.css';
 
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface CardContentProps {
-  content: contentType;
+  content: ContentType;
   isButtonSelected: boolean[];
   isLoading: boolean;
   isError: boolean;
