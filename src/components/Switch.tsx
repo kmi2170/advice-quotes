@@ -1,34 +1,24 @@
+import { useContext } from 'react';
+
 import Switch from '@material-ui/core/Switch';
-import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Grid, Typography, Tooltip } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core/styles';
+
+import { AdviceContext } from '../context';
+import { actionTypes } from '../context/actionTypes';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  switchName1: {
-    // color: 'white',
-    // marginRight: '1rem',
-  },
-  switchName2: {
-    // color: 'white',
-  },
+  switchName1: {},
+  switchName2: {},
 }));
 
-interface SwitchComponentProps {
-  state: boolean;
-  setState: (state: boolean | ((state: boolean) => boolean)) => void;
-  setCookieWallpaper: (state: boolean | ((state: boolean) => boolean)) => void;
-}
-
-const SwitchComponent: React.FC<SwitchComponentProps> = ({
-  state,
-  setState,
-  setCookieWallpaper,
-}) => {
+const SwitchComponent: React.FC = () => {
   const classes = useStyles();
 
-  const handleChange = () => {
-    setState((prev) => !prev);
-    setCookieWallpaper((prev) => !prev);
-  };
+  const { state, dispatch } = useContext(AdviceContext);
+
+  const handleChangeWallpaper = () =>
+    dispatch({ type: actionTypes.SET_WALLPAPER, payload: null });
 
   return (
     <Grid container justifyContent="center" alignItems="center">
@@ -41,8 +31,8 @@ const SwitchComponent: React.FC<SwitchComponentProps> = ({
         <Tooltip title="Switch Wallpaper">
           <Switch
             color="default"
-            checked={state}
-            onChange={handleChange}
+            checked={state.wallpaper}
+            onChange={handleChangeWallpaper}
             inputProps={{ 'aria-label': 'switch the wallpaer' }}
           />
         </Tooltip>

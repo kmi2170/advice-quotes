@@ -1,8 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useCookies } from 'react-cookie';
 
 import { Container, Grid, Typography } from '@material-ui/core';
 import { useStyles } from '../styles/Home.styles';
+
+import { AdviceContext } from '../context';
+import { actionTypes } from '../context/actionTypes';
 
 import SEO from '../components/SEO';
 import ButtonGroup from '../components/ButtonGroup';
@@ -18,6 +21,8 @@ import { ContentType } from '../api/types';
 
 const Home: React.FC = () => {
   const classes = useStyles();
+
+  const { state, dispatch } = useContext(AdviceContext);
 
   const [content, setContent] = useState<ContentType>(undefined);
 
@@ -76,24 +81,27 @@ const Home: React.FC = () => {
     sameSite: true,
   };
 
-  const setCookieWallpaper = (value: boolean): void => {
-    setCookie('wallpaper', value, cookiesOptions);
-  };
-
   const setCookieButton = (value: boolean[]): void => {
     setCookie('button', value, cookiesOptions);
   };
 
   useEffect(() => {
-    if (!cookies.wallpaper) {
-      setCookieWallpaper(wallpaper);
-    } else if (typeof JSON.parse(cookies.wallpaper) === 'boolean') {
-      setWallpaper(JSON.parse(cookies.wallpaper));
-      // console.log('wallpaper ', wallpaper);
-    } else {
-      setCookieWallpaper(wallpaper);
+    if (
+      cookies.wallpaper &&
+      typeof JSON.parse(cookies.wallpaper) === 'boolean'
+    ) {
+      dispatch({
+        type: actionTypes.SET_WALLPAPER,
+        payload: JSON.parse(cookies.wallpaper),
+      });
     }
+  }, []);
 
+  useEffect(() => {
+    setCookie('wallpaper', state.wallpaper, cookiesOptions);
+  }, [state.wallpaper]);
+
+  useEffect(() => {
     if (!cookies.button) {
       setCookieButton(isButtonSelected);
       setSelectedFetcher(isButtonSelected);
@@ -113,7 +121,7 @@ const Home: React.FC = () => {
       <Container
         maxWidth="lg"
         className={`${classes.container} ${
-          wallpaper == true ? classes.wallpaperNature : classes.wallpaperTown
+          state.wallpaper ? classes.wallpaperNature : classes.wallpaperTown
         }`}
       >
         <Typography
@@ -152,11 +160,7 @@ const Home: React.FC = () => {
         <Grid container justifyContent="space-around" alignItems="center">
           <Grid item>
             <div className={classes.switchContainer}>
-              <Switch
-                state={wallpaper}
-                setState={setWallpaper}
-                setCookieWallpaper={setCookieWallpaper}
-              />
+              <Switch />
             </div>
           </Grid>
           <Grid item>

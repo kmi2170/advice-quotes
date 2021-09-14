@@ -71,11 +71,9 @@ const CardComponent: React.FC<CardContentProps> = ({
 
   const onClickHandler = () => {
     if (selectedFetcher[0]) {
-      console.log('card Advice ', selectedFetcher);
       if (category !== 'all') setCategory('all');
       fetchFuncAdvice();
     } else if (selectedFetcher[1]) {
-      console.log('card Quote ', category, selectedFetcher);
       if (category === 'all') {
         fetchFuncQuote();
       } else {

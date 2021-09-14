@@ -17,7 +17,7 @@ type PayloadType = {
   [actionTypes.SET_SELECTED_FETCHER]: boolean;
   [actionTypes.SET_CONTENT]: ContentType;
   [actionTypes.SET_CATEGORY]: string;
-  [actionTypes.SET_WALLPAPER]: boolean;
+  [actionTypes.SET_WALLPAPER]: null | boolean;
 };
 
 type ActionMap<M extends { [index: string]: any }> = {

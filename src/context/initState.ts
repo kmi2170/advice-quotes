@@ -7,7 +7,7 @@ export const initState = {
   selectedFetcher: undefined,
   content: null,
   category: '',
-  wallpaper: true,
+  wallpaper: false,
 };
 
 export type StateType = {
@@ -17,5 +17,5 @@ export type StateType = {
   selectedFetcher: boolean;
   content: ContentType;
   category: string;
-  wallpaper: boolean;
+  wallpaper: null | boolean;
 };

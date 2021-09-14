@@ -3,7 +3,9 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
+    height: '100vh',
     background: '#222',
+    backgroundImage: 'linear-gradient(#222,#777,#222)',
   },
   titleApp: {
     fontFamily: 'Lobster',
@@ -42,7 +44,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
     marginTop: '1.5rem',
     backgroundColor: 'rgba(180,180,255,0.8)',
     padding: '0 0.5rem',
-    borderRadius: '0.5rem',
+    borderRadius: '0.4rem',
   },
 
   footerContainer: {

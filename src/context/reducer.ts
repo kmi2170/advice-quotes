@@ -16,7 +16,9 @@ export const reducer = (state: StateType, action: ActionsType) => {
     case actionTypes.SET_CATEGORY:
       return { ...state, category: action.payload };
     case actionTypes.SET_WALLPAPER:
-      return { ...state, wallpaper: action.payload };
+      return action.payload
+        ? { ...state, wallpaper: action.payload }
+        : { ...state, wallpaper: !state.wallpaper };
     default:
       return state;
   }
