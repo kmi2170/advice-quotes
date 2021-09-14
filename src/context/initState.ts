@@ -3,7 +3,7 @@ import { ContentType } from '../api/types';
 export const initState = {
   isLoading: true,
   isError: false,
-  isButtonSelected: [true, false],
+  isButtonSelected: null,
   content: undefined,
   category: 'all',
   wallpaper: false,
@@ -12,7 +12,7 @@ export const initState = {
 export type StateType = {
   isLoading: boolean;
   isError: boolean;
-  isButtonSelected: boolean[];
+  isButtonSelected: null | boolean[];
   content: undefined | ContentType;
   category: string;
   wallpaper: null | boolean;

@@ -1,11 +1,10 @@
 import { createTheme } from '@material-ui/core/styles';
 import { responsiveFontSizes } from '@material-ui/core/styles';
 
-import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
+// import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 import { red } from '@material-ui/core/colors';
 
-const breakpoints = createBreakpoints({});
-
+// const breakpoints = createBreakpoints({});
 // breakpoints.values.lg = 1024
 // breakpoints.values['xxl'] = 3000
 // '@media (min-width:600px)': {
@@ -41,18 +40,7 @@ let theme = createTheme({
       'Lobster',
       'sans-serif',
       // 'Roboto Condensed',
-      // 'Rubik',
-      // 'Oswald',
-      // 'Viaoda Libre',
-      // 'Playfair Display',
-      // 'Jua',
     ].join(','),
-    // h4: {
-    //   fontSize: '2.125rem',
-    //   [breakpoints.down('sm')]: {
-    //     fontSize: '1.5rem',
-    //   },
-    // },
   },
   overrides: {
     // Credits

@@ -66,26 +66,27 @@ const CardComponent: React.FC = () => {
           : await fetchQuotes(state.category);
     } else {
       console.log('no fetch function found.');
+      dispatch({ type: actionTypes.SET_IS_LOADING, payload: false });
       dispatch({ type: actionTypes.SET_IS_ERROR, payload: true });
     }
-    dispatch({ type: actionTypes.SET_CONTENT, payload: content });
 
     dispatch({ type: actionTypes.SET_IS_LOADING, payload: false });
+    dispatch({ type: actionTypes.SET_CONTENT, payload: content });
   };
 
   useEffect(() => {
-    handleGetAnother();
+    state.isButtonSelected && handleGetAnother();
   }, [state.isButtonSelected, state.category]);
 
   return (
     <Grid container justifyContent="center" alignItems="center">
       <Grid item>
         <Card className={classes.card} elevation={6}>
-          {state.isButtonSelected[0] ? (
+          {state.isButtonSelected && state.isButtonSelected[0] ? (
             <Typography variant="h6" color="error">
               Advice
             </Typography>
-          ) : state.isButtonSelected[1] ? (
+          ) : state.isButtonSelected && state.isButtonSelected[1] ? (
             state.category === 'all' ? (
               <Typography variant="subtitle1" color="error">
                 Quote
@@ -109,7 +110,6 @@ const CardComponent: React.FC = () => {
                   variant="contained"
                   color="primary"
                   size="small"
-                  // className={classes.button}
                   className={`${classes.button} ${styles.button}`}
                   onClick={handleGetAnother}
                 >

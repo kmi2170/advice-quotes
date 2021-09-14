@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { useCookies } from 'react-cookie';
 
 import { Container, Grid, Typography } from '@material-ui/core';
@@ -8,7 +8,7 @@ import { AdviceContext } from '../context';
 import { actionTypes } from '../context/actionTypes';
 
 import SEO from '../components/SEO';
-import ButtonGroup from '../components/ButtonGroup';
+import ButtonGroup from '../components/ButtonGroup/ButtonGroup';
 import Card from '../components/Card/Card';
 import Switch from '../components/Switch';
 import Credits from '../components/Credits';
@@ -28,6 +28,21 @@ const Home: React.FC = () => {
   const [cookies, setCookie] = useCookies(['button', 'wallpaper']);
 
   useEffect(() => {
+    const payload =
+      cookies.button && typeof cookies.button === 'object'
+        ? cookies.button
+        : [true, false];
+    dispatch({
+      type: actionTypes.SET_IS_BUTTON_SELECTED,
+      payload: payload,
+    });
+    // if (cookies.button && typeof cookies.button === 'object') {
+    //   dispatch({
+    //     type: actionTypes.SET_IS_BUTTON_SELECTED,
+    //     payload: cookies.button,
+    //   });
+    // }
+
     if (
       cookies.wallpaper &&
       typeof JSON.parse(cookies.wallpaper) === 'boolean'
@@ -40,21 +55,12 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setCookie('wallpaper', state.wallpaper, cookiesOptions);
-  }, [state.wallpaper, setCookie]);
-
-  useEffect(() => {
-    if (cookies.button && typeof cookies.button === 'object') {
-      dispatch({
-        type: actionTypes.SET_IS_BUTTON_SELECTED,
-        payload: cookies.button,
-      });
-    }
-  }, []);
-
-  useEffect(() => {
     setCookie('button', state.isButtonSelected, cookiesOptions);
   }, [state.isButtonSelected, setCookie]);
+
+  useEffect(() => {
+    setCookie('wallpaper', state.wallpaper, cookiesOptions);
+  }, [state.wallpaper, setCookie]);
 
   return (
     <div className={classes.root}>

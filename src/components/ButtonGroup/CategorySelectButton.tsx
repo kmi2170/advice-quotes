@@ -11,10 +11,10 @@ import {
 } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
-import { AdviceContext } from '../context';
-import { actionTypes } from '../context/actionTypes';
+import { AdviceContext } from '../../context';
+import { actionTypes } from '../../context/actionTypes';
 
-import { categories } from '../utils/categories';
+import { categories } from '../../utils/categories';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
     },
     paper: {
-      // marginRight: theme.spacing(5),
       marginTop: theme.spacing(5),
     },
     button: {

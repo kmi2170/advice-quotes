@@ -7,7 +7,7 @@ import Document, {
   DocumentContext,
 } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
-import theme from '../utils/theme';
+import theme from '../theme/theme';
 
 export default class MyDocument extends Document {
   render() {
@@ -50,9 +50,6 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
             rel="stylesheet"
           />
-
-
-
         */}
         </Head>
         <body>

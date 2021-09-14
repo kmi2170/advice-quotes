@@ -9,8 +9,6 @@ export const reducer = (state: StateType, action: ActionsType) => {
       return { ...state, isError: action.payload };
     case actionTypes.SET_IS_BUTTON_SELECTED:
       return { ...state, isButtonSelected: action.payload };
-    case actionTypes.SET_SELECTED_FETCHER:
-      return { ...state, selectedFetcher: action.payload };
     case actionTypes.SET_CONTENT:
       return { ...state, content: action.payload };
     case actionTypes.SET_CATEGORY:
