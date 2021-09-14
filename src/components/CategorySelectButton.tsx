@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Tooltip,
   Button,
@@ -10,6 +10,9 @@ import {
   ClickAwayListener,
 } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+
+import { AdviceContext } from '../context';
+import { actionTypes } from '../context/actionTypes';
 
 import { categories } from '../utils/categories';
 
@@ -30,14 +33,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface CatergorySelectButtonProps {
-  setCategory: (category: string) => void;
-}
-
-const CatergorySelectButton: React.FC<CatergorySelectButtonProps> = ({
-  setCategory,
-}) => {
+const CatergorySelectButton: React.FC = () => {
   const classes = useStyles();
+  const { dispatch } = useContext(AdviceContext);
+
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
@@ -57,12 +56,13 @@ const CatergorySelectButton: React.FC<CatergorySelectButtonProps> = ({
   };
 
   const handleClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-    setCategory(
-      +(event.target as HTMLInputElement).value === -1
-        ? 'all'
-        : categories[+(event.target as HTMLInputElement).value].name
-      // console.log(event.target.value, categories[event.target.value].name);
-    );
+    dispatch({
+      type: actionTypes.SET_CATEGORY,
+      payload:
+        +(event.target as HTMLInputElement).value === -1
+          ? 'all'
+          : categories[+(event.target as HTMLInputElement).value].name,
+    });
   };
 
   function handleListKeyDown(event: React.KeyboardEvent) {

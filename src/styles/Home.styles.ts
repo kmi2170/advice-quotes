@@ -29,11 +29,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
       },
     },
   },
-  wallpaperNature: {
+  wallpaper1: {
     backgroundImage:
       'linear-gradient(to bottom, rgba(0,20,0,1.0), rgba(0,50,0,0.0), rgba(0,20,1.0)), url("/images/flowers1.jpg")',
   },
-  wallpaperTown: {
+  wallpaper2: {
     backgroundImage:
       'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(0,20,0,0.0), rgba(0,0,0,1.0)), url("/images/bamboo1.jpg")',
   },

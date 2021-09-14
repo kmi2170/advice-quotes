@@ -1,4 +1,4 @@
-// import { useEffect } from 'react';
+import { useContext } from 'react';
 import {
   Typography,
   Grid,
@@ -8,10 +8,12 @@ import {
 } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-// import SelectCategory from './SelectCategory';
 import CatergorySelectButton from './CategorySelectButton';
 
-const buttonData = [
+import { AdviceContext } from '../context';
+import { actionTypes } from '../context/actionTypes';
+
+const buttons = [
   {
     tooltipTitle: 'Randomly Chosen Advice',
     buttonTitle: 'Advice',
@@ -41,47 +43,35 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface ButtonGroupProps {
-  isButtonSelected: boolean[];
-  setIsButtonSelected: (isButtonSelected: boolean[]) => void;
-  setContent: (content: string | {} | undefined) => void;
-  setCookieButton: (value: boolean[]) => void;
-  setSelectedFetcher: (value: boolean[]) => void;
-  setCategory: (category: string) => void;
-}
-
-const ButtonGroup: React.FC<ButtonGroupProps> = ({
-  isButtonSelected,
-  setIsButtonSelected,
-  setContent,
-  setCookieButton,
-  setSelectedFetcher,
-  setCategory,
-}) => {
+const ButtonGroup: React.FC = () => {
   const classes = useStyles();
 
+  const { state, dispatch } = useContext(AdviceContext);
+
   const onClickHandler = (index: number) => {
-    if (!isButtonSelected[index]) {
+    if (!state.isButtonSelected[index]) {
       let newIsButtonSelected = [false, false];
       newIsButtonSelected[index] = true;
 
-      setCookieButton(newIsButtonSelected);
-      setIsButtonSelected(newIsButtonSelected);
-      setSelectedFetcher(newIsButtonSelected);
-      setContent(undefined);
+      dispatch({
+        type: actionTypes.SET_IS_BUTTON_SELECTED,
+        payload: newIsButtonSelected,
+      });
+
+      dispatch({ type: actionTypes.SET_CONTENT, payload: undefined });
     }
   };
 
   return (
     <Grid container justifyContent="space-around" alignItems="center">
-      {buttonData.map((el, index) => {
+      {buttons.map((button, index) => {
         if (index === 0)
           return (
             <Grid item key={index}>
               <ButtonBody
-                tooltipTitle={el.tooltipTitle}
-                buttonTitle={el.buttonTitle}
-                isSelected={isButtonSelected[index]}
+                tooltipTitle={button.tooltipTitle}
+                buttonTitle={button.buttonTitle}
+                isSelected={state.isButtonSelected[index]}
                 onClickHandler={() => onClickHandler(index)}
               />
             </Grid>
@@ -93,14 +83,14 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
           className={classes.quoteButtonWrapper}
           //className={isButtonSelected[1] ? classes.quoteButtonWrapper : null}
         >
-          {buttonData.map((el, index) => {
+          {buttons.map((button, index) => {
             if (index === 1)
               return (
                 <ButtonBody
                   key={index}
-                  tooltipTitle={el.tooltipTitle}
-                  buttonTitle={el.buttonTitle}
-                  isSelected={isButtonSelected[index]}
+                  tooltipTitle={button.tooltipTitle}
+                  buttonTitle={button.buttonTitle}
+                  isSelected={state.isButtonSelected[index]}
                   onClickHandler={() => onClickHandler(index)}
                 />
               );
@@ -108,12 +98,12 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
 
           <div
             className={
-              isButtonSelected[1]
+              state.isButtonSelected[1]
                 ? classes.categoryButton
                 : classes.categoryButtonOff
             }
           >
-            <CatergorySelectButton setCategory={setCategory} />
+            <CatergorySelectButton />
           </div>
         </div>
       </Grid>
@@ -155,9 +145,6 @@ const ButtonBody: React.FC<ButtonBodyProps> = ({
         color="secondary"
         size="small"
         className={classes.button}
-        // className={`${classes.button} ${
-        //   !isSelected ? classes.buttonUnselected : null
-        // }`}
         onClick={onClickHandler}
       >
         <Typography variant="h6">{buttonTitle}</Typography>

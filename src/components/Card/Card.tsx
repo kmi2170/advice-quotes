@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import {
   Grid,
   Card,
@@ -9,7 +9,13 @@ import {
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import CardContent from './CardContent';
+
+import { AdviceContext } from '../../context';
+import { actionTypes } from '../../context/actionTypes';
 import { ContentType } from '../../api/types';
+
+import { fetchAdvice } from '../../api/lib/fetchAdvice';
+import { fetchQuotes } from '../../api/lib/fetchQuotes';
 
 import styles from './Card.module.css';
 
@@ -42,86 +48,61 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface CardContentProps {
-  content: ContentType;
-  isButtonSelected: boolean[];
-  isLoading: boolean;
-  isError: boolean;
-  fetchFuncAdvice: () => void;
-  fetchFuncQuote: () => void;
-  fetchFuncQuoteCategory: () => void;
-  selectedFetcher: boolean[];
-  category: string;
-  setCategory: (category: string) => void;
-}
-
-const CardComponent: React.FC<CardContentProps> = ({
-  content,
-  isButtonSelected,
-  isLoading,
-  isError,
-  fetchFuncAdvice,
-  fetchFuncQuote,
-  fetchFuncQuoteCategory,
-  selectedFetcher,
-  category,
-  setCategory,
-}) => {
+const CardComponent: React.FC = () => {
   const classes = useStyles();
 
-  const onClickHandler = () => {
-    if (selectedFetcher[0]) {
-      if (category !== 'all') setCategory('all');
-      fetchFuncAdvice();
-    } else if (selectedFetcher[1]) {
-      if (category === 'all') {
-        fetchFuncQuote();
-      } else {
-        fetchFuncQuoteCategory();
-      }
+  const { state, dispatch } = useContext(AdviceContext);
+
+  const handleGetAnother = async () => {
+    dispatch({ type: actionTypes.SET_IS_LOADING, payload: true });
+
+    let content: ContentType;
+    if (state.isButtonSelected[0]) {
+      content = await fetchAdvice();
+    } else if (state.isButtonSelected[1]) {
+      content =
+        state.category === 'all'
+          ? await fetchQuotes()
+          : await fetchQuotes(state.category);
+    } else {
+      console.log('no fetch function found.');
+      dispatch({ type: actionTypes.SET_IS_ERROR, payload: true });
     }
+    dispatch({ type: actionTypes.SET_CONTENT, payload: content });
+
+    dispatch({ type: actionTypes.SET_IS_LOADING, payload: false });
   };
 
   useEffect(() => {
-    if (selectedFetcher !== undefined) {
-      console.log('card useEffect ', selectedFetcher);
-      onClickHandler();
-    }
-  }, [selectedFetcher, category]);
+    handleGetAnother();
+  }, [state.isButtonSelected, state.category]);
 
   return (
     <Grid container justifyContent="center" alignItems="center">
       <Grid item>
         <Card className={classes.card} elevation={6}>
-          {isButtonSelected[0] ? (
+          {state.isButtonSelected[0] ? (
             <Typography variant="h6" color="error">
               Advice
             </Typography>
-          ) : isButtonSelected[1] ? (
-            category === 'all' ? (
+          ) : state.isButtonSelected[1] ? (
+            state.category === 'all' ? (
               <Typography variant="subtitle1" color="error">
                 Quote
               </Typography>
             ) : (
               <Typography variant="subtitle1" color="error">
-                Quote - <em>{category}</em>
+                Quote - <em>{state.category}</em>
               </Typography>
             )
           ) : null}
-          {isError ? (
+          {state.isError ? (
             <Typography variant="h6" color="error">
               Error. Loading Data Failed. Please try again later.
             </Typography>
           ) : (
             <>
-              {isLoading ? (
-                <CircularProgress />
-              ) : (
-                <CardContent
-                  content={content}
-                  isButtonSelected={isButtonSelected}
-                />
-              )}
+              {state.isLoading ? <CircularProgress /> : <CardContent />}
 
               <div className={classes.buttonWrapper}>
                 <Button
@@ -130,7 +111,7 @@ const CardComponent: React.FC<CardContentProps> = ({
                   size="small"
                   // className={classes.button}
                   className={`${classes.button} ${styles.button}`}
-                  onClick={onClickHandler}
+                  onClick={handleGetAnother}
                 >
                   <Typography variant="h5">Get another!</Typography>
                 </Button>

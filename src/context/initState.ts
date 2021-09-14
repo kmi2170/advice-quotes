@@ -4,18 +4,16 @@ export const initState = {
   isLoading: true,
   isError: false,
   isButtonSelected: [true, false],
-  selectedFetcher: undefined,
-  content: null,
-  category: '',
+  content: undefined,
+  category: 'all',
   wallpaper: false,
 };
 
 export type StateType = {
   isLoading: boolean;
   isError: boolean;
-  isButtonSelected: [boolean, boolean];
-  selectedFetcher: boolean;
-  content: ContentType;
+  isButtonSelected: boolean[];
+  content: undefined | ContentType;
   category: string;
   wallpaper: null | boolean;
 };

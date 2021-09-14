@@ -1,7 +1,9 @@
+import { useContext } from 'react';
+
 import { Typography } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import { ContentType } from '../../api/types';
+import { AdviceContext } from '../../context';
 
 const useStyles = makeStyles((theme: Theme) => ({
   textBox: {
@@ -31,29 +33,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface CardContentProps {
-  content: ContentType;
-  isButtonSelected: boolean[];
-}
-
-const CardContent: React.FC<CardContentProps> = ({
-  content,
-  isButtonSelected,
-}) => {
+const CardContent: React.FC = () => {
   const classes = useStyles();
+
+  const { state } = useContext(AdviceContext);
 
   return (
     <div className={classes.textBox}>
-      {isButtonSelected[0] && content !== undefined ? (
+      {state.isButtonSelected[0] && state.content !== undefined ? (
         <Typography
           className={classes.content}
           // className={`${classes.contetn} ${styles.fadeInText}`}
           variant="h4"
           align="center"
         >
-          {content}
+          {state.content}
         </Typography>
-      ) : isButtonSelected[1] && content !== undefined ? (
+      ) : state.isButtonSelected[1] && state.content !== undefined ? (
         <div>
           <Typography
             className={classes.content}
@@ -61,7 +57,7 @@ const CardContent: React.FC<CardContentProps> = ({
             variant="h4"
             align="center"
           >
-            {content['content']}
+            {state.content['content']}
           </Typography>
           <Typography
             className={classes.content}
@@ -70,7 +66,7 @@ const CardContent: React.FC<CardContentProps> = ({
             align="center"
             style={{ fontStyle: 'italic', marginTop: '1rem' }}
           >
-            {content['author']}
+            {state.content['author']}
           </Typography>
           {/*
            */}
@@ -81,17 +77,3 @@ const CardContent: React.FC<CardContentProps> = ({
 };
 
 export default CardContent;
-
-// interface AdviceSearchProps {
-//   onSubmitHandler: () => void;
-// }
-// const AdviceSearch: React.FC<AdviceSearchProps> = ({ onSubmitHandler }) => {
-//   return (
-//     <form noValidate autoComplete="off">
-//       <TextField id="searchForm" label="Search Keyword" variant="outlined" />
-//       <Typography variant="body2" color="textSecondary">
-//         Only SINGLE WORD is accepted.
-//       </Typography>
-//     </form>
-//   );
-// };
