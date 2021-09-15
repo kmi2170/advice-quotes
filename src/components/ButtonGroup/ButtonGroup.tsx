@@ -1,11 +1,11 @@
-import { useContext } from 'react';
 import { Typography, Grid, Button, Tooltip } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import CatergorySelectButton from './CategorySelectButton';
 
-import { AdviceContext } from '../../context';
-import { actionTypes } from '../../context/actionTypes';
+import { useSelector, useDispatch } from 'react-redux';
+import { actionTypes } from '../../redux/actionTypes';
+import { RootState, AppDispatch } from '../../redux/store';
 
 const useStyles = makeStyles((theme: Theme) => ({
   quotesButtonContainer: {
@@ -34,10 +34,13 @@ const buttons = [
 const ButtonGroup: React.FC = () => {
   const classes = useStyles();
 
-  const { state, dispatch } = useContext(AdviceContext);
+  const isButtonSelected = useSelector<RootState, boolean[]>(
+    (state) => state.isButtonSelected
+  );
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleClick = (index: number) => {
-    if (!state.isButtonSelected[index]) {
+    if (!isButtonSelected[index]) {
       let newIsButtonSelected = [false, false];
       newIsButtonSelected[index] = true;
 
@@ -55,15 +58,13 @@ const ButtonGroup: React.FC = () => {
 
   return (
     <Grid container justifyContent="space-around" alignItems="center">
-      {state.isButtonSelected &&
+      {isButtonSelected &&
         buttons.map((button, index) => (
           <Grid key={index} item>
             <div className={index === 1 ? classes.quotesButtonContainer : null}>
               <Tooltip title={button.tooltip}>
                 <Button
-                  variant={
-                    state.isButtonSelected[index] ? 'contained' : 'outlined'
-                  }
+                  variant={isButtonSelected[index] ? 'contained' : 'outlined'}
                   color="secondary"
                   size="small"
                   className={classes.button}
@@ -72,7 +73,7 @@ const ButtonGroup: React.FC = () => {
                   <Typography variant="h6">{button.name}</Typography>
                 </Button>
               </Tooltip>
-              {index === 1 && state.isButtonSelected[1] && (
+              {index === 1 && isButtonSelected[1] && (
                 <div className={classes.categoryButton}>
                   <CatergorySelectButton />
                 </div>

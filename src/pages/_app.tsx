@@ -14,11 +14,14 @@ import theme from '../theme/theme';
 
 import '../styles/globals.css';
 
-import AdviceContextProvider from '../context';
+import { Provider } from 'react-redux';
+import { useStore } from '../redux/store';
 
 // const queryClient = new QueryClient();
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+  const store = useStore(pageProps.initialReduxState);
+
   React.useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
@@ -41,9 +44,9 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         </Head>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <AdviceContextProvider>
+        <Provider store={store}>
           <Component {...pageProps} />
-        </AdviceContextProvider>
+        </Provider>
         {/* <ReactQueryDevtools />
         </Hydrate>
       </QueryClientProvider> */}

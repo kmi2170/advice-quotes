@@ -1,11 +1,12 @@
-import { useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 
 import { Container, Grid, Typography } from '@material-ui/core';
 import { useStyles } from '../styles/Home.styles';
 
-import { AdviceContext } from '../context';
-import { actionTypes } from '../context/actionTypes';
+import { useSelector, useDispatch } from 'react-redux';
+import { actionTypes } from '../redux/actionTypes';
+import { RootState, AppDispatch } from '../redux/store';
 
 import SEO from '../components/SEO';
 import ButtonGroup from '../components/ButtonGroup/ButtonGroup';
@@ -23,7 +24,11 @@ const cookiesOptions = {
 const Home: React.FC = () => {
   const classes = useStyles();
 
-  const { state, dispatch } = useContext(AdviceContext);
+  const wallpaper = useSelector<RootState, boolean>((state) => state.wallpaper);
+  const isButtonSelected = useSelector<RootState, boolean[]>(
+    (state) => state.isButtonSelected
+  );
+  const dispatch = useDispatch<AppDispatch>();
 
   const [cookies, setCookie] = useCookies(['button', 'wallpaper']);
 
@@ -34,14 +39,8 @@ const Home: React.FC = () => {
         : [true, false];
     dispatch({
       type: actionTypes.SET_IS_BUTTON_SELECTED,
-      payload: payload,
+      payload,
     });
-    // if (cookies.button && typeof cookies.button === 'object') {
-    //   dispatch({
-    //     type: actionTypes.SET_IS_BUTTON_SELECTED,
-    //     payload: cookies.button,
-    //   });
-    // }
 
     if (
       cookies.wallpaper &&
@@ -55,12 +54,12 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setCookie('button', state.isButtonSelected, cookiesOptions);
-  }, [state.isButtonSelected, setCookie]);
+    setCookie('button', isButtonSelected, cookiesOptions);
+  }, [isButtonSelected, setCookie]);
 
   useEffect(() => {
-    setCookie('wallpaper', state.wallpaper, cookiesOptions);
-  }, [state.wallpaper, setCookie]);
+    setCookie('wallpaper', wallpaper, cookiesOptions);
+  }, [wallpaper, setCookie]);
 
   return (
     <div className={classes.root}>
@@ -68,7 +67,7 @@ const Home: React.FC = () => {
       <Container
         maxWidth="lg"
         className={`${classes.container} ${
-          state.wallpaper ? classes.wallpaper1 : classes.wallpaper2
+          wallpaper ? classes.wallpaper1 : classes.wallpaper2
         }`}
       >
         <Typography

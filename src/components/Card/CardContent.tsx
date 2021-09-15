@@ -1,9 +1,10 @@
-import { useContext } from 'react';
-
 import { Typography } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import { AdviceContext } from '../../context';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+
+import { ContentType } from '../../api/types';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -24,25 +25,28 @@ const useStyles = makeStyles((theme: Theme) => ({
 const CardContent: React.FC = () => {
   const classes = useStyles();
 
-  const { state } = useContext(AdviceContext);
+  const isButtonSelected = useSelector<RootState, boolean[]>(
+    (state) => state.isButtonSelected
+  );
+  const content = useSelector<RootState, ContentType>((state) => state.content);
 
   return (
     <div className={classes.contentContainer}>
-      {state.isButtonSelected[0] && state.content ? (
+      {isButtonSelected && isButtonSelected[0] && content ? (
         <Typography className={classes.content} variant="h4" align="center">
-          {state.content}
+          {content}
         </Typography>
-      ) : state.isButtonSelected[1] && state.content ? (
+      ) : isButtonSelected && isButtonSelected[1] && content ? (
         <>
           <Typography className={classes.content} variant="h4" align="center">
-            {state.content['content']}
+            {content['content']}
           </Typography>
           <Typography
             className={classes.contentAuthor}
             variant="h4"
             align="center"
           >
-            {state.content['author']}
+            {content['author']}
           </Typography>
         </>
       ) : null}

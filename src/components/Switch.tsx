@@ -1,11 +1,10 @@
-import { useContext } from 'react';
-
 import Switch from '@material-ui/core/Switch';
 import { Grid, Typography, Tooltip } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import { AdviceContext } from '../context';
-import { actionTypes } from '../context/actionTypes';
+import { useSelector, useDispatch } from 'react-redux';
+import { actionTypes } from '../redux/actionTypes';
+import { RootState, AppDispatch } from '../redux/store';
 
 const useStyles = makeStyles((theme: Theme) => ({
   switchName1: {},
@@ -15,7 +14,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 const SwitchComponent: React.FC = () => {
   const classes = useStyles();
 
-  const { state, dispatch } = useContext(AdviceContext);
+  const wallpaper = useSelector<RootState, boolean>((state) => state.wallpaper);
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleChangeWallpaper = () =>
     dispatch({ type: actionTypes.SET_WALLPAPER, payload: null });
@@ -31,7 +31,7 @@ const SwitchComponent: React.FC = () => {
         <Tooltip title="Switch Wallpaper">
           <Switch
             color="default"
-            checked={state.wallpaper}
+            checked={wallpaper}
             onChange={handleChangeWallpaper}
             inputProps={{ 'aria-label': 'switch the wallpaer' }}
           />

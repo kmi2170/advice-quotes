@@ -1,6 +1,6 @@
 import { ContentType } from '../api/types';
 
-export const initState = {
+export const initialState: StateType = {
   isLoading: true,
   isError: false,
   isButtonSelected: null,

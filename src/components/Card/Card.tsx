@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import {
   Grid,
   Card,
@@ -9,10 +9,11 @@ import {
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import CardContent from './CardContent';
-
-import { AdviceContext } from '../../context';
-import { actionTypes } from '../../context/actionTypes';
 import { ContentType } from '../../api/types';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { actionTypes } from '../../redux/actionTypes';
+import { RootState, AppDispatch } from '../../redux/store';
 
 import { fetchAdvice } from '../../api/lib/fetchAdvice';
 import { fetchQuotes } from '../../api/lib/fetchQuotes';
@@ -51,19 +52,23 @@ const useStyles = makeStyles((theme: Theme) => ({
 const CardComponent: React.FC = () => {
   const classes = useStyles();
 
-  const { state, dispatch } = useContext(AdviceContext);
+  const isButtonSelected = useSelector<RootState, boolean[]>(
+    (state) => state.isButtonSelected
+  );
+  const category = useSelector<RootState, string>((state) => state.category);
+  const isLoading = useSelector<RootState, boolean>((state) => state.isLoading);
+  const isError = useSelector<RootState, boolean>((state) => state.isError);
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleGetAnother = async () => {
     dispatch({ type: actionTypes.SET_IS_LOADING, payload: true });
 
     let content: ContentType;
-    if (state.isButtonSelected[0]) {
+    if (isButtonSelected[0]) {
       content = await fetchAdvice();
-    } else if (state.isButtonSelected[1]) {
+    } else if (isButtonSelected[1]) {
       content =
-        state.category === 'all'
-          ? await fetchQuotes()
-          : await fetchQuotes(state.category);
+        category === 'all' ? await fetchQuotes() : await fetchQuotes(category);
     } else {
       console.log('no fetch function found.');
       dispatch({ type: actionTypes.SET_IS_LOADING, payload: false });
@@ -75,35 +80,35 @@ const CardComponent: React.FC = () => {
   };
 
   useEffect(() => {
-    state.isButtonSelected && handleGetAnother();
-  }, [state.isButtonSelected, state.category]);
+    isButtonSelected && handleGetAnother();
+  }, [isButtonSelected, category]);
 
   return (
     <Grid container justifyContent="center" alignItems="center">
       <Grid item>
         <Card className={classes.card} elevation={6}>
-          {state.isButtonSelected && state.isButtonSelected[0] ? (
+          {isButtonSelected && isButtonSelected[0] ? (
             <Typography variant="h6" color="error">
               Advice
             </Typography>
-          ) : state.isButtonSelected && state.isButtonSelected[1] ? (
-            state.category === 'all' ? (
+          ) : isButtonSelected && isButtonSelected[1] ? (
+            category === 'all' ? (
               <Typography variant="subtitle1" color="error">
                 Quote
               </Typography>
             ) : (
               <Typography variant="subtitle1" color="error">
-                Quote - <em>{state.category}</em>
+                Quote - <em>{category}</em>
               </Typography>
             )
           ) : null}
-          {state.isError ? (
+          {isError ? (
             <Typography variant="h6" color="error">
               Error. Loading Data Failed. Please try again later.
             </Typography>
           ) : (
             <>
-              {state.isLoading ? <CircularProgress /> : <CardContent />}
+              {isLoading ? <CircularProgress /> : <CardContent />}
 
               <div className={classes.buttonWrapper}>
                 <Button

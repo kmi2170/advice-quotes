@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   Tooltip,
   Button,
@@ -11,8 +11,9 @@ import {
 } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
-import { AdviceContext } from '../../context';
-import { actionTypes } from '../../context/actionTypes';
+import { useDispatch } from 'react-redux';
+import { actionTypes } from '../../redux/actionTypes';
+import { AppDispatch } from '../../redux/store';
 
 import { categories } from '../../utils/categories';
 
@@ -34,7 +35,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const CatergorySelectButton: React.FC = () => {
   const classes = useStyles();
-  const { dispatch } = useContext(AdviceContext);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
