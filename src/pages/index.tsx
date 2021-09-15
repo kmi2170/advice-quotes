@@ -51,6 +51,7 @@ const Home: React.FC = () => {
         payload: JSON.parse(cookies.wallpaper),
       });
     }
+    console.log(wallpaper);
   }, []);
 
   useEffect(() => {

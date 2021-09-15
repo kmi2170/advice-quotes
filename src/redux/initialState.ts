@@ -1,6 +1,6 @@
 import { ContentType } from '../api/types';
 
-export const initialState: StateType = {
+export const initialState: State = {
   isLoading: true,
   isError: false,
   isButtonSelected: null,
@@ -9,7 +9,7 @@ export const initialState: StateType = {
   wallpaper: false,
 };
 
-export type StateType = {
+export type State = {
   isLoading: boolean;
   isError: boolean;
   isButtonSelected: null | boolean[];

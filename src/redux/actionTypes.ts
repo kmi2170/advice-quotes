@@ -9,7 +9,7 @@ export enum actionTypes {
   SET_WALLPAPER = 'SET_WALLPAPER',
 }
 
-type PayloadType = {
+type Payload = {
   [actionTypes.SET_IS_LOADING]: boolean;
   [actionTypes.SET_IS_ERROR]: boolean;
   [actionTypes.SET_IS_BUTTON_SELECTED]: boolean[];
@@ -24,4 +24,4 @@ type ActionMap<M extends { [index: string]: any }> = {
     : { type: Key; payload: M[Key] };
 };
 
-export type ActionsType = ActionMap<PayloadType>[keyof ActionMap<PayloadType>];
+export type Actions = ActionMap<Payload>[keyof ActionMap<Payload>];

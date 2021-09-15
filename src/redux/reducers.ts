@@ -1,11 +1,8 @@
 import { combineReducers } from 'redux';
-import { initialState, StateType } from './initialState';
-import { actionTypes as types, ActionsType } from './actionTypes';
+import { initialState, State } from './initialState';
+import { actionTypes as types, Actions } from './actionTypes';
 
-export const reducer = (
-  state: StateType = initialState,
-  action: ActionsType
-) => {
+export const reducer = (state: State = initialState, action: Actions) => {
   switch (action.type) {
     case types.SET_IS_LOADING:
       return { ...state, isLoading: action.payload };
@@ -18,9 +15,10 @@ export const reducer = (
     case types.SET_CATEGORY:
       return { ...state, category: action.payload };
     case types.SET_WALLPAPER:
-      return action.payload
-        ? { ...state, wallpaper: action.payload }
-        : { ...state, wallpaper: !state.wallpaper };
+      console.log(action.payload);
+      return action.payload === null
+        ? { ...state, wallpaper: !state.wallpaper }
+        : { ...state, wallpaper: action.payload };
     default:
       return state;
   }
