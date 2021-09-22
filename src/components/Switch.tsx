@@ -2,9 +2,9 @@ import Switch from '@material-ui/core/Switch';
 import { Grid, Typography, Tooltip } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { actionTypes } from '../redux/actionTypes';
-import { RootState, AppDispatch } from '../redux/store';
+import { RootState } from '../app/store';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { setWallpaper } from '../features/adviceSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
   switchName1: {},
@@ -14,11 +14,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 const SwitchComponent: React.FC = () => {
   const classes = useStyles();
 
-  const wallpaper = useSelector<RootState, boolean>((state) => state.wallpaper);
-  const dispatch = useDispatch<AppDispatch>();
+  const wallpaper = useAppSelector(
+    (state: RootState) => state.advice.wallpaper
+  );
+  const dispatch = useAppDispatch();
 
-  const handleChangeWallpaper = () =>
-    dispatch({ type: actionTypes.SET_WALLPAPER, payload: null });
+  const handleChangeWallpaper = () => dispatch(setWallpaper(null));
 
   return (
     <Grid container justifyContent="center" alignItems="center">

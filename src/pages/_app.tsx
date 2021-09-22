@@ -15,13 +15,11 @@ import theme from '../theme/theme';
 import '../styles/globals.css';
 
 import { Provider } from 'react-redux';
-import { useStore } from '../redux/store';
+import { store } from '../app/store';
 
 // const queryClient = new QueryClient();
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
-  const store = useStore(pageProps.initialReduxState);
-
   React.useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');

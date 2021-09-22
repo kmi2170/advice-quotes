@@ -11,9 +11,13 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import CardContent from './CardContent';
 import { ContentType } from '../../api/types';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { actionTypes } from '../../redux/actionTypes';
-import { RootState, AppDispatch } from '../../redux/store';
+import { RootState } from '../../app/store';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import {
+  setContent,
+  setIsLoading,
+  setIsError,
+} from '../../features/adviceSlice';
 
 import { fetchAdvice } from '../../api/lib/fetchAdvice';
 import { fetchQuotes } from '../../api/lib/fetchQuotes';
@@ -52,16 +56,18 @@ const useStyles = makeStyles((theme: Theme) => ({
 const CardComponent: React.FC = () => {
   const classes = useStyles();
 
-  const isButtonSelected = useSelector<RootState, boolean[]>(
-    (state) => state.isButtonSelected
+  const isButtonSelected = useAppSelector(
+    (state: RootState) => state.advice.isButtonSelected
   );
-  const category = useSelector<RootState, string>((state) => state.category);
-  const isLoading = useSelector<RootState, boolean>((state) => state.isLoading);
-  const isError = useSelector<RootState, boolean>((state) => state.isError);
-  const dispatch = useDispatch<AppDispatch>();
+  const category = useAppSelector((state: RootState) => state.advice.category);
+  const isLoading = useAppSelector(
+    (state: RootState) => state.advice.isLoading
+  );
+  const isError = useAppSelector((state: RootState) => state.advice.isError);
+  const dispatch = useAppDispatch();
 
   const handleGetAnother = async () => {
-    dispatch({ type: actionTypes.SET_IS_LOADING, payload: true });
+    dispatch(setIsLoading(true));
 
     let content: ContentType;
     if (isButtonSelected[0]) {
@@ -71,12 +77,12 @@ const CardComponent: React.FC = () => {
         category === 'all' ? await fetchQuotes() : await fetchQuotes(category);
     } else {
       console.log('no fetch function found.');
-      dispatch({ type: actionTypes.SET_IS_LOADING, payload: false });
-      dispatch({ type: actionTypes.SET_IS_ERROR, payload: true });
+      dispatch(setIsLoading(false));
+      dispatch(setIsError(true));
     }
 
-    dispatch({ type: actionTypes.SET_IS_LOADING, payload: false });
-    dispatch({ type: actionTypes.SET_CONTENT, payload: content });
+    dispatch(setIsLoading(false));
+    dispatch(setContent(content));
   };
 
   useEffect(() => {

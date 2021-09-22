@@ -3,9 +3,9 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import CatergorySelectButton from './CategorySelectButton';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { actionTypes } from '../../redux/actionTypes';
-import { RootState, AppDispatch } from '../../redux/store';
+import { RootState } from '../../app/store';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { setContent, setIsButtonSelected } from '../../features/adviceSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
   quotesButtonContainer: {
@@ -34,25 +34,18 @@ const buttons = [
 const ButtonGroup: React.FC = () => {
   const classes = useStyles();
 
-  const isButtonSelected = useSelector<RootState, boolean[]>(
-    (state) => state.isButtonSelected
+  const isButtonSelected = useAppSelector(
+    (state: RootState) => state.advice.isButtonSelected
   );
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   const handleClick = (index: number) => {
     if (!isButtonSelected[index]) {
       let newIsButtonSelected = [false, false];
       newIsButtonSelected[index] = true;
 
-      dispatch({
-        type: actionTypes.SET_CONTENT,
-        payload: undefined,
-      });
-
-      dispatch({
-        type: actionTypes.SET_IS_BUTTON_SELECTED,
-        payload: newIsButtonSelected,
-      });
+      dispatch(setContent(undefined));
+      dispatch(setIsButtonSelected(newIsButtonSelected));
     }
   };
 

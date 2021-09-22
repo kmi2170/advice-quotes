@@ -1,10 +1,8 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
-
-import { ContentType } from '../../api/types';
+import { RootState } from '../../app/store';
+import { useAppSelector } from '../../app/hooks';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -25,10 +23,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 const CardContent: React.FC = () => {
   const classes = useStyles();
 
-  const isButtonSelected = useSelector<RootState, boolean[]>(
-    (state) => state.isButtonSelected
+  const isButtonSelected = useAppSelector(
+    (state: RootState) => state.advice.isButtonSelected
   );
-  const content = useSelector<RootState, ContentType>((state) => state.content);
+  const content = useAppSelector((state: RootState) => state.advice.content);
 
   return (
     <div className={classes.contentContainer}>

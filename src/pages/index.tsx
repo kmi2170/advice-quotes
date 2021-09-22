@@ -4,9 +4,9 @@ import { useCookies } from 'react-cookie';
 import { Container, Grid, Typography } from '@material-ui/core';
 import { useStyles } from '../styles/Home.styles';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { actionTypes } from '../redux/actionTypes';
-import { RootState, AppDispatch } from '../redux/store';
+import { RootState } from '../app/store';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { setIsButtonSelected, setWallpaper } from '../features/adviceSlice';
 
 import SEO from '../components/SEO';
 import ButtonGroup from '../components/ButtonGroup/ButtonGroup';
@@ -24,11 +24,13 @@ const cookiesOptions = {
 const Home: React.FC = () => {
   const classes = useStyles();
 
-  const wallpaper = useSelector<RootState, boolean>((state) => state.wallpaper);
-  const isButtonSelected = useSelector<RootState, boolean[]>(
-    (state) => state.isButtonSelected
+  const wallpaper = useAppSelector(
+    (state: RootState) => state.advice.wallpaper
   );
-  const dispatch = useDispatch<AppDispatch>();
+  const isButtonSelected = useAppSelector(
+    (state) => state.advice.isButtonSelected
+  );
+  const dispatch = useAppDispatch();
 
   const [cookies, setCookie] = useCookies(['button', 'wallpaper']);
 
@@ -37,21 +39,14 @@ const Home: React.FC = () => {
       cookies.button && typeof cookies.button === 'object'
         ? cookies.button
         : [true, false];
-    dispatch({
-      type: actionTypes.SET_IS_BUTTON_SELECTED,
-      payload,
-    });
+    dispatch(setIsButtonSelected(payload));
 
     if (
       cookies.wallpaper &&
       typeof JSON.parse(cookies.wallpaper) === 'boolean'
     ) {
-      dispatch({
-        type: actionTypes.SET_WALLPAPER,
-        payload: JSON.parse(cookies.wallpaper),
-      });
+      dispatch(setWallpaper(JSON.parse(cookies.wallpaper)));
     }
-    console.log(wallpaper);
   }, []);
 
   useEffect(() => {
