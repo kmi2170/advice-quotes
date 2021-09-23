@@ -18,6 +18,7 @@ import {
   setIsLoading,
   setIsError,
 } from '../../features/adviceSlice';
+import { fetchAdviceQuote } from '../../features/adviceAsync';
 
 import { fetchAdvice } from '../../api/lib/fetchAdvice';
 import { fetchQuotes } from '../../api/lib/fetchQuotes';
@@ -67,27 +68,8 @@ const CardComponent: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const handleGetAnother = async () => {
-    dispatch(setIsLoading(true));
-
-    let content: ContentType;
-    if (isButtonSelected[0]) {
-      content = await fetchAdvice();
-    } else if (isButtonSelected[1]) {
-      content =
-        category === 'all' ? await fetchQuotes() : await fetchQuotes(category);
-    } else {
-      console.log('no fetch function found.');
-      dispatch(setIsLoading(false));
-      dispatch(setIsError(true));
-    }
-
-    dispatch(setIsLoading(false));
-    dispatch(setContent(content));
+    dispatch(fetchAdviceQuote());
   };
-
-  useEffect(() => {
-    isButtonSelected && handleGetAnother();
-  }, [isButtonSelected, category]);
 
   return (
     <Grid container justifyContent="center" alignItems="center">

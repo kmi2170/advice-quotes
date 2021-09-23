@@ -6,6 +6,7 @@ import CatergorySelectButton from './CategorySelectButton';
 import { RootState } from '../../app/store';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { setContent, setIsButtonSelected } from '../../features/adviceSlice';
+import { fetchAdviceQuote } from '../../features/adviceAsync';
 
 const useStyles = makeStyles((theme: Theme) => ({
   quotesButtonContainer: {
@@ -46,6 +47,7 @@ const ButtonGroup: React.FC = () => {
 
       dispatch(setContent(undefined));
       dispatch(setIsButtonSelected(newIsButtonSelected));
+      dispatch(fetchAdviceQuote());
     }
   };
 

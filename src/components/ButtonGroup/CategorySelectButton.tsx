@@ -13,6 +13,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 import { useAppDispatch } from '../../app/hooks';
 import { setCategory } from '../../features/adviceSlice';
+import { fetchAdviceQuote } from '../../features/adviceAsync';
 
 import { categories } from '../../utils/categories';
 
@@ -63,6 +64,8 @@ const CatergorySelectButton: React.FC = () => {
           : categories[+(event.target as HTMLInputElement).value].name
       )
     );
+
+    dispatch(fetchAdviceQuote());
   };
 
   function handleListKeyDown(event: React.KeyboardEvent) {

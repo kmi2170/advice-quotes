@@ -7,6 +7,7 @@ import { useStyles } from '../styles/Home.styles';
 import { RootState } from '../app/store';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { setIsButtonSelected, setWallpaper } from '../features/adviceSlice';
+import { fetchAdviceQuote } from '../features/adviceAsync';
 
 import SEO from '../components/SEO';
 import ButtonGroup from '../components/ButtonGroup/ButtonGroup';
@@ -47,6 +48,8 @@ const Home: React.FC = () => {
     ) {
       dispatch(setWallpaper(JSON.parse(cookies.wallpaper)));
     }
+
+    dispatch(fetchAdviceQuote());
   }, []);
 
   useEffect(() => {

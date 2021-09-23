@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ContentType } from '../api/types';
+import { fetchAdviceQuote } from './adviceAsync';
 
 export type AdviceState = {
   isLoading: boolean;
@@ -11,7 +12,7 @@ export type AdviceState = {
 };
 
 export const initialState: AdviceState = {
-  isLoading: true,
+  isLoading: false,
   isError: false,
   isButtonSelected: null,
   content: undefined,
@@ -42,6 +43,21 @@ export const adviceSlice = createSlice({
       state.wallpaper =
         action.payload === null ? !state.wallpaper : action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchAdviceQuote.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchAdviceQuote.fulfilled, (state) => {
+        console.log('fullfilled');
+        state.isLoading = false;
+      })
+      .addCase(fetchAdviceQuote.rejected, (state, error) => {
+        state.isLoading = false;
+        state.isError = true;
+        console.log(error);
+      });
   },
 });
 
