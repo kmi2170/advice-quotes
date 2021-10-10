@@ -1,23 +1,26 @@
-import { useEffect } from 'react';
-import { useCookies } from 'react-cookie';
+import { useEffect } from "react";
+import { useCookies } from "react-cookie";
 
-import { Container, Grid, Typography } from '@material-ui/core';
-import { useStyles } from '../styles/Home.styles';
+import { Container, Grid, Typography } from "@material-ui/core";
+import { useStyles } from "../styles/Home.styles";
 
-import { RootState } from '../app/store';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { setIsButtonSelected, setWallpaper } from '../features/adviceSlice';
-import { fetchAdviceQuote } from '../features/adviceAsync';
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import {
+  setIsButtonSelected,
+  setWallpaper,
+  selectAdvice,
+} from "../features/adviceSlice";
+import { fetchAdviceQuote } from "../features/adviceAsync";
 
-import SEO from '../components/SEO';
-import ButtonGroup from '../components/ButtonGroup/ButtonGroup';
-import Card from '../components/Card/Card';
-import Switch from '../components/Switch';
-import Credits from '../components/Credits';
-import Footer from '../components/Footer';
+import SEO from "../components/SEO";
+import ButtonGroup from "../components/ButtonGroup/ButtonGroup";
+import Card from "../components/Card/Card";
+import Switch from "../components/Switch";
+import Credits from "../components/Credits";
+import Footer from "../components/Footer";
 
 const cookiesOptions = {
-  path: '/',
+  path: "/",
   maxAge: 2600000,
   sameSite: true,
 };
@@ -25,26 +28,21 @@ const cookiesOptions = {
 const Home: React.FC = () => {
   const classes = useStyles();
 
-  const wallpaper = useAppSelector(
-    (state: RootState) => state.advice.wallpaper
-  );
-  const isButtonSelected = useAppSelector(
-    (state) => state.advice.isButtonSelected
-  );
+  const { wallpaper, isButtonSelected } = useAppSelector(selectAdvice);
   const dispatch = useAppDispatch();
 
-  const [cookies, setCookie] = useCookies(['button', 'wallpaper']);
+  const [cookies, setCookie] = useCookies(["button", "wallpaper"]);
 
   useEffect(() => {
     const payload =
-      cookies.button && typeof cookies.button === 'object'
+      cookies.button && typeof cookies.button === "object"
         ? cookies.button
         : [true, false];
     dispatch(setIsButtonSelected(payload));
 
     if (
       cookies.wallpaper &&
-      typeof JSON.parse(cookies.wallpaper) === 'boolean'
+      typeof JSON.parse(cookies.wallpaper) === "boolean"
     ) {
       dispatch(setWallpaper(JSON.parse(cookies.wallpaper)));
     }
@@ -53,11 +51,11 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setCookie('button', isButtonSelected, cookiesOptions);
+    setCookie("button", isButtonSelected, cookiesOptions);
   }, [isButtonSelected, setCookie]);
 
   useEffect(() => {
-    setCookie('wallpaper', wallpaper, cookiesOptions);
+    setCookie("wallpaper", wallpaper, cookiesOptions);
   }, [wallpaper, setCookie]);
 
   return (

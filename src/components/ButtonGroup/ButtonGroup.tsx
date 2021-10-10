@@ -1,43 +1,44 @@
-import { Typography, Grid, Button, Tooltip } from '@material-ui/core';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { Typography, Grid, Button, Tooltip } from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
-import CatergorySelectButton from './CategorySelectButton';
+import CatergorySelectButton from "./CategorySelectButton";
 
-import { RootState } from '../../app/store';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { setContent, setIsButtonSelected } from '../../features/adviceSlice';
-import { fetchAdviceQuote } from '../../features/adviceAsync';
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import {
+  setContent,
+  setIsButtonSelected,
+  selectAdvice,
+} from "../../features/adviceSlice";
+import { fetchAdviceQuote } from "../../features/adviceAsync";
 
 const useStyles = makeStyles((theme: Theme) => ({
   quotesButtonContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   categoryButton: {
-    marginLeft: '0.5rem',
+    marginLeft: "0.5rem",
   },
   button: {
-    borderRadius: '0.5rem',
-    textTransform: 'capitalize',
+    borderRadius: "0.5rem",
+    textTransform: "capitalize",
   },
   buttonUnselected: {
-    backgroundColor: 'gray',
+    backgroundColor: "gray",
   },
 }));
 
 const buttons = [
-  { tooltip: 'Randomly Chosen Advice', name: 'Advice' },
-  { tooltip: 'Randomly Chosen Quotes', name: 'Quotes' },
+  { tooltip: "Randomly Chosen Advice", name: "Advice" },
+  { tooltip: "Randomly Chosen Quotes", name: "Quotes" },
 ];
 
 const ButtonGroup: React.FC = () => {
   const classes = useStyles();
 
-  const isButtonSelected = useAppSelector(
-    (state: RootState) => state.advice.isButtonSelected
-  );
+  const { isButtonSelected } = useAppSelector(selectAdvice);
   const dispatch = useAppDispatch();
 
   const handleClick = (index: number) => {
@@ -59,7 +60,7 @@ const ButtonGroup: React.FC = () => {
             <div className={index === 1 ? classes.quotesButtonContainer : null}>
               <Tooltip title={button.tooltip}>
                 <Button
-                  variant={isButtonSelected[index] ? 'contained' : 'outlined'}
+                  variant={isButtonSelected[index] ? "contained" : "outlined"}
                   color="secondary"
                   size="small"
                   className={classes.button}

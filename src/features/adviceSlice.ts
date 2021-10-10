@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ContentType } from '../api/types';
-import { fetchAdviceQuote } from './adviceAsync';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ContentType } from "../api/types";
+import { RootState } from "../app/store";
+import { fetchAdviceQuote } from "./adviceAsync";
 
 export type AdviceState = {
   isLoading: boolean;
@@ -16,12 +17,12 @@ export const initialState: AdviceState = {
   isError: false,
   isButtonSelected: null,
   content: undefined,
-  category: 'all',
+  category: "all",
   wallpaper: false,
 };
 
 export const adviceSlice = createSlice({
-  name: 'advice',
+  name: "advice",
   initialState,
   reducers: {
     setIsLoading: (state, action: PayloadAction<boolean>) => {
@@ -50,7 +51,7 @@ export const adviceSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchAdviceQuote.fulfilled, (state) => {
-        console.log('fullfilled');
+        console.log("fullfilled");
         state.isLoading = false;
       })
       .addCase(fetchAdviceQuote.rejected, (state, error) => {
@@ -60,6 +61,8 @@ export const adviceSlice = createSlice({
       });
   },
 });
+
+export const selectAdvice = (state: RootState) => state.advice;
 
 export const {
   setIsLoading,
