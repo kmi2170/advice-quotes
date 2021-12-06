@@ -11,6 +11,7 @@ import CardContent from "./CardContent";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { fetchAdviceQuote } from "../../features/adviceAsync";
+import { selectAdvice } from "../../features/adviceSlice";
 
 import styles from "./Card.module.css";
 
