@@ -23,7 +23,6 @@ const AppTitle: React.FC = () => {
       component="h1"
       align="center"
       className={classes.titleApp}
-      // style={{ fontSize: '1rem' }}
     >
       Advice/Quotes App
     </Typography>

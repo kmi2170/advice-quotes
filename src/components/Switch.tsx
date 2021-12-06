@@ -1,11 +1,9 @@
-import { useContext } from 'react';
+import Switch from "@material-ui/core/Switch";
+import { Grid, Typography, Tooltip } from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
-import Switch from '@material-ui/core/Switch';
-import { Grid, Typography, Tooltip } from '@material-ui/core';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-
-import { AdviceContext } from '../context';
-import { actionTypes } from '../context/actionTypes';
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { setWallpaper, selectAdvice } from "../features/adviceSlice";
 
 const useStyles = makeStyles((theme: Theme) => ({
   switchName1: {},
@@ -15,10 +13,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 const SwitchComponent: React.FC = () => {
   const classes = useStyles();
 
-  const { state, dispatch } = useContext(AdviceContext);
+  const { wallpaper } = useAppSelector(selectAdvice);
+  const dispatch = useAppDispatch();
 
-  const handleChangeWallpaper = () =>
-    dispatch({ type: actionTypes.SET_WALLPAPER, payload: null });
+  const handleChangeWallpaper = () => dispatch(setWallpaper(null));
 
   return (
     <Grid container justifyContent="center" alignItems="center">
@@ -31,9 +29,9 @@ const SwitchComponent: React.FC = () => {
         <Tooltip title="Switch Wallpaper">
           <Switch
             color="default"
-            checked={state.wallpaper}
+            checked={wallpaper}
             onChange={handleChangeWallpaper}
-            inputProps={{ 'aria-label': 'switch the wallpaer' }}
+            inputProps={{ "aria-label": "switch the wallpaer" }}
           />
         </Tooltip>
       </Grid>

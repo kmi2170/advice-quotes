@@ -1,48 +1,47 @@
-import { useContext } from 'react';
+import { Typography } from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
-import { Typography } from '@material-ui/core';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-
-import { AdviceContext } from '../../context';
+import { useAppSelector } from "../../app/hooks";
+import { selectAdvice } from "../../features/adviceSlice";
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
-    display: 'block',
-    minHeight: '30vh',
-    overflowY: 'auto',
+    display: "block",
+    minHeight: "30vh",
+    overflowY: "auto",
   },
   content: {
-    fontFamily: 'Acme',
+    fontFamily: "Acme",
   },
   contentAuthor: {
-    fontFamily: 'Acme',
-    fontStyle: 'italic',
-    marginTop: '1rem',
+    fontFamily: "Acme",
+    fontStyle: "italic",
+    marginTop: "1rem",
   },
 }));
 
 const CardContent: React.FC = () => {
   const classes = useStyles();
 
-  const { state } = useContext(AdviceContext);
+  const { isButtonSelected, content } = useAppSelector(selectAdvice);
 
   return (
     <div className={classes.contentContainer}>
-      {state.isButtonSelected[0] && state.content ? (
+      {isButtonSelected && isButtonSelected[0] && content ? (
         <Typography className={classes.content} variant="h4" align="center">
-          {state.content}
+          {content}
         </Typography>
-      ) : state.isButtonSelected[1] && state.content ? (
+      ) : isButtonSelected && isButtonSelected[1] && content ? (
         <>
           <Typography className={classes.content} variant="h4" align="center">
-            {state.content['content']}
+            {content["content"]}
           </Typography>
           <Typography
             className={classes.contentAuthor}
             variant="h4"
             align="center"
           >
-            {state.content['author']}
+            {content["author"]}
           </Typography>
         </>
       ) : null}

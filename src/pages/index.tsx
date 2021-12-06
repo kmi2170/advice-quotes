@@ -1,21 +1,26 @@
-import { useEffect, useContext } from 'react';
-import { useCookies } from 'react-cookie';
+import { useEffect } from "react";
+import { useCookies } from "react-cookie";
 
-import { Container, Grid, Typography } from '@material-ui/core';
-import { useStyles } from '../styles/Home.styles';
+import { Container, Grid, Typography } from "@material-ui/core";
+import { useStyles } from "../styles/Home.styles";
 
-import { AdviceContext } from '../context';
-import { actionTypes } from '../context/actionTypes';
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import {
+  setIsButtonSelected,
+  setWallpaper,
+  selectAdvice,
+} from "../features/adviceSlice";
+import { fetchAdviceQuote } from "../features/adviceAsync";
 
-import SEO from '../components/SEO';
-import ButtonGroup from '../components/ButtonGroup/ButtonGroup';
-import Card from '../components/Card/Card';
-import Switch from '../components/Switch';
-import Credits from '../components/Credits';
-import Footer from '../components/Footer';
+import SEO from "../components/SEO";
+import ButtonGroup from "../components/ButtonGroup/ButtonGroup";
+import Card from "../components/Card/Card";
+import Switch from "../components/Switch";
+import Credits from "../components/Credits";
+import Footer from "../components/Footer";
 
 const cookiesOptions = {
-  path: '/',
+  path: "/",
   maxAge: 2600000,
   sameSite: true,
 };
@@ -23,44 +28,35 @@ const cookiesOptions = {
 const Home: React.FC = () => {
   const classes = useStyles();
 
-  const { state, dispatch } = useContext(AdviceContext);
+  const { wallpaper, isButtonSelected } = useAppSelector(selectAdvice);
+  const dispatch = useAppDispatch();
 
-  const [cookies, setCookie] = useCookies(['button', 'wallpaper']);
+  const [cookies, setCookie] = useCookies(["button", "wallpaper"]);
 
   useEffect(() => {
     const payload =
-      cookies.button && typeof cookies.button === 'object'
+      cookies.button && typeof cookies.button === "object"
         ? cookies.button
         : [true, false];
-    dispatch({
-      type: actionTypes.SET_IS_BUTTON_SELECTED,
-      payload: payload,
-    });
-    // if (cookies.button && typeof cookies.button === 'object') {
-    //   dispatch({
-    //     type: actionTypes.SET_IS_BUTTON_SELECTED,
-    //     payload: cookies.button,
-    //   });
-    // }
+    dispatch(setIsButtonSelected(payload));
 
     if (
       cookies.wallpaper &&
-      typeof JSON.parse(cookies.wallpaper) === 'boolean'
+      typeof JSON.parse(cookies.wallpaper) === "boolean"
     ) {
-      dispatch({
-        type: actionTypes.SET_WALLPAPER,
-        payload: JSON.parse(cookies.wallpaper),
-      });
+      dispatch(setWallpaper(JSON.parse(cookies.wallpaper)));
     }
+
+    dispatch(fetchAdviceQuote());
   }, []);
 
   useEffect(() => {
-    setCookie('button', state.isButtonSelected, cookiesOptions);
-  }, [state.isButtonSelected, setCookie]);
+    setCookie("button", isButtonSelected, cookiesOptions);
+  }, [isButtonSelected, setCookie]);
 
   useEffect(() => {
-    setCookie('wallpaper', state.wallpaper, cookiesOptions);
-  }, [state.wallpaper, setCookie]);
+    setCookie("wallpaper", wallpaper, cookiesOptions);
+  }, [wallpaper, setCookie]);
 
   return (
     <div className={classes.root}>
@@ -68,7 +64,7 @@ const Home: React.FC = () => {
       <Container
         maxWidth="lg"
         className={`${classes.container} ${
-          state.wallpaper ? classes.wallpaper1 : classes.wallpaper2
+          wallpaper ? classes.wallpaper1 : classes.wallpaper2
         }`}
       >
         <Typography

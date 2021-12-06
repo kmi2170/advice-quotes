@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   Tooltip,
   Button,
@@ -11,8 +11,9 @@ import {
 } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
-import { AdviceContext } from '../../context';
-import { actionTypes } from '../../context/actionTypes';
+import { useAppDispatch } from '../../app/hooks';
+import { setCategory } from '../../features/adviceSlice';
+import { fetchAdviceQuote } from '../../features/adviceAsync';
 
 import { categories } from '../../utils/categories';
 
@@ -34,7 +35,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const CatergorySelectButton: React.FC = () => {
   const classes = useStyles();
-  const { dispatch } = useContext(AdviceContext);
+
+  const dispatch = useAppDispatch();
 
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
@@ -55,13 +57,15 @@ const CatergorySelectButton: React.FC = () => {
   };
 
   const handleClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-    dispatch({
-      type: actionTypes.SET_CATEGORY,
-      payload:
+    dispatch(
+      setCategory(
         +(event.target as HTMLInputElement).value === -1
           ? 'all'
-          : categories[+(event.target as HTMLInputElement).value].name,
-    });
+          : categories[+(event.target as HTMLInputElement).value].name
+      )
+    );
+
+    dispatch(fetchAdviceQuote());
   };
 
   function handleListKeyDown(event: React.KeyboardEvent) {
