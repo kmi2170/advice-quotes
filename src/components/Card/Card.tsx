@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   Grid,
   Card,
@@ -11,16 +10,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import CardContent from "./CardContent";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import {
-  setContent,
-  setIsLoading,
-  setIsError,
-  selectAdvice,
-} from "../../features/adviceSlice";
 import { fetchAdviceQuote } from "../../features/adviceAsync";
-
-import { fetchAdvice } from "../../api/lib/fetchAdvice";
-import { fetchQuotes } from "../../api/lib/fetchQuotes";
 
 import styles from "./Card.module.css";
 
