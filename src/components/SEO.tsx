@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Head from "next/head";
 
 const SEO = () => {
   const title = config.title;
@@ -28,16 +28,16 @@ const SEO = () => {
 export default SEO;
 
 const config = {
-  title: 'Advice/Quotes App',
-  author: 'Kmi, Web developer/programmer',
+  title: "Advice/Quotes App",
+  author: "Kemmei, Web Developer/Programmer",
   // author: {
   //   name: 'Kmi',
   //   summary: 'Web developer/programmer',
   // },
   description:
-    'A simple web application that displays randomly chosen Advice or Quote, created with Next.js, Typescript adn Material-UI. It is switchable between Advice and Quote. Quote can be narrowed down by selecting a category. A little addition is that you can choose between two background images, bamboos and flowers. Your selections of Advice/Quote and background image are stored in cookie if available and peresisted when you come back to this app next time',
-  keywords: 'Next.js, TypeScript, Material-UI, Advice, Quote',
+    "A very simple web app to display randomly chosen Advice or Quote fetched from Advice Slip JSON API and Quotable. A Next.js project build with Typescript, Material-UI and Redux-Toolkit.",
+  keywords: "Next.js, TypeScript, Material-UI, Advice Slip JSON API, Quotable",
   social: {
-    twitter: '',
+    twitter: "",
   },
 };

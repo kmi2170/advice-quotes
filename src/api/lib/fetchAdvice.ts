@@ -1,27 +1,25 @@
 import axios from 'axios';
+// import { ContentType } from "../types";
 
 const url = 'https://api.adviceslip.com/advice';
 
-const fetchFunc = async () => {
+const fetchFunc = async (): Promise<string> => {
   try {
-    const {
-      data: {
-        slip: { advice },
-      },
-    } = await axios.get(url, {
-      params: { timeStamp: new Date().getTime() },
-    });
+    const { data: { slip: { advice } } }
+      = await axios.get(url, {
+        params: { timeStamp: new Date().getTime() },
+      });
 
-    return advice;
+    return advice as string;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
 export const fetchAdvice = async () => {
-  let advice = await fetchFunc();
+  const advice = await fetchFunc();
 
-  advice = filterAdvice(advice);
+  const filteredadvice = filterAdvice(advice);
 
   return advice;
 };
