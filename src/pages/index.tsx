@@ -12,7 +12,6 @@ import {
 } from "../features/adviceSlice";
 import { fetchAdviceQuote } from "../features/adviceAsync";
 
-import SEO from "../components/SEO";
 import ButtonGroup from "../components/ButtonGroup/ButtonGroup";
 import Card from "../components/Card";
 import Switch from "../components/Switch";
@@ -60,7 +59,7 @@ const Home: React.FC = () => {
 
   return (
     <div className={classes.root}>
-      <SEO />
+      {/* <SEO /> */}
       <Container
         maxWidth="lg"
         className={`${classes.container} ${wallpaper ? classes.wallpaper1 : classes.wallpaper2
