@@ -1,10 +1,10 @@
-import { Typography } from "@material-ui/core";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 
-import { useAppSelector } from "../../app/hooks";
-import { selectAdvice } from "../../features/adviceSlice";
+import { useAppSelector } from "../../../app/hooks";
+import { selectAdvice } from "../../../features/adviceSlice";
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   contentContainer: {
     display: "block",
     minHeight: "30vh",
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CardContent: React.FC = () => {
+const CardContent = () => {
   const classes = useStyles();
 
   const { isButtonSelected, content } = useAppSelector(selectAdvice);

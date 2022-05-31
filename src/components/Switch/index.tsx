@@ -1,16 +1,19 @@
+import { memo } from 'react'
 import Switch from "@material-ui/core/Switch";
-import { Grid, Typography, Tooltip } from "@material-ui/core";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Tooltip from "@material-ui/core/Tooltip";
+import { makeStyles } from "@material-ui/core/styles";
 
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { setWallpaper, selectAdvice } from "../features/adviceSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { setWallpaper, selectAdvice } from "../../features/adviceSlice";
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   switchName1: {},
   switchName2: {},
 }));
 
-const SwitchComponent: React.FC = () => {
+const SwitchComponent = () => {
   const classes = useStyles();
 
   const { wallpaper } = useAppSelector(selectAdvice);
@@ -44,4 +47,4 @@ const SwitchComponent: React.FC = () => {
   );
 };
 
-export default SwitchComponent;
+export default memo(SwitchComponent);

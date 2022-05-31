@@ -1,22 +1,18 @@
-import { Grid, Typography } from '@material-ui/core';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { memo } from 'react'
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   footer: {
     color: '#fff',
-    // fontFamily: 'Raleway',
-    // fontSize: '0.875rem',
-    // [theme.breakpoints.down('xs')]: {
-    //   fontSize: '0.6rem',
-    // },
   },
 }));
 
 const Footer: React.FC = () => {
   const classes = useStyles();
 
-  const dt = new Date();
-  const year = dt.getFullYear();
+  const year = (new Date()).getFullYear();
 
   return (
     <footer>
@@ -35,4 +31,4 @@ const Footer: React.FC = () => {
   );
 };
 
-export default Footer;
+export default memo(Footer);

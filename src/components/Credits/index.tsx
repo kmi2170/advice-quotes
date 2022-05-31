@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Credits() {
+const Credits = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
@@ -31,7 +31,7 @@ export default function Credits() {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const id = open ? 'credits-popover' : undefined;
 
   return (
     <>
@@ -68,13 +68,6 @@ export default function Credits() {
         <Typography variant="body2" className={classes.text}>
           Bamboos Photo by Andre Moura from Pexels
         </Typography>
-        {/* 
-          bamboo2 Photo by JV Gardens from Pexels
-          Mountains Photo by Simon Berger from Pexels
-        <Typography variant="body2" className={classes.text}>
-          Town Photo by Yelena Odintsova from Pexels
-        </Typography>
-        */}
         <Typography variant="body2" className={classes.text}>
           Flowers Photo by Ellie Burgin from Pexels
         </Typography>
@@ -82,3 +75,5 @@ export default function Credits() {
     </>
   );
 }
+
+export default memo(Credits)

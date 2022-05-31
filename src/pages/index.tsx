@@ -14,7 +14,7 @@ import { fetchAdviceQuote } from "../features/adviceAsync";
 
 import SEO from "../components/SEO";
 import ButtonGroup from "../components/ButtonGroup/ButtonGroup";
-import Card from "../components/Card/Card";
+import Card from "../components/Card";
 import Switch from "../components/Switch";
 import Credits from "../components/Credits";
 import Footer from "../components/Footer";
@@ -63,9 +63,8 @@ const Home: React.FC = () => {
       <SEO />
       <Container
         maxWidth="lg"
-        className={`${classes.container} ${
-          wallpaper ? classes.wallpaper1 : classes.wallpaper2
-        }`}
+        className={`${classes.container} ${wallpaper ? classes.wallpaper1 : classes.wallpaper2
+          }`}
       >
         <Typography
           variant="h3"

@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { fetchAdviceQuote } from "../../features/adviceAsync";
 import { selectAdvice } from "../../features/adviceSlice";
 
-import styles from "./Card.module.css";
+import styles from "./index.module.css";
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
