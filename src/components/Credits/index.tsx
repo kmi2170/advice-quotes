@@ -2,7 +2,6 @@ import { useState, memo } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
-// import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme: Theme) => ({
   credits: {
@@ -19,6 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Credits = () => {
+  console.log('credits');
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
@@ -74,6 +74,6 @@ const Credits = () => {
       </Popover>
     </>
   );
-}
+};
 
-export default memo(Credits)
+export default memo(Credits);

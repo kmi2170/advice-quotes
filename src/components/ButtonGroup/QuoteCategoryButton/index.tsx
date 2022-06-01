@@ -11,11 +11,10 @@ import {
 } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
-import { useAppDispatch } from '../../app/hooks';
-import { setCategory } from '../../features/adviceSlice';
-import { fetchAdviceQuote } from '../../features/adviceAsync';
-
-import { categories } from '../../utils/categories';
+import { useAppDispatch } from '../../../app/hooks';
+import { setQuoteCategory } from '../../../features/adviceSlice';
+import { fetchAdviceQuote } from '../../../features/adviceAsync';
+import { categories } from '../../../utils/categories';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const CatergorySelectButton: React.FC = () => {
+const QuoteCatergoryButton = () => {
   const classes = useStyles();
 
   const dispatch = useAppDispatch();
@@ -42,7 +41,7 @@ const CatergorySelectButton: React.FC = () => {
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+    setOpen(prevOpen => !prevOpen);
   };
 
   const handleClose = (event: React.MouseEvent<EventTarget>) => {
@@ -58,7 +57,7 @@ const CatergorySelectButton: React.FC = () => {
 
   const handleClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     dispatch(
-      setCategory(
+      setQuoteCategory(
         +(event.target as HTMLInputElement).value === -1
           ? 'all'
           : categories[+(event.target as HTMLInputElement).value].name
@@ -77,13 +76,16 @@ const CatergorySelectButton: React.FC = () => {
 
   // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
-  React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current!.focus();
-    }
+  React.useEffect(
+    () => {
+      if (prevOpen.current === true && open === false) {
+        anchorRef.current!.focus();
+      }
 
-    prevOpen.current = open;
-  }, [open]);
+      prevOpen.current = open;
+    },
+    [open]
+  );
 
   return (
     <div className={classes.root}>
@@ -127,7 +129,7 @@ const CatergorySelectButton: React.FC = () => {
                     <MenuItem
                       key="all"
                       value={-1}
-                      onClick={(e) => {
+                      onClick={e => {
                         handleClose(e);
                         handleClick(e);
                       }}
@@ -138,7 +140,7 @@ const CatergorySelectButton: React.FC = () => {
                       <MenuItem
                         key={category._id}
                         value={i}
-                        onClick={(e) => {
+                        onClick={e => {
                           handleClose(e);
                           handleClick(e);
                         }}
@@ -157,4 +159,4 @@ const CatergorySelectButton: React.FC = () => {
   );
 };
 
-export default CatergorySelectButton;
+export default QuoteCatergoryButton;

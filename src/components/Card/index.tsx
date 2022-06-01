@@ -4,51 +4,55 @@ import {
   Typography,
   Button,
   CircularProgress,
-} from "@material-ui/core";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+} from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import CardContent from "./CardContent";
+import CardContent from './CardContent';
 
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { fetchAdviceQuote } from "../../features/adviceAsync";
-import { selectAdvice } from "../../features/adviceSlice";
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { fetchAdviceQuote } from '../../features/adviceAsync';
+import { selectAdvice } from '../../features/adviceSlice';
 
-import styles from "./index.module.css";
+import styles from './index.module.css';
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
-    width: "80vw",
-    [theme.breakpoints.up("sm")]: {
-      minWidth: "80vw",
+    width: '80vw',
+    [theme.breakpoints.up('sm')]: {
+      minWidth: '80vw',
     },
-    minHeight: "50vh",
-    padding: "1rem",
-    paddingTop: "1.5rem",
-    borderRadius: "1rem",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.5)",
+    minHeight: '50vh',
+    padding: '1rem',
+    paddingTop: '1.5rem',
+    borderRadius: '1rem',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255,255,255,0.5)',
     backgroundImage:
-      "linear-gradient(to bottom, rgb(255,255,255,1.0),rgba(255,255,255,0.0))",
+      'linear-gradient(to bottom, rgb(255,255,255,1.0),rgba(255,255,255,0.0))',
   },
   button: {
-    borderRadius: "0.5rem",
-    textTransform: "capitalize",
+    borderRadius: '0.5rem',
+    textTransform: 'capitalize',
   },
   buttonWrapper: {
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "2rem",
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: '2rem',
   },
 }));
 
 const CardComponent: React.FC = () => {
   const classes = useStyles();
 
-  const { isButtonSelected, category, isLoading, isError } =
-    useAppSelector(selectAdvice);
+  const {
+    isTypeButtonSelected,
+    quoteCategory,
+    isLoading,
+    isError,
+  } = useAppSelector(selectAdvice);
   const dispatch = useAppDispatch();
 
   const handleGetAnother = async () => {
@@ -59,18 +63,18 @@ const CardComponent: React.FC = () => {
     <Grid container justifyContent="center" alignItems="center">
       <Grid item>
         <Card className={classes.card} elevation={6}>
-          {isButtonSelected && isButtonSelected[0] ? (
+          {isTypeButtonSelected && isTypeButtonSelected[0] ? (
             <Typography variant="h6" color="error">
               Advice
             </Typography>
-          ) : isButtonSelected && isButtonSelected[1] ? (
-            category === "all" ? (
+          ) : isTypeButtonSelected && isTypeButtonSelected[1] ? (
+            quoteCategory === 'all' ? (
               <Typography variant="subtitle1" color="error">
                 Quote
               </Typography>
             ) : (
               <Typography variant="subtitle1" color="error">
-                Quote - <em>{category}</em>
+                Quote - <em>{quoteCategory}</em>
               </Typography>
             )
           ) : null}

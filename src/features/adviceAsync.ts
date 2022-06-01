@@ -14,13 +14,13 @@ export const fetchAdviceQuote = createAsyncThunk(
       console.log(advice);
 
       let content: ContentType;
-      if (advice.isButtonSelected[0]) {
+      if (advice.isTypeButtonSelected[0]) {
         content = await fetchAdvice();
-      } else if (advice.isButtonSelected[1]) {
+      } else if (advice.isTypeButtonSelected[1]) {
         content =
-          advice.category === 'all'
+          advice.quoteCategory === 'all'
             ? await fetchQuotes()
-            : await fetchQuotes(advice.category);
+            : await fetchQuotes(advice.quoteCategory);
       }
 
       dispatch(setContent(content));
