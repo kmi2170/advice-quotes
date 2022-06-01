@@ -14,7 +14,7 @@ import theme from '../theme/theme';
 
 import '../styles/globals.css';
 
-import SEO from "../components/SEO";
+import SEO from '../components/SEO';
 import { Provider } from 'react-redux';
 import { store } from '../app/store';
 
@@ -35,7 +35,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         {/* <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}> */}
         <Head>
-          <title>Advice Appli</title>
+          <title>Advice App</title>
           <meta
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width"

@@ -1,14 +1,9 @@
-import { useEffect } from 'react';
-
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from './index.styles';
 
-import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { selectAdvice } from '../features/adviceSlice';
-import { fetchAdviceQuote } from '../features/adviceAsync';
-
+import { useAppSelector } from '../app/hooks';
 import ButtonGroup from '../components/ButtonGroup';
 import Card from '../components/Card';
 import SwitchWallpaper from '../components/SwitchWallpaper';
@@ -18,12 +13,9 @@ import Footer from '../components/Footer';
 const Home = () => {
   const classes = useStyles();
 
-  const { wallpaper } = useAppSelector(selectAdvice);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchAdviceQuote());
-  }, []);
+  const wallpaper = useAppSelector(state => state.advice.wallpaper);
+  // When selectAdvice is updated, it always cause to re-render component
+  // const wallpaper = useAppSelector(selectAdvice, advice => advice.wallpaper);
   console.log('pages/index');
 
   return (
@@ -57,6 +49,7 @@ const Home = () => {
             <Credits />
           </Grid>
         </Grid>
+
         <div className={classes.footerContainer}>
           <Footer />
         </div>

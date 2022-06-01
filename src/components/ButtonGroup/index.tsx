@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -6,14 +7,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import QuoteCatergoryButton from './QuoteCategoryButton';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import {
-  setContent,
-  setIsButtonSelected,
-  selectAdvice,
-} from '../../features/adviceSlice';
+import { setContent, setIsButtonSelected } from '../../features/adviceSlice';
 import { fetchAdviceQuote } from '../../features/adviceAsync';
 import { useCustomeCookies } from '../../hooks/useCustomCookies';
-import { useEffect } from 'react';
 
 const useStyles = makeStyles(() => ({
   quotesButtonContainer: {
@@ -43,14 +39,16 @@ const ButtonGroup = () => {
   const classes = useStyles();
   console.log('buttongroup');
 
-  const { isTypeButtonSelected } = useAppSelector(selectAdvice);
+  const isTypeButtonSelected = useAppSelector(
+    state => state.advice.isTypeButtonSelected
+  );
   const dispatch = useAppDispatch();
   const { cookies, setButtonCookie } = useCustomeCookies();
 
   useEffect(() => {
-    if (cookies.button && Array.isArray(cookies.button)) {
+    cookies.button &&
+      Array.isArray(cookies.button) &&
       dispatch(setIsButtonSelected(cookies.button));
-    }
   }, []);
 
   useEffect(() => setButtonCookie(isTypeButtonSelected), [

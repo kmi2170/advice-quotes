@@ -1,4 +1,4 @@
-import { useEffect, memo } from 'react';
+import { useEffect } from 'react';
 import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -6,7 +6,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { setWallpaper, selectAdvice } from '../../features/adviceSlice';
+import { setWallpaper } from '../../features/adviceSlice';
 import { useCustomeCookies } from '../../hooks/useCustomCookies';
 
 const useStyles = makeStyles(() => ({
@@ -18,17 +18,15 @@ const SwitchWallpaper = () => {
   const classes = useStyles();
   console.log('switch');
 
-  const { wallpaper } = useAppSelector(selectAdvice);
+  const wallpaper = useAppSelector(state => state.advice.wallpaper);
   const dispatch = useAppDispatch();
   const { cookies, setWallpaperCookie } = useCustomeCookies();
 
   useEffect(() => {
-    if (
-      cookies.wallpaper &&
-      typeof JSON.parse(cookies.wallpaper) === 'boolean'
-    ) {
+    cookies.wallpaper &&
+      typeof cookies.wallpaper === 'string' &&
+      typeof JSON.parse(cookies.wallpaper) === 'boolean' &&
       dispatch(setWallpaper(JSON.parse(cookies.wallpaper)));
-    }
   }, []);
 
   useEffect(() => setWallpaperCookie(wallpaper), [wallpaper]);
@@ -61,4 +59,4 @@ const SwitchWallpaper = () => {
   );
 };
 
-export default memo(SwitchWallpaper);
+export default SwitchWallpaper;

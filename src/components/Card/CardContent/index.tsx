@@ -22,29 +22,36 @@ const useStyles = makeStyles(() => ({
 
 const CardContent = () => {
   const classes = useStyles();
+  console.log('card content');
 
   const { isTypeButtonSelected, content } = useAppSelector(selectAdvice);
 
   return (
     <div className={classes.contentContainer}>
-      {isTypeButtonSelected && isTypeButtonSelected[0] && content ? (
-        <Typography className={classes.content} variant="h4" align="center">
-          {content}
-        </Typography>
-      ) : isTypeButtonSelected && isTypeButtonSelected[1] && content ? (
-        <>
+      {isTypeButtonSelected &&
+        isTypeButtonSelected[0] &&
+        content && (
           <Typography className={classes.content} variant="h4" align="center">
-            {content['content']}
+            {content}
           </Typography>
-          <Typography
-            className={classes.contentAuthor}
-            variant="h4"
-            align="center"
-          >
-            {content['author']}
-          </Typography>
-        </>
-      ) : null}
+        )}
+
+      {isTypeButtonSelected &&
+        isTypeButtonSelected[1] &&
+        content && (
+          <>
+            <Typography className={classes.content} variant="h4" align="center">
+              {content['content']}
+            </Typography>
+            <Typography
+              className={classes.contentAuthor}
+              variant="h4"
+              align="center"
+            >
+              {content['author']}
+            </Typography>
+          </>
+        )}
     </div>
   );
 };

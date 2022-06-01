@@ -5,7 +5,10 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme: Theme) => ({
   credits: {
-    color: 'white',
+    color: 'black',
+    background: 'lightgrey',
+    padding: '2px 2px 1px 2px',
+    borderRadius: '4px',
     [theme.breakpoints.down('xs')]: {
       fontSize: '0.50rem',
     },
@@ -18,7 +21,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Credits = () => {
-  console.log('credits');
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 

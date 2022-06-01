@@ -1,19 +1,13 @@
-import {
-  Grid,
-  Card,
-  Typography,
-  Button,
-  CircularProgress,
-} from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import CardContent from './CardContent';
-
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { fetchAdviceQuote } from '../../features/adviceAsync';
+import GetAnotherButton from './GetAnotherButton';
+import { useAppSelector } from '../../app/hooks';
 import { selectAdvice } from '../../features/adviceSlice';
-
-import styles from './index.module.css';
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
@@ -44,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CardComponent: React.FC = () => {
+const CardComponent = () => {
   const classes = useStyles();
 
   const {
@@ -53,22 +47,21 @@ const CardComponent: React.FC = () => {
     isLoading,
     isError,
   } = useAppSelector(selectAdvice);
-  const dispatch = useAppDispatch();
-
-  const handleGetAnother = async () => {
-    dispatch(fetchAdviceQuote());
-  };
 
   return (
     <Grid container justifyContent="center" alignItems="center">
       <Grid item>
         <Card className={classes.card} elevation={6}>
-          {isTypeButtonSelected && isTypeButtonSelected[0] ? (
-            <Typography variant="h6" color="error">
-              Advice
-            </Typography>
-          ) : isTypeButtonSelected && isTypeButtonSelected[1] ? (
-            quoteCategory === 'all' ? (
+          {isTypeButtonSelected &&
+            isTypeButtonSelected[0] && (
+              <Typography variant="h6" color="error">
+                Advice
+              </Typography>
+            )}
+
+          {isTypeButtonSelected &&
+            isTypeButtonSelected[1] &&
+            (quoteCategory === 'all' ? (
               <Typography variant="subtitle1" color="error">
                 Quote
               </Typography>
@@ -76,8 +69,8 @@ const CardComponent: React.FC = () => {
               <Typography variant="subtitle1" color="error">
                 Quote - <em>{quoteCategory}</em>
               </Typography>
-            )
-          ) : null}
+            ))}
+
           {isError ? (
             <Typography variant="h6" color="error">
               Error. Loading Data Failed. Please try again later.
@@ -85,18 +78,7 @@ const CardComponent: React.FC = () => {
           ) : (
             <>
               {isLoading ? <CircularProgress /> : <CardContent />}
-
-              <div className={classes.buttonWrapper}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="small"
-                  className={`${classes.button} ${styles.button}`}
-                  onClick={handleGetAnother}
-                >
-                  <Typography variant="h5">Get another!</Typography>
-                </Button>
-              </div>
+              <GetAnotherButton />
             </>
           )}
         </Card>
