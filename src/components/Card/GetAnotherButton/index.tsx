@@ -27,9 +27,11 @@ const GetAnotherButton = () => {
     dispatch(fetchAdviceQuote());
   };
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     dispatch(fetchAdviceQuote());
   }, []);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <div className={classes.buttonWrapper}>

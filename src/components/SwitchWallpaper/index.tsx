@@ -16,12 +16,12 @@ const useStyles = makeStyles(() => ({
 
 const SwitchWallpaper = () => {
   const classes = useStyles();
-  console.log('switch');
 
   const wallpaper = useAppSelector(state => state.advice.wallpaper);
   const dispatch = useAppDispatch();
   const { cookies, setWallpaperCookie } = useCustomeCookies();
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     cookies.wallpaper &&
       typeof cookies.wallpaper === 'string' &&
@@ -30,6 +30,7 @@ const SwitchWallpaper = () => {
   }, []);
 
   useEffect(() => setWallpaperCookie(wallpaper), [wallpaper]);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   const handleSwitchWallpaper = () => dispatch(setWallpaper(null));
 

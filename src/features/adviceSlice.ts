@@ -7,7 +7,7 @@ export type AdviceState = {
   isLoading: boolean;
   isError: boolean;
   isTypeButtonSelected: boolean[];
-  content: undefined | ContentType;
+  content: null | ContentType;
   quoteCategory: string;
   wallpaper: null | boolean;
 };
@@ -16,7 +16,7 @@ export const initialState: AdviceState = {
   isLoading: false,
   isError: false,
   isTypeButtonSelected: [true, false],
-  content: undefined,
+  content: null,
   quoteCategory: 'all',
   wallpaper: false,
 };
@@ -37,7 +37,7 @@ export const adviceSlice = createSlice({
     setQuoteCategory: (state, action: PayloadAction<string>) => {
       state.quoteCategory = action.payload;
     },
-    setContent: (state, action: PayloadAction<undefined | ContentType>) => {
+    setContent: (state, action: PayloadAction<null | ContentType>) => {
       state.content = action.payload;
     },
     setWallpaper: (state, action: PayloadAction<null | boolean>) => {
@@ -57,7 +57,7 @@ export const adviceSlice = createSlice({
       .addCase(fetchAdviceQuote.rejected, (state, error) => {
         state.isLoading = false;
         state.isError = true;
-        console.log(error);
+        console.error(error);
       });
   },
 });

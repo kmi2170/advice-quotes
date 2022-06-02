@@ -1,4 +1,1 @@
-export type ContentType =
-  | string
-  | { content: string; author: string }
-  | undefined;
+export type ContentType = string | { content: string; author: string } | null;

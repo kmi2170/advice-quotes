@@ -17,10 +17,9 @@ export const fetchAdviceQuote = createAsyncThunk(
       if (advice.isTypeButtonSelected[0]) {
         content = await fetchAdvice();
       } else if (advice.isTypeButtonSelected[1]) {
-        content =
-          advice.quoteCategory === 'all'
-            ? await fetchQuotes()
-            : await fetchQuotes(advice.quoteCategory);
+        content = await fetchQuotes(
+          advice.quoteCategory === 'all' ? '' : advice.quoteCategory
+        );
       }
 
       dispatch(setContent(content));

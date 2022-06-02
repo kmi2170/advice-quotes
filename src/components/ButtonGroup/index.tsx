@@ -37,7 +37,6 @@ const buttons = [
 
 const ButtonGroup = () => {
   const classes = useStyles();
-  console.log('buttongroup');
 
   const isTypeButtonSelected = useAppSelector(
     state => state.advice.isTypeButtonSelected
@@ -45,6 +44,7 @@ const ButtonGroup = () => {
   const dispatch = useAppDispatch();
   const { cookies, setButtonCookie } = useCustomeCookies();
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     cookies.button &&
       Array.isArray(cookies.button) &&
@@ -54,6 +54,7 @@ const ButtonGroup = () => {
   useEffect(() => setButtonCookie(isTypeButtonSelected), [
     isTypeButtonSelected,
   ]);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   const handleTypeButtonClick = (index: number) => {
     if (!isTypeButtonSelected[index]) {

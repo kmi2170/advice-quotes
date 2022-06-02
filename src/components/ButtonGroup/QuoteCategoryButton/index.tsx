@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const QuoteCatergoryButton = () => {
   const classes = useStyles();
-  console.log('QuoteCatergoryButton');
 
   const dispatch = useAppDispatch();
 

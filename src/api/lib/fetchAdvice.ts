@@ -1,41 +1,35 @@
 import axios from 'axios';
-// import { ContentType } from "../types";
+import { ContentType } from '../types';
+
+export const fetchAdvice = async (): Promise<ContentType> => {
+  const advice = await fetcher();
+
+  return filterText(advice);
+};
 
 const url = 'https://api.adviceslip.com/advice';
 
-const fetchFunc = async (): Promise<string> => {
+const fetcher = async (): Promise<string> => {
   try {
-    const { data: { slip: { advice } } }
-      = await axios.get(url, {
-        params: { timeStamp: new Date().getTime() },
-      });
+    const { data: { slip: { advice } } } = await axios.get(url, {
+      params: { timeStamp: new Date().getTime() },
+    });
 
-    return advice as string;
+    return advice;
   } catch (error) {
     console.error(error);
   }
 };
 
-export const fetchAdvice = async () => {
-  const advice = await fetchFunc();
-
-  const filteredadvice = filterAdvice(advice);
-
-  return advice;
-};
-
-const filterAdvice = async (advice: string) => {
+const filterText = async (text: string): Promise<string> => {
   let count = 0;
   while (count < 30) {
-    if (!checkString(advice)) break;
-
-    advice = await fetchFunc();
-
+    if (!checkText(text)) break;
+    text = await fetcher();
     count++;
   }
 
-  return advice;
+  return text;
 };
 
-const checkString = (string: string): boolean =>
-  string.toLowerCase().includes('sex');
+const checkText = (text: string): boolean => text.toLowerCase().includes('sex');

@@ -22,7 +22,6 @@ const useStyles = makeStyles(() => ({
 
 const CardContent = () => {
   const classes = useStyles();
-  console.log('card content');
 
   const { isTypeButtonSelected, content } = useAppSelector(selectAdvice);
 
