@@ -40,7 +40,7 @@ const QuoteCatergoryButton = () => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
-  const handleToggle = () => {
+  const handleToggle: React.MouseEventHandler<HTMLButtonElement> = () => {
     setOpen(prevOpen => !prevOpen);
   };
 

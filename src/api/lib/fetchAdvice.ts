@@ -4,7 +4,7 @@ import { ContentType } from '../types';
 export const fetchAdvice = async (): Promise<ContentType> => {
   const advice = await fetcher();
 
-  return filterText(advice);
+  return filterText(advice, fetcher);
 };
 
 const url = 'https://api.adviceslip.com/advice';
@@ -21,7 +21,10 @@ const fetcher = async (): Promise<string> => {
   }
 };
 
-const filterText = async (text: string): Promise<string> => {
+const filterText = async (
+  text: string,
+  fetcher: () => Promise<string>
+): Promise<string> => {
   let count = 0;
   while (count < 30) {
     if (!checkText(text)) break;
