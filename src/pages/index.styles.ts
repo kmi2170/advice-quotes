@@ -1,6 +1,6 @@
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme: Theme) => ({
+const styles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
     height: '100vh',
@@ -51,3 +51,5 @@ export const useStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(5),
   },
 }));
+
+export default styles;
