@@ -13,7 +13,6 @@ import Footer from '../components/Footer';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
-    height: '100vh',
     background: '#222',
     backgroundImage: 'linear-gradient(#222,#777,#222)',
   },
@@ -42,10 +41,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   wallpaper1: {
     backgroundImage:
       'linear-gradient(to bottom, rgba(0,20,0,1.0), rgba(0,50,0,0.0), rgba(0,20,1.0)), url("/images/flowers1.jpg")',
+    maxWidth: '100%',
+    height: 'auto',
   },
   wallpaper2: {
     backgroundImage:
       'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(0,20,0,0.0), rgba(0,0,0,1.0)), url("/images/bamboo1.jpg")',
+    maxWidth: '100%',
+    height: 'auto',
   },
   cardContainer: {
     marginTop: '1.0rem',
@@ -66,9 +69,8 @@ const Home = () => {
   const classes = useStyles();
 
   const wallpaper = useAppSelector(state => state.advice.wallpaper);
-  // When selectAdvice is updated, it always cause to re-render component
+  // selectAdvice will be updated when any state changes, it always cause the component to re-render
   // const wallpaper = useAppSelector(selectAdvice, advice => advice.wallpaper);
-  console.log('pages/index');
 
   return (
     <div className={classes.root}>
