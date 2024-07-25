@@ -1,21 +1,21 @@
-import { useState, memo } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Popover from '@material-ui/core/Popover';
-import Typography from '@material-ui/core/Typography';
+import { useState, memo } from "react";
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import Popover from "@material-ui/core/Popover";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme: Theme) => ({
   credits: {
-    color: 'black',
-    background: 'lightgrey',
-    padding: '2px 2px 1px 2px',
-    borderRadius: '4px',
-    [theme.breakpoints.down('xs')]: {
-      fontSize: '0.50rem',
+    color: "black",
+    background: "lightgrey",
+    padding: "2px 2px 1px 2px",
+    borderRadius: "4px",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "0.50rem",
     },
   },
   text: {
-    [theme.breakpoints.down('xs')]: {
-      fontSize: '0.65rem',
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "0.65rem",
     },
   },
 }));
@@ -33,7 +33,7 @@ const Credits = () => {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? 'credits-popover' : undefined;
+  const id = open ? "credits-popover" : undefined;
 
   return (
     <>
@@ -50,19 +50,16 @@ const Credits = () => {
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
+          vertical: "bottom",
+          horizontal: "center",
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
+          vertical: "top",
+          horizontal: "center",
         }}
       >
         <Typography variant="body2" className={classes.text}>
           Advice / https://api.adviceslip.com
-        </Typography>
-        <Typography variant="body2" className={classes.text}>
-          Quotes / https://github.com/lukePeavey/quotable
         </Typography>
         <Typography variant="body2" className={classes.text}>
           Wallpaper /

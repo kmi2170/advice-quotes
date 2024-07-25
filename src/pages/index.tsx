@@ -1,63 +1,61 @@
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
-import { useAppSelector } from '../app/hooks';
-import ButtonGroup from '../components/ButtonGroup';
-import Card from '../components/Card';
-import SwitchWallpaper from '../components/SwitchWallpaper';
-import Credits from '../components/Credits';
-import Footer from '../components/Footer';
+import { useAppSelector } from "../app/hooks";
+import Card from "../components/Card";
+import Credits from "../components/Credits";
+import Footer from "../components/Footer";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
-    background: '#222',
-    backgroundImage: 'linear-gradient(#222,#777,#222)',
+    background: "#222",
+    backgroundImage: "linear-gradient(#222,#777,#222)",
   },
   titleApp: {
-    fontFamily: 'Lobster',
-    color: 'white',
-    textShadow: '2px 2px #19857b',
+    fontFamily: "Lobster",
+    color: "white",
+    textShadow: "2px 2px #19857b",
     padding: theme.spacing(4, 0),
   },
   container: {
-    height: '100vh',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
+    height: "100vh",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
     // backgroundSize: 'fit',
-    [theme.breakpoints.down('sm')]: {
-      '@media (orientation: landscape)': {
-        backgroundSize: 'auto 100vw',
-        height: '100vw',
+    [theme.breakpoints.down("sm")]: {
+      "@media (orientation: landscape)": {
+        backgroundSize: "auto 100vw",
+        height: "100vw",
       },
-      '@media (orientation: portrait)': {
-        backgroundSize: 'auto 100vh',
-        height: '100vh',
+      "@media (orientation: portrait)": {
+        backgroundSize: "auto 100vh",
+        height: "100vh",
       },
     },
   },
   wallpaper1: {
     backgroundImage:
       'linear-gradient(to bottom, rgba(0,20,0,1.0), rgba(0,50,0,0.0), rgba(0,20,1.0)), url("/images/flowers1.jpg")',
-    maxWidth: '100%',
-    height: 'auto',
+    maxWidth: "100%",
+    height: "auto",
   },
   wallpaper2: {
     backgroundImage:
       'linear-gradient(to bottom, rgba(0,0,0,1.0), rgba(0,20,0,0.0), rgba(0,0,0,1.0)), url("/images/bamboo1.jpg")',
-    maxWidth: '100%',
-    height: 'auto',
+    maxWidth: "100%",
+    height: "auto",
   },
   cardContainer: {
-    marginTop: '1.0rem',
+    marginTop: "1.0rem",
   },
   switchContainer: {
-    marginTop: '1.5rem',
-    backgroundColor: 'rgba(180,180,255,0.8)',
-    padding: '0 0.5rem',
-    borderRadius: '0.4rem',
+    marginTop: "1.5rem",
+    backgroundColor: "rgba(180,180,255,0.8)",
+    padding: "0 0.5rem",
+    borderRadius: "0.4rem",
   },
 
   footerContainer: {
@@ -68,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Home = () => {
   const classes = useStyles();
 
-  const wallpaper = useAppSelector(state => state.advice.wallpaper);
+  const wallpaper = useAppSelector((state) => state.advice.wallpaper);
   // selectAdvice will be updated when any state changes, it always cause the component to re-render
   // const wallpaper = useAppSelector(selectAdvice, advice => advice.wallpaper);
 
@@ -86,19 +84,14 @@ const Home = () => {
           align="center"
           className={classes.titleApp}
         >
-          Advice/Quotes App
+          Advice App
         </Typography>
-
-        <ButtonGroup />
 
         <div className={classes.cardContainer}>
           <Card />
         </div>
 
         <Grid container justifyContent="space-around" alignItems="center">
-          <Grid item className={classes.switchContainer}>
-            <SwitchWallpaper />
-          </Grid>
           <Grid item>
             <Credits />
           </Grid>

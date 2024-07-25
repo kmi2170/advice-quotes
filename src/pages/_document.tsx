@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 import Document, {
   Html,
   Head,
   Main,
   NextScript,
   DocumentContext,
-} from 'next/document';
-import { ServerStyleSheets } from '@material-ui/core/styles';
-import theme from '../theme/theme';
+} from "next/document";
+import { ServerStyleSheets } from "@material-ui/core/styles";
+import theme from "../theme/theme";
 
 export default class MyDocument extends Document {
   render() {
@@ -33,24 +33,6 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
             rel="stylesheet"
           />
-          {/* 
-          <link
-            href="https://fonts.googleapis.com/css2?family=Oswald&family=Roboto+Condensed&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
-            rel="stylesheet"
-          />
-        */}
         </Head>
         <body>
           <Main />

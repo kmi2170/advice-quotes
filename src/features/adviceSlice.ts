@@ -1,15 +1,14 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ContentType } from '../api/types';
-import { RootState } from '../app/store';
-import { fetchAdviceQuote } from './adviceAsync';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../app/store";
+import { fetchAdvice } from "./adviceAsync";
 
 export type AdviceState = {
   isLoading: boolean;
   isError: boolean;
   isTypeButtonSelected: boolean[];
-  content: null | ContentType;
+  content: string | null;
   quoteCategory: string;
-  wallpaper: null | boolean;
+  wallpaper: boolean | null;
 };
 
 export const initialState: AdviceState = {
@@ -17,12 +16,12 @@ export const initialState: AdviceState = {
   isError: false,
   isTypeButtonSelected: [true, false],
   content: null,
-  quoteCategory: 'all',
+  quoteCategory: "all",
   wallpaper: false,
 };
 
 export const adviceSlice = createSlice({
-  name: 'advice',
+  name: "advice",
   initialState,
   reducers: {
     setIsLoading: (state, action: PayloadAction<boolean>) => {
@@ -31,13 +30,7 @@ export const adviceSlice = createSlice({
     setIsError: (state, action: PayloadAction<boolean>) => {
       state.isError = action.payload;
     },
-    setIsButtonSelected: (state, action: PayloadAction<boolean[]>) => {
-      state.isTypeButtonSelected = action.payload;
-    },
-    setQuoteCategory: (state, action: PayloadAction<string>) => {
-      state.quoteCategory = action.payload;
-    },
-    setContent: (state, action: PayloadAction<null | ContentType>) => {
+    setContent: (state, action: PayloadAction<string | null>) => {
       state.content = action.payload;
     },
     setWallpaper: (state, action: PayloadAction<null | boolean>) => {
@@ -45,16 +38,15 @@ export const adviceSlice = createSlice({
         action.payload === null ? !state.wallpaper : action.payload;
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(fetchAdviceQuote.pending, state => {
+      .addCase(fetchAdvice.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchAdviceQuote.fulfilled, state => {
-        console.log('fullfilled');
+      .addCase(fetchAdvice.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(fetchAdviceQuote.rejected, (state, error) => {
+      .addCase(fetchAdvice.rejected, (state, error) => {
         state.isLoading = false;
         state.isError = true;
         console.error(error);
@@ -64,13 +56,7 @@ export const adviceSlice = createSlice({
 
 export const selectAdvice = (state: RootState) => state.advice;
 
-export const {
-  setIsLoading,
-  setIsError,
-  setIsButtonSelected,
-  setContent,
-  setQuoteCategory,
-  setWallpaper,
-} = adviceSlice.actions;
+export const { setIsLoading, setIsError, setContent, setWallpaper } =
+  adviceSlice.actions;
 
 export default adviceSlice.reducer;

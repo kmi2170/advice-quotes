@@ -3,11 +3,6 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import { CookiesProvider } from "react-cookie";
 
-// import { QueryClientProvider } from 'react-query';
-// import { Hydrate } from 'react-query/hydration';
-// import queryClient from '../utils/reactQuery';
-// import { ReactQueryDevtools } from 'react-query/devtools';
-
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../theme/theme";
@@ -17,8 +12,6 @@ import "../styles/globals.css";
 import SEO from "../components/SEO";
 import { Provider } from "react-redux";
 import { store } from "../app/store";
-
-// const queryClient = new QueryClient();
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   React.useEffect(() => {
@@ -32,8 +25,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <CookiesProvider>
       <ThemeProvider theme={theme}>
-        {/* <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}> */}
         <Head>
           <title>Advice App</title>
           <meta
@@ -42,14 +33,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           />
           <SEO />
         </Head>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <Provider store={store}>
           <Component {...pageProps} />
         </Provider>
-        {/* <ReactQueryDevtools />
-        </Hydrate>
-      </QueryClientProvider> */}
       </ThemeProvider>
     </CookiesProvider>
   );

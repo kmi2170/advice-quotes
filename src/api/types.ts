@@ -1,1 +1,2 @@
-export type ContentType = string | { content: string; author: string } | null;
+export type AdviceSlipType = { slip: { advice: string } };
+//export type AdviceSlipType = { data: { slip: { advice: string } } };
