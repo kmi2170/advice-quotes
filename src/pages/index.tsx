@@ -12,6 +12,9 @@ import Image from "next/image";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
+    position: "relative",
+    width: "100vw",
+    height: "100vh",
   },
   appTitle: {
     fontWeight: "bold",
@@ -51,18 +54,21 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Home = () => {
   const classes = useStyles();
 
-  const wallpaper = useAppSelector((state) => state.advice.wallpaper);
-
-  console.log(wallpapers);
+  const wallpaperId = useAppSelector((state) => state.advice.wallpaperId);
 
   return (
     <div className={classes.root}>
       <Image
-        src={wallpapers[0].wallpaper}
+        src={wallpapers[wallpaperId].wallpaper}
         alt="background"
-        layout="fill"
-        objectFit="cover"
-        style={{ zIndex: -10 }}
+        quality={100}
+        fill
+        //sizes="100vw 100vh"
+        priority
+        style={{
+          objectFit: "cover",
+          zIndex: -10,
+        }}
       />
       <Container maxWidth="lg">
         <Typography

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
-import { setContent } from "./adviceSlice";
+import { setContent, setWallpaperId } from "./adviceSlice";
 import { fetchAdviceSlip } from "../api/lib/fetchAdvice";
 
 export const fetchAdvice = createAsyncThunk(
@@ -11,6 +11,7 @@ export const fetchAdvice = createAsyncThunk(
       // console.log(advice);
       const content = await fetchAdviceSlip();
       dispatch(setContent(content));
+      dispatch(setWallpaperId(null));
     } catch (error) {
       return rejectWithValue(error);
     }
