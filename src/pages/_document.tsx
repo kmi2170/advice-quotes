@@ -16,23 +16,6 @@ export default class MyDocument extends Document {
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Raleway&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Acme&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
-            rel="stylesheet"
-          />
         </Head>
         <body>
           <Main />

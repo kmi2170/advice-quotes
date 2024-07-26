@@ -6,8 +6,9 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles((theme: Theme) => ({
   credits: {
     color: "black",
-    background: "lightgrey",
-    padding: "2px 2px 1px 2px",
+    background: "lightblue",
+    width: "4rem",
+    padding: "5px 0 5px 0",
     borderRadius: "4px",
     [theme.breakpoints.down("xs")]: {
       fontSize: "0.50rem",
@@ -39,8 +40,10 @@ const Credits = () => {
     <>
       <Typography
         variant="body2"
-        onClick={handleClick}
+        onMouseEnter={handleClick}
+        // onMouseLeave={handleClose}
         className={classes.credits}
+        align="center"
       >
         Credits
       </Typography>
