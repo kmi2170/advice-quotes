@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import Image from "next/image";
 import useImageUrl from "../hooks/useImageUrl";
 import styles from "./index.module.css";
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -24,12 +25,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   container: {
     height: "100vh",
-  },
-  cardContainer: {
-    marginTop: "1.0rem",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
   },
   creditsContainer: {
     width: "80vw",
@@ -64,26 +59,26 @@ const Home = () => {
         className={styles.blur}
       />
       <Container maxWidth="lg">
-        <Typography
-          variant="h2"
-          component="h1"
-          align="center"
-          className={classes.appTitle}
-        >
-          Advice App
-        </Typography>
+        <Grid container justifyContent="center">
+          <Typography
+            variant="h2"
+            component="h1"
+            align="center"
+            className={classes.appTitle}
+          >
+            Advice App
+          </Typography>
 
-        <div className={classes.cardContainer}>
           <Card />
-        </div>
 
-        <div className={classes.creditsContainer}>
-          <Credits />
-        </div>
+          <div className={classes.creditsContainer}>
+            <Credits />
+          </div>
 
-        <div className={classes.footerContainer}>
-          <Footer />
-        </div>
+          <div className={classes.footerContainer}>
+            <Footer />
+          </div>
+        </Grid>
       </Container>
     </div>
   );

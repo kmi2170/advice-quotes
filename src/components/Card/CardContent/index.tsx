@@ -6,9 +6,11 @@ import { selectAdvice } from "../../../features/adviceSlice";
 
 const useStyles = makeStyles(() => ({
   contentContainer: {
-    display: "block",
-    minHeight: "30vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     overflowY: "auto",
+    minHeight: "30vh",
   },
   content: {},
 }));
