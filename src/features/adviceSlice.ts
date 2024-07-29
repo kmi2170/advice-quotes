@@ -9,7 +9,6 @@ export type AdviceState = {
   isTypeButtonSelected: boolean[];
   content: string | null;
   quoteCategory: string;
-  wallpaperId: number;
 };
 
 export const initialState: AdviceState = {
@@ -18,7 +17,6 @@ export const initialState: AdviceState = {
   isTypeButtonSelected: [true, false],
   content: null,
   quoteCategory: "all",
-  wallpaperId: 0,
 };
 
 export const adviceSlice = createSlice({
@@ -33,10 +31,6 @@ export const adviceSlice = createSlice({
     },
     setContent: (state, action: PayloadAction<string | null>) => {
       state.content = action.payload;
-    },
-    setWallpaperId: (state, action: PayloadAction<null>) => {
-      const wallpaperId = Math.floor(Math.random() * numOfWallpapers);
-      state.wallpaperId = wallpaperId;
     },
   },
   extraReducers: (builder) => {
@@ -57,7 +51,6 @@ export const adviceSlice = createSlice({
 
 export const selectAdvice = (state: RootState) => state.advice;
 
-export const { setIsLoading, setIsError, setContent, setWallpaperId } =
-  adviceSlice.actions;
+export const { setIsLoading, setIsError, setContent } = adviceSlice.actions;
 
 export default adviceSlice.reducer;

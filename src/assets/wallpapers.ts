@@ -18,6 +18,7 @@ import wallpaper_17 from "/public/wallpapers/wallpaper-17.jpg";
 import wallpaper_18 from "/public/wallpapers/wallpaper-18.jpg";
 import wallpaper_19 from "/public/wallpapers/wallpaper-19.jpg";
 import wallpaper_20 from "/public/wallpapers/wallpaper-20.jpg";
+import blurImage from "/public/blur1.jpg";
 
 export const wallpapers = [
   { id: 0, wallpaper: wallpaper_1 },
@@ -42,4 +43,5 @@ export const wallpapers = [
   { id: 19, wallpaper: wallpaper_20 },
 ];
 
+export const blurImageUrl = blurImage.src;
 export const numOfWallpapers = wallpapers.length;

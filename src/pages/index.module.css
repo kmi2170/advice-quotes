@@ -1,0 +1,13 @@
+.blur {
+  animation: blur 1.5s linear forwards;
+  /* animation-delay: 1s; */
+}
+
+@keyframes blur {
+  0% {
+    filter: blur(50px);
+  }
+  100% {
+    filter: blur(0px);
+  }
+}

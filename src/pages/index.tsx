@@ -2,12 +2,12 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
-import { useAppSelector } from "../app/hooks";
 import Card from "../components/Card";
 import Credits from "../components/Credits";
 import Footer from "../components/Footer";
-import { wallpapers } from "../assets/wallpapers";
 import Image from "next/image";
+import useImageUrl from "../hooks/useImageUrl";
+import styles from "./index.module.css";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -24,20 +24,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   container: {
     height: "100vh",
-    // backgroundRepeat: "no-repeat",
-    // backgroundPosition: "center",
   },
   cardContainer: {
     marginTop: "1.0rem",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-  },
-  switchContainer: {
-    marginTop: "1.5rem",
-    backgroundColor: "rgba(180,180,255,0.8)",
-    padding: "0 0.5rem",
-    borderRadius: "0.4rem",
   },
   creditsContainer: {
     width: "80vw",
@@ -54,12 +46,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Home = () => {
   const classes = useStyles();
 
-  const wallpaperId = useAppSelector((state) => state.advice.wallpaperId);
+  const wallpaperUrl = useImageUrl();
 
   return (
     <div className={classes.root}>
       <Image
-        src={wallpapers[wallpaperId].wallpaper}
+        src={wallpaperUrl}
         alt="background"
         quality={100}
         fill
@@ -69,10 +61,11 @@ const Home = () => {
           objectFit: "cover",
           zIndex: -10,
         }}
+        className={styles.blur}
       />
       <Container maxWidth="lg">
         <Typography
-          variant="h3"
+          variant="h2"
           component="h1"
           align="center"
           className={classes.appTitle}
