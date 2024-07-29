@@ -65,13 +65,7 @@ const Credits = () => {
           Advice / https://api.adviceslip.com
         </Typography>
         <Typography variant="body2" className={classes.text}>
-          Wallpaper /
-        </Typography>
-        <Typography variant="body2" className={classes.text}>
-          Bamboos Photo by Andre Moura from Pexels
-        </Typography>
-        <Typography variant="body2" className={classes.text}>
-          Flowers Photo by Ellie Burgin from Pexels
+          Wallpaper / unsplash.com
         </Typography>
       </Popover>
     </>
