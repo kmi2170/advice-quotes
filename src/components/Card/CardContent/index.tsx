@@ -10,14 +10,7 @@ const useStyles = makeStyles(() => ({
     minHeight: "30vh",
     overflowY: "auto",
   },
-  content: {
-    fontFamily: "Acme",
-  },
-  contentAuthor: {
-    fontFamily: "Acme",
-    fontStyle: "italic",
-    marginTop: "1rem",
-  },
+  content: {},
 }));
 
 const CardContent = () => {
