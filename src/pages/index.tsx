@@ -41,12 +41,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Home = () => {
   const classes = useStyles();
 
-  const wallpaperUrl = useImageUrl();
+  const { imageUrl, blurUrl } = useImageUrl();
+
+  console.log(imageUrl, blurUrl);
 
   return (
     <div className={classes.root}>
       <Image
-        src={wallpaperUrl}
+        src={imageUrl}
+        blurDataURL={blurUrl}
+        placeholder="blur"
         alt="background"
         quality={100}
         fill
@@ -56,7 +60,7 @@ const Home = () => {
           objectFit: "cover",
           zIndex: -10,
         }}
-        className={styles.blur}
+        // className={styles.blur}
       />
       <Container maxWidth="lg">
         <Grid container justifyContent="center">

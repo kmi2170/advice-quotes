@@ -5,14 +5,17 @@ import {
   wallpapers,
 } from "../assets/wallpapers";
 
-export default function useImageUrl(): string {
-  const [imageUrl, setImageUrl] = useState<string>(blurImageUrl);
+export default function useImageUrl(): { imageUrl: string; blurUrl: string } {
+  const [imageUrl, setImageUrl] = useState<string>("");
+  const [blurUrl, setBlurUrl] = useState<string>(wallpapers[0].blur.src);
 
   useEffect(() => {
     const pickedId = Math.floor(Math.random() * numOfWallpapers);
-    const url = wallpapers[pickedId].wallpaper.src;
-    setImageUrl(url);
+    const imageUrl = wallpapers[pickedId].wallpaper.src;
+    const blurUrl = wallpapers[pickedId].blur.src;
+    setImageUrl(imageUrl);
+    setBlurUrl(blurUrl);
   }, []);
 
-  return imageUrl;
+  return { imageUrl, blurUrl };
 }
