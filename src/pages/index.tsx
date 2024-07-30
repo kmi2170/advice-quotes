@@ -6,12 +6,17 @@ import Card from "../components/Card";
 import Credits from "../components/Credits";
 import Footer from "../components/Footer";
 import Image from "next/image";
-import useImageUrl from "../hooks/useImageUrl";
+import getImageUrl from "../hooks/getImageUrl";
 import styles from "./index.module.css";
 import { Grid } from "@material-ui/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { defaultBlurData } from "../../public/wallpapers/default_blur";
-import { numOfWallpapers, wallpapers } from "../assets/wallpapers";
+import {
+  numOfWallpapers,
+  placeholderImage,
+  wallpapers,
+} from "../assets/wallpapers";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -44,16 +49,35 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Home = () => {
   const classes = useStyles();
 
-  // const { imageUrl } = useImageUrl();
-  const pickedId = Math.floor(Math.random() * numOfWallpapers);
-  const imageUrl = wallpapers[pickedId].wallpaper.src;
-  // const [loaded, setLoaded] = useState(false);
+  // const { imageUrl } = getImageUrl();
+
+  const [mountImage, setMountImage] = useState(false);
+  const imageLoader = () => {
+    const pickedId = Math.floor(Math.random() * numOfWallpapers);
+    let imageUrl = wallpapers[pickedId].wallpaper;
+    console.log({ pickedId });
+    console.log(imageUrl.src);
+
+    return imageUrl;
+  };
+
+  const image = imageLoader();
+
+  //const [image, setImage] = useState(imageLoader());
+
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setMountImage(true);
+  }, []);
+  console.log({ mountImage });
 
   return (
     <div className={classes.root}>
       <Image
-        src={imageUrl}
-        blurDataURL={defaultBlurData}
+        // loader={imageLoader}
+        src={image}
+        // src={wallpapers[0].wallpaper}
         placeholder="blur"
         alt="background"
         quality={50}
@@ -64,11 +88,53 @@ const Home = () => {
           objectFit: "cover",
           zIndex: -10,
         }}
-        // onLoad={() => {
-        //   setLoaded(true);
-        // }}
-        // className={loaded ? styles.blur_remove : styles.blur}
+        onLoad={() => {
+          console.log("loaded =========");
+          // setUpdate((prev) => prev + 1);
+
+          // setLoaded(true);
+        }}
+        // className={styles.blur_remove}
       />
+      {/* {mountImage ? (
+        <Image
+          // loader={imageLoader}
+          src={image}
+          // src={wallpapers[0].wallpaper}
+          placeholder="blur"
+          alt="background"
+          quality={50}
+          fill
+          //sizes="100vw 100vh"
+          priority
+          style={{
+            objectFit: "cover",
+            zIndex: -10,
+          }}
+          onLoad={() => {
+            console.log("loaded =========");
+            // setUpdate((prev) => prev + 1);
+
+            // setLoaded(true);
+          }}
+          // className={styles.blur_remove}
+        />
+      ) : (
+        <Image
+          src={placeholderImage}
+          placeholder="blur"
+          alt="background"
+          quality={50}
+          fill
+          //sizes="100vw 100vh"
+          priority
+          style={{
+            objectFit: "cover",
+            zIndex: -10,
+          }}
+          className={styles.blur}
+        />
+      )} */}
       <Container maxWidth="lg">
         <Grid container justifyContent="center">
           <Typography

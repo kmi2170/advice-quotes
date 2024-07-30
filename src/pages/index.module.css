@@ -1,5 +1,6 @@
 .blur {
-  filter: blur(30px);
+  filter: blur(20px);
+  opacity: 0.5;
 }
 
 .blur_remove {
@@ -9,7 +10,7 @@
 
 @keyframes blur {
   0% {
-    filter: blur(30px);
+    filter: blur(20px);
   }
   100% {
     filter: blur(0px);
