@@ -64,7 +64,7 @@ const Home = () => {
         onLoad={() => {
           setLoaded(true);
         }}
-        className={loaded ? styles.blur_remove : styles.blur}
+        // className={loaded ? styles.blur_remove : styles.blur}
       />
       <Container maxWidth="lg">
         <Grid container justifyContent="center">
