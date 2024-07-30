@@ -6,7 +6,7 @@ import { Overlock } from "next/font/google";
 export const overlock = Overlock({
   subsets: ["latin"],
   style: "normal",
-  weight: ["400"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
