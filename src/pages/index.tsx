@@ -44,7 +44,7 @@ const Home = () => {
   const classes = useStyles();
 
   const { imageUrl } = useImageUrl();
-  const [loaded, setLoaded] = useState(false);
+  // const [loaded, setLoaded] = useState(false);
 
   return (
     <div className={classes.root}>
@@ -61,9 +61,9 @@ const Home = () => {
           objectFit: "cover",
           zIndex: -10,
         }}
-        onLoad={() => {
-          setLoaded(true);
-        }}
+        // onLoad={() => {
+        //   setLoaded(true);
+        // }}
         // className={loaded ? styles.blur_remove : styles.blur}
       />
       <Container maxWidth="lg">
