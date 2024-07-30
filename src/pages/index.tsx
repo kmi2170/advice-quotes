@@ -53,7 +53,7 @@ const Home = () => {
         blurDataURL={defaultBlurData}
         placeholder="blur"
         alt="background"
-        quality={100}
+        quality={50}
         fill
         //sizes="100vw 100vh"
         priority
