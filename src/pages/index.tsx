@@ -5,7 +5,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import Card from "../components/Card";
 import Credits from "../components/Credits";
 import Footer from "../components/Footer";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import getImageUrl from "../hooks/getImageUrl";
 import styles from "./index.module.css";
 import { Grid } from "@material-ui/core";
@@ -67,35 +67,14 @@ const Home = () => {
 
   const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    setMountImage(true);
-  }, []);
+  // useEffect(() => {
+  //   setMountImage(true);
+  // }, []);
   console.log({ mountImage });
 
   return (
     <div className={classes.root}>
-      <Image
-        // loader={imageLoader}
-        src={image}
-        // src={wallpapers[0].wallpaper}
-        placeholder="blur"
-        alt="background"
-        quality={50}
-        fill
-        //sizes="100vw 100vh"
-        priority
-        style={{
-          objectFit: "cover",
-          zIndex: -10,
-        }}
-        onLoad={() => {
-          console.log("loaded =========");
-          // setUpdate((prev) => prev + 1);
-
-          // setLoaded(true);
-        }}
-        // className={styles.blur_remove}
-      />
+      <BackgroundImage img={image} />
       {/* {mountImage ? (
         <Image
           // loader={imageLoader}
@@ -162,3 +141,38 @@ const Home = () => {
 };
 
 export default Home;
+
+type BackgroundImageProps = {
+  img: StaticImageData;
+};
+
+function BackgroundImage(props: BackgroundImageProps) {
+  let { img } = props;
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  return (
+    <>
+      {mounted && (
+        <Image
+          src={img}
+          placeholder="blur"
+          alt="background"
+          quality={50}
+          fill
+          //sizes="100vw 100vh"
+          priority
+          style={{
+            objectFit: "cover",
+            zIndex: -10,
+          }}
+        />
+      )}
+    </>
+  );
+}
