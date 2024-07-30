@@ -18,36 +18,28 @@ import wallpaper_17 from "/public/wallpapers/wallpaper-17.jpg";
 import wallpaper_18 from "/public/wallpapers/wallpaper-18.jpg";
 import wallpaper_19 from "/public/wallpapers/wallpaper-19.jpg";
 import wallpaper_20 from "/public/wallpapers/wallpaper-20.jpg";
-import blurImage from "/public/blur1.jpg";
-//import blur_1 from "/public/wallpapers/blur-1.jpg";
-import blur_2 from "/public/wallpapers/blur-2.jpg";
-import blur_3 from "/public/wallpapers/blur-3.jpg";
-import blur_4 from "/public/wallpapers/blur-4.jpg";
-import blur_5 from "/public/wallpapers/blur-5.jpg";
-import { blurData_1 } from "../../public/wallpapers/blur-1";
 
 export const wallpapers = [
-  { id: 0, wallpaper: wallpaper_1, blur: blurData_1 },
-  // { id: 1, wallpaper: wallpaper_2, blur: blur_2 },
-  // { id: 2, wallpaper: wallpaper_3, blur: blur_3 },
-  // { id: 3, wallpaper: wallpaper_4, blur: blur_4 },
-  // { id: 4, wallpaper: wallpaper_5, blur: blur_5 },
-  // { id: 5, wallpaper: wallpaper_6 },
-  // { id: 6, wallpaper: wallpaper_7 },
-  // { id: 7, wallpaper: wallpaper_8 },
-  // { id: 8, wallpaper: wallpaper_9 },
-  // { id: 9, wallpaper: wallpaper_10 },
-  // { id: 10, wallpaper: wallpaper_11 },
-  // { id: 11, wallpaper: wallpaper_12 },
-  // { id: 12, wallpaper: wallpaper_13 },
-  // { id: 13, wallpaper: wallpaper_14 },
-  // { id: 14, wallpaper: wallpaper_15 },
-  // { id: 15, wallpaper: wallpaper_16 },
-  // { id: 16, wallpaper: wallpaper_17 },
-  // { id: 17, wallpaper: wallpaper_18 },
-  // { id: 18, wallpaper: wallpaper_19 },
-  // { id: 19, wallpaper: wallpaper_20 },
+  { id: 0, wallpaper: wallpaper_1 },
+  { id: 1, wallpaper: wallpaper_2 },
+  { id: 2, wallpaper: wallpaper_3 },
+  { id: 3, wallpaper: wallpaper_4 },
+  { id: 4, wallpaper: wallpaper_5 },
+  { id: 5, wallpaper: wallpaper_6 },
+  { id: 6, wallpaper: wallpaper_7 },
+  { id: 7, wallpaper: wallpaper_8 },
+  { id: 8, wallpaper: wallpaper_9 },
+  { id: 9, wallpaper: wallpaper_10 },
+  { id: 10, wallpaper: wallpaper_11 },
+  { id: 11, wallpaper: wallpaper_12 },
+  { id: 12, wallpaper: wallpaper_13 },
+  { id: 13, wallpaper: wallpaper_14 },
+  { id: 14, wallpaper: wallpaper_15 },
+  { id: 15, wallpaper: wallpaper_16 },
+  { id: 16, wallpaper: wallpaper_17 },
+  { id: 17, wallpaper: wallpaper_18 },
+  { id: 18, wallpaper: wallpaper_19 },
+  { id: 19, wallpaper: wallpaper_20 },
 ];
 
-export const blurImageUrl = blurImage.src;
 export const numOfWallpapers = wallpapers.length;

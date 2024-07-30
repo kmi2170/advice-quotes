@@ -9,6 +9,8 @@ import Image from "next/image";
 import useImageUrl from "../hooks/useImageUrl";
 import styles from "./index.module.css";
 import { Grid } from "@material-ui/core";
+import { useState } from "react";
+import { defaultBlurData } from "../../public/wallpapers/default_blur";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -41,13 +43,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Home = () => {
   const classes = useStyles();
 
-  const { imageUrl, blurUrl } = useImageUrl();
+  const { imageUrl } = useImageUrl();
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <div className={classes.root}>
       <Image
         src={imageUrl}
-        blurDataURL={blurUrl}
+        blurDataURL={defaultBlurData}
         placeholder="blur"
         alt="background"
         quality={100}
@@ -58,7 +61,10 @@ const Home = () => {
           objectFit: "cover",
           zIndex: -10,
         }}
-        // className={styles.blur}
+        onLoad={() => {
+          setLoaded(true);
+        }}
+        className={loaded ? styles.blur_remove : styles.blur}
       />
       <Container maxWidth="lg">
         <Grid container justifyContent="center">
