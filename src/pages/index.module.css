@@ -1,11 +1,15 @@
 .blur {
-  animation: blur 1.5s linear forwards;
+  filter: blur(30px);
+}
+
+.blur_remove {
+  animation: blur 1s linear forwards;
   /* animation-delay: 1s; */
 }
 
 @keyframes blur {
   0% {
-    filter: blur(50px);
+    filter: blur(30px);
   }
   100% {
     filter: blur(0px);
