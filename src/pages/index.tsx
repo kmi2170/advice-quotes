@@ -11,6 +11,7 @@ import styles from "./index.module.css";
 import { Grid } from "@material-ui/core";
 import { useState } from "react";
 import { defaultBlurData } from "../../public/wallpapers/default_blur";
+import { numOfWallpapers, wallpapers } from "../assets/wallpapers";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -43,7 +44,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Home = () => {
   const classes = useStyles();
 
-  const { imageUrl } = useImageUrl();
+  // const { imageUrl } = useImageUrl();
+  const pickedId = Math.floor(Math.random() * numOfWallpapers);
+  const imageUrl = wallpapers[pickedId].wallpaper.src;
   // const [loaded, setLoaded] = useState(false);
 
   return (
