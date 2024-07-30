@@ -6,13 +6,15 @@ import { selectAdvice } from "../../../features/adviceSlice";
 
 const useStyles = makeStyles(() => ({
   contentContainer: {
+    overflowY: "auto",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    overflowY: "auto",
     minHeight: "30vh",
   },
-  content: {},
+  content: {
+    fontWeight: "bold",
+  },
 }));
 
 const CardContent = () => {
@@ -22,7 +24,7 @@ const CardContent = () => {
 
   return (
     <div className={classes.contentContainer}>
-      <Typography className={classes.content} variant="h4" align="center">
+      <Typography className={classes.content} variant="h3" align="center">
         {content}
       </Typography>
     </div>

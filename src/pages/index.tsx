@@ -43,8 +43,6 @@ const Home = () => {
 
   const { imageUrl, blurUrl } = useImageUrl();
 
-  console.log(imageUrl, blurUrl);
-
   return (
     <div className={classes.root}>
       <Image

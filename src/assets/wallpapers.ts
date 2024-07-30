@@ -19,18 +19,19 @@ import wallpaper_18 from "/public/wallpapers/wallpaper-18.jpg";
 import wallpaper_19 from "/public/wallpapers/wallpaper-19.jpg";
 import wallpaper_20 from "/public/wallpapers/wallpaper-20.jpg";
 import blurImage from "/public/blur1.jpg";
-import blur_1 from "/public/wallpapers/blur-1.jpg";
+//import blur_1 from "/public/wallpapers/blur-1.jpg";
 import blur_2 from "/public/wallpapers/blur-2.jpg";
 import blur_3 from "/public/wallpapers/blur-3.jpg";
 import blur_4 from "/public/wallpapers/blur-4.jpg";
 import blur_5 from "/public/wallpapers/blur-5.jpg";
+import { blurData_1 } from "../../public/wallpapers/blur-1";
 
 export const wallpapers = [
-  { id: 0, wallpaper: wallpaper_1, blur: blur_1 },
-  { id: 1, wallpaper: wallpaper_2, blur: blur_2 },
-  { id: 2, wallpaper: wallpaper_3, blur: blur_3 },
-  { id: 3, wallpaper: wallpaper_4, blur: blur_4 },
-  { id: 4, wallpaper: wallpaper_5, blur: blur_5 },
+  { id: 0, wallpaper: wallpaper_1, blur: blurData_1 },
+  // { id: 1, wallpaper: wallpaper_2, blur: blur_2 },
+  // { id: 2, wallpaper: wallpaper_3, blur: blur_3 },
+  // { id: 3, wallpaper: wallpaper_4, blur: blur_4 },
+  // { id: 4, wallpaper: wallpaper_5, blur: blur_5 },
   // { id: 5, wallpaper: wallpaper_6 },
   // { id: 6, wallpaper: wallpaper_7 },
   // { id: 7, wallpaper: wallpaper_8 },
