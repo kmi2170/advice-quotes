@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: "100vh",
     backgroundImage:
       "radial-gradient( rgba(233, 233, 233, 1),rgba(114, 114, 114, 1))",
-    zIndex: -20,
+    zIndex: 10,
   },
   appTitle: {
     fontWeight: "bold",
@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Home = () => {
   const classes = useStyles();
-
   const image = imageLoader();
 
   return (
