@@ -9,7 +9,6 @@ import Image, { StaticImageData } from "next/image";
 import { Grid } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { numOfWallpapers, wallpapers } from "../assets/wallpapers";
-import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -17,6 +16,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: "relative",
     width: "100vw",
     height: "100vh",
+    backgroundImage:
+      "radial-gradient( rgba(233, 233, 233, 1),rgba(114, 114, 114, 1))",
+    zIndex: -20,
   },
   appTitle: {
     fontWeight: "bold",
@@ -92,7 +94,7 @@ function BackgroundImage(props: BackgroundImageProps) {
 
   return (
     <>
-      {mounted ? (
+      {mounted && (
         <Image
           src={img}
           placeholder="blur"
@@ -106,17 +108,6 @@ function BackgroundImage(props: BackgroundImageProps) {
             zIndex: -10,
           }}
         />
-      ) : (
-        <div
-          style={{
-            position: "absolute",
-            backgroundImage:
-              "radial-gradient( rgba(233, 233, 233, 1),rgba(114, 114, 114, 1))",
-            width: "100vw",
-            height: "100vh",
-            zIndex: -10,
-          }}
-        ></div>
       )}
     </>
   );
