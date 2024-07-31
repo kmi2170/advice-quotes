@@ -5,12 +5,10 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import Card from "../components/Card";
 import Credits from "../components/Credits";
 import Footer from "../components/Footer";
-import Image from "next/image";
-import useImageUrl from "../hooks/useImageUrl";
-import styles from "./index.module.css";
+import Image, { StaticImageData } from "next/image";
 import { Grid } from "@material-ui/core";
-import { useState } from "react";
-import { defaultBlurData } from "../../public/wallpapers/default_blur";
+import { useEffect, useState } from "react";
+import { numOfWallpapers, wallpapers } from "../assets/wallpapers";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -18,6 +16,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: "relative",
     width: "100vw",
     height: "100vh",
+    backgroundImage:
+      "radial-gradient( rgba(233, 233, 233, 1),rgba(114, 114, 114, 1))",
+    zIndex: -20,
   },
   appTitle: {
     fontWeight: "bold",
@@ -43,29 +44,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Home = () => {
   const classes = useStyles();
 
-  const { imageUrl } = useImageUrl();
-  // const [loaded, setLoaded] = useState(false);
+  const image = imageLoader();
 
   return (
     <div className={classes.root}>
-      <Image
-        src={imageUrl}
-        blurDataURL={defaultBlurData}
-        placeholder="blur"
-        alt="background"
-        quality={100}
-        fill
-        //sizes="100vw 100vh"
-        priority
-        style={{
-          objectFit: "cover",
-          zIndex: -10,
-        }}
-        // onLoad={() => {
-        //   setLoaded(true);
-        // }}
-        // className={loaded ? styles.blur_remove : styles.blur}
-      />
+      <BackgroundImage img={image} />
+
       <Container maxWidth="lg">
         <Grid container justifyContent="center">
           <Typography
@@ -93,3 +77,47 @@ const Home = () => {
 };
 
 export default Home;
+
+type BackgroundImageProps = {
+  img: StaticImageData;
+};
+
+function BackgroundImage(props: BackgroundImageProps) {
+  let { img } = props;
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  return (
+    <>
+      {mounted && (
+        <Image
+          src={img}
+          placeholder="blur"
+          alt="background"
+          quality={50}
+          fill
+          //sizes="100vw 100vh"
+          priority
+          style={{
+            objectFit: "cover",
+            zIndex: -10,
+          }}
+        />
+      )}
+    </>
+  );
+}
+
+const imageLoader = () => {
+  const pickedId = Math.floor(Math.random() * numOfWallpapers);
+  let imageUrl = wallpapers[pickedId].wallpaper;
+  console.log({ pickedId });
+  console.log(imageUrl.src);
+
+  return imageUrl;
+};
