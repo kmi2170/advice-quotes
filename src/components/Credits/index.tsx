@@ -41,7 +41,6 @@ const Credits = () => {
       <Typography
         variant="body2"
         onMouseEnter={handleClick}
-        // onMouseLeave={handleClose}
         className={classes.credits}
         align="center"
       >
