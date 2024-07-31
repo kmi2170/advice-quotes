@@ -6,16 +6,9 @@ import Card from "../components/Card";
 import Credits from "../components/Credits";
 import Footer from "../components/Footer";
 import Image, { StaticImageData } from "next/image";
-import getImageUrl from "../hooks/getImageUrl";
-import styles from "./index.module.css";
 import { Grid } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import { defaultBlurData } from "../../public/wallpapers/default_blur";
-import {
-  numOfWallpapers,
-  placeholderImage,
-  wallpapers,
-} from "../assets/wallpapers";
+import { numOfWallpapers, wallpapers } from "../assets/wallpapers";
 import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -49,71 +42,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Home = () => {
   const classes = useStyles();
 
-  // const { imageUrl } = getImageUrl();
-
-  const [mountImage, setMountImage] = useState(false);
-  const imageLoader = () => {
-    const pickedId = Math.floor(Math.random() * numOfWallpapers);
-    let imageUrl = wallpapers[pickedId].wallpaper;
-    console.log({ pickedId });
-    console.log(imageUrl.src);
-
-    return imageUrl;
-  };
-
   const image = imageLoader();
-
-  //const [image, setImage] = useState(imageLoader());
-
-  const [loaded, setLoaded] = useState(false);
-
-  // useEffect(() => {
-  //   setMountImage(true);
-  // }, []);
-  console.log({ mountImage });
 
   return (
     <div className={classes.root}>
       <BackgroundImage img={image} />
-      {/* {mountImage ? (
-        <Image
-          // loader={imageLoader}
-          src={image}
-          // src={wallpapers[0].wallpaper}
-          placeholder="blur"
-          alt="background"
-          quality={50}
-          fill
-          //sizes="100vw 100vh"
-          priority
-          style={{
-            objectFit: "cover",
-            zIndex: -10,
-          }}
-          onLoad={() => {
-            console.log("loaded =========");
-            // setUpdate((prev) => prev + 1);
 
-            // setLoaded(true);
-          }}
-          // className={styles.blur_remove}
-        />
-      ) : (
-        <Image
-          src={placeholderImage}
-          placeholder="blur"
-          alt="background"
-          quality={50}
-          fill
-          //sizes="100vw 100vh"
-          priority
-          style={{
-            objectFit: "cover",
-            zIndex: -10,
-          }}
-          className={styles.blur}
-        />
-      )} */}
       <Container maxWidth="lg">
         <Grid container justifyContent="center">
           <Typography
@@ -158,7 +92,7 @@ function BackgroundImage(props: BackgroundImageProps) {
 
   return (
     <>
-      {mounted && (
+      {mounted ? (
         <Image
           src={img}
           placeholder="blur"
@@ -172,7 +106,27 @@ function BackgroundImage(props: BackgroundImageProps) {
             zIndex: -10,
           }}
         />
+      ) : (
+        <div
+          style={{
+            position: "absolute",
+            backgroundImage:
+              "radial-gradient( rgba(233, 233, 233, 1),rgba(114, 114, 114, 1))",
+            width: "100vw",
+            height: "100vh",
+            zIndex: -10,
+          }}
+        ></div>
       )}
     </>
   );
 }
+
+const imageLoader = () => {
+  const pickedId = Math.floor(Math.random() * numOfWallpapers);
+  let imageUrl = wallpapers[pickedId].wallpaper;
+  console.log({ pickedId });
+  console.log(imageUrl.src);
+
+  return imageUrl;
+};
