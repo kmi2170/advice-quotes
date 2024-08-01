@@ -1,12 +1,14 @@
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import { Theme } from "@mui/material/styles";
+
+import makeStyles from '@mui/styles/makeStyles';
 
 import Card from "../components/Card";
 import Credits from "../components/Credits";
 import Footer from "../components/Footer";
 import Image, { StaticImageData } from "next/image";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { numOfWallpapers, wallpapers } from "../assets/wallpapers";
 

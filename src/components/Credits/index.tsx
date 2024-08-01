@@ -1,7 +1,8 @@
 import { useState, memo } from "react";
-import { makeStyles, Theme } from "@material-ui/core/styles";
-import Popover from "@material-ui/core/Popover";
-import Typography from "@material-ui/core/Typography";
+import { Theme } from "@mui/material/styles";
+import makeStyles from '@mui/styles/makeStyles';
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
 
 const useStyles = makeStyles((theme: Theme) => ({
   credits: {
@@ -10,12 +11,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: "4rem",
     padding: "5px 0 5px 0",
     borderRadius: "4px",
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: "0.50rem",
     },
   },
   text: {
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: "0.65rem",
     },
   },
