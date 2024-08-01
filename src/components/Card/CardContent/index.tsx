@@ -1,7 +1,7 @@
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { useAppSelector } from "../../../app/hooks";
+import { useAppSelector } from "../../../store/hooks";
 import { selectAdvice } from "../../../features/adviceSlice";
 
 const useStyles = makeStyles(() => ({

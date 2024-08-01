@@ -7,7 +7,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 
 import CardContent from "./CardContent";
 import GetAnotherButton from "./GetAnotherButton";
-import { useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../store/hooks";
 import { selectAdvice } from "../../features/adviceSlice";
 
 const useStyles = makeStyles((theme: Theme) => ({

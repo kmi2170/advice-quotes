@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { useAppDispatch } from "../../../app/hooks";
+import { useAppDispatch } from "../../../store/hooks";
 import { fetchAdvice } from "../../../features/adviceAsync";
 import styles from "./index.module.css";
 

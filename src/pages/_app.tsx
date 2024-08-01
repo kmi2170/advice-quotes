@@ -10,7 +10,7 @@ import "../styles/globals.css";
 
 import SEO from "../components/SEO";
 import { Provider } from "react-redux";
-import { store } from "../app/store";
+import { store } from "../store/store";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   React.useEffect(() => {

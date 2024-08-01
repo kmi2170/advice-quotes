@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../app/store";
+import { RootState } from "../store/store";
 import { fetchAdvice } from "./adviceAsync";
 import { numOfWallpapers } from "../assets/wallpapers";
 
