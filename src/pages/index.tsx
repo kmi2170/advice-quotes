@@ -1,8 +1,8 @@
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 import { Theme } from "@mui/material/styles";
 import makeStyles from "@mui/styles/makeStyles";
-import { Grid } from "@mui/material";
 
 import Card from "../components/Card";
 import Credits from "../components/Credits";
@@ -25,19 +25,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: "white",
     textShadow: "2px 2px #19857b",
     padding: theme.spacing(4, 0),
-  },
-  container: {
-    height: "100vh",
-  },
-  creditsContainer: {
-    width: "80vw",
-    display: "flex",
-    justifyContent: "flex-end",
-    marginTop: "2rem",
-  },
-  footerContainer: {
-    paddingTop: "10px",
-    paddingBottom: "30px",
   },
 }));
 
@@ -68,13 +55,9 @@ const Home = () => {
 
           <Card />
 
-          <div className={classes.creditsContainer}>
-            <Credits />
-          </div>
+          <Credits />
 
-          <div className={classes.footerContainer}>
-            <Footer />
-          </div>
+          <Footer />
         </Grid>
       </Container>
     </div>
