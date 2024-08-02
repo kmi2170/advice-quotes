@@ -1,16 +1,14 @@
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { Theme } from "@mui/material/styles";
-
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
+import { Grid } from "@mui/material";
 
 import Card from "../components/Card";
 import Credits from "../components/Credits";
 import Footer from "../components/Footer";
-import Image, { StaticImageData } from "next/image";
-import { Grid } from "@mui/material";
-import { useEffect, useState } from "react";
 import { numOfWallpapers, wallpapers } from "../assets/wallpapers";
+import BackgroundImage from "../components/BackgroundImage";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -42,6 +40,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: "30px",
   },
 }));
+
+const imageLoader = () => {
+  const pickedId = Math.floor(Math.random() * numOfWallpapers);
+  let imageUrl = wallpapers[pickedId].wallpaper;
+  return imageUrl;
+};
 
 const Home = () => {
   const classes = useStyles();
@@ -78,47 +82,3 @@ const Home = () => {
 };
 
 export default Home;
-
-type BackgroundImageProps = {
-  img: StaticImageData;
-};
-
-function BackgroundImage(props: BackgroundImageProps) {
-  let { img } = props;
-
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    return () => setMounted(false);
-  }, []);
-
-  return (
-    <>
-      {mounted && (
-        <Image
-          src={img}
-          placeholder="blur"
-          alt="background"
-          quality={50}
-          fill
-          //sizes="100vw 100vh"
-          priority
-          style={{
-            objectFit: "cover",
-            zIndex: -10,
-          }}
-        />
-      )}
-    </>
-  );
-}
-
-const imageLoader = () => {
-  const pickedId = Math.floor(Math.random() * numOfWallpapers);
-  let imageUrl = wallpapers[pickedId].wallpaper;
-  console.log({ pickedId });
-  console.log(imageUrl.src);
-
-  return imageUrl;
-};

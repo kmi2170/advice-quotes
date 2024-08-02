@@ -2,25 +2,16 @@ import React from "react";
 import { AppProps } from "next/app";
 import Head from "next/head";
 
-import {
-  ThemeProvider,
-  Theme,
-  StyledEngineProvider,
-} from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import theme from "../theme/theme";
+import { Provider } from "react-redux";
+import { store } from "../store/store";
 
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { AppCacheProvider } from "@mui/material-nextjs/v13-pagesRouter";
+import theme from "../theme/theme";
 import "../styles/globals.css";
 
 import SEO from "../components/SEO";
-import { Provider } from "react-redux";
-import { store } from "../store/store";
-import { AppCacheProvider } from "@mui/material-nextjs/v13-pagesRouter";
-
-declare module "@mui/styles/defaultTheme" {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
 
 const MyApp = (props: AppProps) => {
   const { Component, pageProps } = props;

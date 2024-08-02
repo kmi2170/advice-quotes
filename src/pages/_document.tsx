@@ -8,6 +8,8 @@ import {
   DocumentProps,
   DocumentInitialProps,
 } from "next/document";
+import { AppProps } from "next/app";
+
 import { ServerStyleSheets as JSSServerStyleSheets } from "@mui/styles";
 import {
   DocumentHeadTags,
@@ -17,8 +19,6 @@ import {
 
 import theme, { overlock } from "../theme/theme";
 
-import { AppProps } from "next/app";
-
 export default function MyDocument(
   props: DocumentProps & DocumentHeadTagsProps
 ) {
@@ -27,7 +27,6 @@ export default function MyDocument(
       <Head>
         {/* PWA primary color */}
         <meta name="theme-color" content={theme.palette.primary.main} />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
         <DocumentHeadTags {...props} />
       </Head>
       <body>
