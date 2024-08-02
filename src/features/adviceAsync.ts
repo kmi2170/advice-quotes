@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-// import { RootState } from "../app/store";
 import { setContent } from "./adviceSlice";
 import { fetchAdviceSlip } from "../api/lib/fetchAdvice";
+// import { RootState } from "../app/store";
 
 export const fetchAdvice = createAsyncThunk(
   "advice/fetchAdviceQuote",

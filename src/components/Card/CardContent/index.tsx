@@ -1,5 +1,5 @@
 import Typography from "@mui/material/Typography";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 
 import { useAppSelector } from "../../../store/hooks";
 import { selectAdvice } from "../../../features/adviceSlice";

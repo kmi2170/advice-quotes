@@ -3,8 +3,9 @@ import makeStyles from "@mui/styles/makeStyles";
 
 const useStyles = makeStyles(() => ({
   footer: {
+    marginTop: "2rem",
     color: "#fff",
-    textShadow: "1px 1px black",
+    textShadow: "2px 2px black",
   },
 }));
 

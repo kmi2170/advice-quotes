@@ -1,11 +1,8 @@
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Theme } from "@mui/material/styles";
-
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 
 import CardContent from "./CardContent";
 import GetAnotherButton from "./GetAnotherButton";

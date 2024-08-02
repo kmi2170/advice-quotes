@@ -1,7 +1,7 @@
 import { memo, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 
 import { useAppDispatch } from "../../../store/hooks";
 import { fetchAdvice } from "../../../features/adviceAsync";
@@ -27,11 +27,9 @@ const GetAnotherButton = () => {
     dispatch(fetchAdvice());
   };
 
-  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     dispatch(fetchAdvice());
   }, []);
-  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <div className={classes.buttonWrapper}>
