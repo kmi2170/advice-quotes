@@ -1,4 +1,4 @@
-import { useState, memo } from "react";
+import { useState } from "react";
 
 import { Theme } from "@mui/material/styles";
 import makeStyles from "@mui/styles/makeStyles";
@@ -37,6 +37,7 @@ const Credits = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (anchorEl != null) return;
     setAnchorEl(event.currentTarget);
   };
 
@@ -46,6 +47,8 @@ const Credits = () => {
 
   const open = Boolean(anchorEl);
   const id = open ? "credits-popover" : undefined;
+
+  console.log("credits...");
 
   return (
     <Box className={classes.creditsContainer}>
@@ -63,7 +66,7 @@ const Credits = () => {
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: "bottom",
+          vertical: "top",
           horizontal: "center",
         }}
         transformOrigin={{
@@ -71,10 +74,10 @@ const Credits = () => {
           horizontal: "center",
         }}
       >
-        <Typography variant="body2" className={classes.text}>
+        <Typography variant="body1" className={classes.text}>
           Advice / https://api.adviceslip.com
         </Typography>
-        <Typography variant="body2" className={classes.text}>
+        <Typography variant="body1" className={classes.text}>
           Wallpaper / unsplash.com
         </Typography>
       </Popover>
