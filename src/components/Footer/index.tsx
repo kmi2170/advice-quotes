@@ -16,7 +16,7 @@ const Footer = () => {
   return (
     <footer>
       <Typography variant="subtitle1" align="center" className={classes.footer}>
-        &copy; kmi {year}. All rights reserved.
+        &copy; Kemmei H. {year} All rights reserved.
       </Typography>
     </footer>
   );
