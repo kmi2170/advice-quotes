@@ -9,13 +9,14 @@ import styles from "./index.module.css";
 
 const useStyles = makeStyles(() => ({
   button: {
+    padding: "0.5rem 1rem 0.5rem 1rem",
     borderRadius: "0.5rem",
     textTransform: "capitalize",
   },
   buttonWrapper: {
     display: "flex",
     justifyContent: "center",
-    margin: "2rem 0 1rem 0",
+    margin: "1.5rem 0 0.25rem 0",
   },
 }));
 

@@ -1,4 +1,5 @@
 import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 import makeStyles from "@mui/styles/makeStyles";
 
 import { useAppSelector } from "../../../store/hooks";
@@ -12,6 +13,7 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     alignItems: "center",
     minHeight: "30vh",
+    maxHeight: "50vh",
   },
   content: {
     fontWeight: "bold",
@@ -21,13 +23,17 @@ const useStyles = makeStyles(() => ({
 const CardContent = () => {
   const classes = useStyles();
 
-  const { content } = useAppSelector(selectAdvice);
+  const { isError, isLoading, content } = useAppSelector(selectAdvice);
 
   return (
     <div className={classes.contentContainer}>
-      <Typography className={styles.content} variant="h3" align="center">
-        {content}
-      </Typography>
+      {!isError && isLoading ? (
+        <CircularProgress />
+      ) : (
+        <Typography className={styles.content} variant="h3" align="center">
+          {content}
+        </Typography>
+      )}
     </div>
   );
 };

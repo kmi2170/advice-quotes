@@ -1,6 +1,5 @@
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
-import CircularProgress from "@mui/material/CircularProgress";
 import { Theme } from "@mui/material/styles";
 import makeStyles from "@mui/styles/makeStyles";
 
@@ -30,11 +29,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 const CardComponent = () => {
   const classes = useStyles();
 
-  const { isLoading, isError } = useAppSelector(selectAdvice);
+  const { isError } = useAppSelector(selectAdvice);
 
   return (
     <Card className={classes.card} elevation={6}>
-      {!isError && isLoading ? <CircularProgress /> : <CardContent />}
+      <CardContent />
       <GetAnotherButton />
       {isError && (
         <Typography variant="h6" color="error">
