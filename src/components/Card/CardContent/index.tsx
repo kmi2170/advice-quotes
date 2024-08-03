@@ -28,7 +28,7 @@ const CardContent = () => {
   return (
     <div className={classes.contentContainer}>
       {!isError && isLoading ? (
-        <CircularProgress />
+        <CircularProgress size={50} thickness={8} />
       ) : (
         <Typography className={styles.content} variant="h3" align="center">
           {content}
