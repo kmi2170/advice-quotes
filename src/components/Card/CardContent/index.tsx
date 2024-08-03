@@ -13,6 +13,7 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     alignItems: "center",
     minHeight: "30vh",
+    maxHeight: "50vh",
   },
   content: {
     fontWeight: "bold",
