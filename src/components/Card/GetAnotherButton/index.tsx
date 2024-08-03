@@ -9,6 +9,7 @@ import styles from "./index.module.css";
 
 const useStyles = makeStyles(() => ({
   button: {
+    padding: "0.5rem",
     borderRadius: "0.5rem",
     textTransform: "capitalize",
   },
