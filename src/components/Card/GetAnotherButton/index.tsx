@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
   buttonWrapper: {
     display: "flex",
     justifyContent: "center",
-    marginTop: "2rem",
+    margin: "2rem 0 1rem 0",
   },
 }));
 
