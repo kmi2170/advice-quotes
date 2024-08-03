@@ -1,27 +1,31 @@
 import { memo, useEffect } from "react";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
 
 import { useAppDispatch } from "../../../store/hooks";
 import { fetchAdvice } from "../../../features/adviceAsync";
-import styles from "./index.module.css";
+import { keyframes } from "@emotion/react";
 
-const useStyles = makeStyles(() => ({
-  button: {
-    padding: "0.5rem 1rem 0.5rem 1rem",
-    borderRadius: "0.5rem",
-    textTransform: "capitalize",
-  },
-  buttonWrapper: {
-    display: "flex",
-    justifyContent: "center",
-    margin: "1.5rem 0 0.25rem 0",
-  },
-}));
+const rotate = keyframes`
+  0% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+  25% {
+    transform: rotate(3deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotate(-3deg) translate3d(0, 0, 0);
+  }
+  75% {
+    transform: rotate(1deg) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+`;
 
 const GetAnotherButton = () => {
-  const classes = useStyles();
   const dispatch = useAppDispatch();
 
   const handleGetAnother = async () => {
@@ -33,17 +37,30 @@ const GetAnotherButton = () => {
   }, []);
 
   return (
-    <div className={classes.buttonWrapper}>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        margin: "1.5rem 0 0.25rem 0",
+      }}
+    >
       <Button
         variant="contained"
         color="primary"
         size="small"
-        className={`${classes.button} ${styles.button}`}
         onClick={handleGetAnother}
+        sx={{
+          padding: "0.5rem 1rem 0.5rem 1rem",
+          borderRadius: "0.5rem",
+          textTransform: "capitalize",
+          "&:hover": {
+            animation: `${rotate} 0.7s ease-in-out both`,
+          },
+        }}
       >
         <Typography variant="h5">Get another!</Typography>
       </Button>
-    </div>
+    </Box>
   );
 };
 

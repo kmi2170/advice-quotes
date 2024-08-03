@@ -1,3 +1,5 @@
+"use client";
+
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { setContent } from "./adviceSlice";
 import { fetchAdviceSlip } from "../api/lib/fetchAdvice";

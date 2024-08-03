@@ -1,40 +1,48 @@
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-import makeStyles from "@mui/styles/makeStyles";
 
 import { useAppSelector } from "../../../store/hooks";
 import { selectAdvice } from "../../../features/adviceSlice";
-import styles from "./index.module.css";
+import { keyframes } from "@emotion/react";
 
-const useStyles = makeStyles(() => ({
-  contentContainer: {
-    overflowY: "auto",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    minHeight: "30vh",
-    maxHeight: "50vh",
-  },
-  content: {
-    fontWeight: "bold",
-  },
-}));
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+`;
 
 const CardContent = () => {
-  const classes = useStyles();
-
   const { isError, isLoading, content } = useAppSelector(selectAdvice);
 
   return (
-    <div className={classes.contentContainer}>
+    <Box
+      sx={{
+        overflowY: "auto",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "30vh",
+        maxHeight: "50vh",
+      }}
+    >
       {!isError && isLoading ? (
         <CircularProgress size={50} thickness={8} />
       ) : (
-        <Typography className={styles.content} variant="h3" align="center">
+        <Typography
+          variant="h3"
+          align="center"
+          sx={{ fontWeight: "bold", animation: `${fadeIn} 1s ease-out` }}
+        >
           {content}
         </Typography>
       )}
-    </div>
+    </Box>
   );
 };
 

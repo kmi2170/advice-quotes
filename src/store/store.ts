@@ -1,5 +1,7 @@
-import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
-import adviceReducer from '../features/adviceSlice';
+"use client";
+
+import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
+import adviceReducer from "../features/adviceSlice";
 
 export const store = configureStore({
   reducer: { advice: adviceReducer },

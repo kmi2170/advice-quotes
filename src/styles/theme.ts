@@ -1,3 +1,5 @@
+"use client";
+
 import { createTheme } from "@mui/material/styles";
 import { responsiveFontSizes } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
