@@ -1,21 +1,32 @@
 import { useState, memo } from "react";
-import { makeStyles, Theme } from "@material-ui/core/styles";
-import Popover from "@material-ui/core/Popover";
-import Typography from "@material-ui/core/Typography";
+
+import { Theme } from "@mui/material/styles";
+import makeStyles from "@mui/styles/makeStyles";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 const useStyles = makeStyles((theme: Theme) => ({
+  creditsContainer: {
+    marginTop: "1.5rem",
+    width: "80vw",
+    maxWidth: "1024px",
+    display: "flex",
+    justifyContent: "flex-end",
+  },
   credits: {
     color: "black",
     background: "lightblue",
     width: "4rem",
     padding: "5px 0 5px 0",
     borderRadius: "4px",
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "0.50rem",
     },
   },
   text: {
-    [theme.breakpoints.down("xs")]: {
+    padding: "0.5rem 1.0rem 0.5rem 1.0rem",
+    [theme.breakpoints.down("sm")]: {
       fontSize: "0.65rem",
     },
   },
@@ -37,7 +48,7 @@ const Credits = () => {
   const id = open ? "credits-popover" : undefined;
 
   return (
-    <>
+    <Box className={classes.creditsContainer}>
       <Typography
         variant="body2"
         onMouseEnter={handleClick}
@@ -67,8 +78,8 @@ const Credits = () => {
           Wallpaper / unsplash.com
         </Typography>
       </Popover>
-    </>
+    </Box>
   );
 };
 
-export default memo(Credits);
+export default Credits;

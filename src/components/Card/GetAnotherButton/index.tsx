@@ -1,9 +1,9 @@
 import { memo, useEffect } from "react";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import makeStyles from "@mui/styles/makeStyles";
 
-import { useAppDispatch } from "../../../app/hooks";
+import { useAppDispatch } from "../../../store/hooks";
 import { fetchAdvice } from "../../../features/adviceAsync";
 import styles from "./index.module.css";
 
@@ -27,11 +27,9 @@ const GetAnotherButton = () => {
     dispatch(fetchAdvice());
   };
 
-  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     dispatch(fetchAdvice());
   }, []);
-  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <div className={classes.buttonWrapper}>

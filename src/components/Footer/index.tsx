@@ -1,32 +1,23 @@
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@mui/material/Typography";
+import makeStyles from "@mui/styles/makeStyles";
 
 const useStyles = makeStyles(() => ({
   footer: {
+    marginTop: "2rem",
     color: "#fff",
-    textShadow: "1px 1px black",
+    textShadow: "2px 2px black",
   },
 }));
 
 const Footer = () => {
   const classes = useStyles();
-
   const year = new Date().getFullYear();
 
   return (
     <footer>
-      <Grid container>
-        <Grid item xs={12}>
-          <Typography
-            variant="subtitle1"
-            align="center"
-            className={classes.footer}
-          >
-            &copy; kmi {year}. All rights reserved.
-          </Typography>
-        </Grid>
-      </Grid>
+      <Typography variant="subtitle1" align="center" className={classes.footer}>
+        &copy; kmi {year}. All rights reserved.
+      </Typography>
     </footer>
   );
 };

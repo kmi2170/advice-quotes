@@ -1,13 +1,12 @@
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Theme } from "@mui/material/styles";
+import makeStyles from "@mui/styles/makeStyles";
 
 import CardContent from "./CardContent";
 import GetAnotherButton from "./GetAnotherButton";
-import { useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../store/hooks";
 import { selectAdvice } from "../../features/adviceSlice";
 
 const useStyles = makeStyles((theme: Theme) => ({
