@@ -14,7 +14,7 @@ const Footer = () => {
           textShadow: "2px 2px black",
         }}
       >
-        &copy; Kemmei H. {year} All rights reserved.
+        &copy; {year} Kemmei H.
       </Typography>
     </footer>
   );
