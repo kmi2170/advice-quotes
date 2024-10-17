@@ -12,6 +12,7 @@ export const CardComponent = () => {
   return (
     <Card
       elevation={6}
+      component="main"
       sx={{
         width: "80vw",
         maxWidth: "1024px",

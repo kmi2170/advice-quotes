@@ -33,7 +33,12 @@ const Home = () => {
       <BackgroundImage img={image} />
 
       <Container maxWidth="lg">
-        <Grid container justifyContent="center">
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"
+        >
           <Typography
             variant="h2"
             component="h1"

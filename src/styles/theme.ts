@@ -25,7 +25,6 @@ let theme = createTheme({
     fontFamily: overlock.style.fontFamily,
   },
   components: {
-    // Credits
     MuiPopover: {
       styleOverrides: {
         root: {
