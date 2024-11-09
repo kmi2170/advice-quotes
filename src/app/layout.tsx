@@ -4,7 +4,6 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import theme from "../styles/theme";
 import "../styles/global.css";
 import CssBaseline from "@mui/material/CssBaseline";
-import EmotionCacheProvider from "../lib/EmotionCacheProvider";
 
 export const metadata: Metadata = {
   title: "Advice App",
