@@ -2,8 +2,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 
-import { useAppSelector } from "../../../store/hooks";
-import { selectAdvice } from "../../../features/adviceSlice";
 import { keyframes } from "@emotion/react";
 
 const fadeIn = keyframes`
@@ -17,8 +15,13 @@ const fadeIn = keyframes`
   }
 `;
 
-const CardContent = () => {
-  const { isError, isLoading, content } = useAppSelector(selectAdvice);
+type CardContentProps = {
+  content?: string;
+  isFetching: boolean;
+};
+
+const CardContent = (props: CardContentProps) => {
+  const { isFetching, content } = props;
 
   return (
     <Box
@@ -31,7 +34,7 @@ const CardContent = () => {
         maxHeight: "50vh",
       }}
     >
-      {!isError && isLoading ? (
+      {isFetching ? (
         <CircularProgress size={50} thickness={8} />
       ) : (
         <Typography

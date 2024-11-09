@@ -1,10 +1,9 @@
-import { memo, useEffect } from "react";
+import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
+import { memo } from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import { useAppDispatch } from "../../../store/hooks";
-import { fetchAdvice } from "../../../features/adviceAsync";
 import { keyframes } from "@emotion/react";
 
 const rotate = keyframes`
@@ -25,16 +24,20 @@ const rotate = keyframes`
   }
 `;
 
-const GetAnotherButton = () => {
-  const dispatch = useAppDispatch();
+type RefetchType = (
+  options?: RefetchOptions
+) => Promise<QueryObserverResult<string, Error>>;
+
+type GetAnotherButtonProps = {
+  refetch: RefetchType;
+};
+
+const GetAnotherButton = (props: GetAnotherButtonProps) => {
+  const { refetch } = props;
 
   const handleGetAnother = async () => {
-    dispatch(fetchAdvice());
+    refetch();
   };
-
-  useEffect(() => {
-    dispatch(fetchAdvice());
-  }, []);
 
   return (
     <Box

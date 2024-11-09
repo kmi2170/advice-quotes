@@ -5,15 +5,13 @@ import Card from "@mui/material/Card";
 
 import CardContent from "./CardContent";
 import GetAnotherButton from "./GetAnotherButton";
-import { useAppSelector } from "../../store/hooks";
-import { selectAdvice } from "../../features/adviceSlice";
 import { fetchAdviceSlip } from "../../api/lib/fetchAdvice";
 
 export const CardComponent = () => {
-  const { isError } = useAppSelector(selectAdvice);
-
-  const { data } = useQuery({ queryKey: ["advice"], queryFn: fetchAdviceSlip });
-  console.log("tanstack", data);
+  const { data, isFetching, isError, refetch } = useQuery({
+    queryKey: ["advice"],
+    queryFn: fetchAdviceSlip,
+  });
 
   return (
     <Card
@@ -35,11 +33,11 @@ export const CardComponent = () => {
           "linear-gradient(to bottom, rgb(255,255,255,1.0),rgba(255,255,255,0.0))",
       }}
     >
-      <CardContent />
-      <GetAnotherButton />
+      <CardContent isFetching={isFetching} content={data} />
+      <GetAnotherButton refetch={refetch} />
       {isError && (
         <Typography variant="h6" color="error">
-          Error. Loading Data Failed. Please try again later.
+          Fetching Data Failed. Please try again later.
         </Typography>
       )}
     </Card>
