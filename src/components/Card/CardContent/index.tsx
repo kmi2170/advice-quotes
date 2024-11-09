@@ -39,6 +39,7 @@ const CardContent = (props: CardContentProps) => {
       ) : (
         <Typography
           variant="h3"
+          component="p"
           align="center"
           sx={{ fontWeight: "bold", animation: `${fadeIn} 1s ease-out` }}
         >

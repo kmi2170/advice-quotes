@@ -11,6 +11,9 @@ export const CardComponent = () => {
   const { data, isFetching, isError, refetch } = useQuery({
     queryKey: ["advice"],
     queryFn: fetchAdviceSlip,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
   });
 
   return (

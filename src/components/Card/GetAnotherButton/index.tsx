@@ -59,9 +59,10 @@ const GetAnotherButton = (props: GetAnotherButtonProps) => {
           "&:hover": {
             animation: `${rotate} 0.7s ease-in-out both`,
           },
+          fontSize: "1.25rem",
         }}
       >
-        <Typography variant="h5">Get another!</Typography>
+        Get another
       </Button>
     </Box>
   );
