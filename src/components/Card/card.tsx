@@ -1,3 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
+
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 
@@ -5,9 +7,13 @@ import CardContent from "./CardContent";
 import GetAnotherButton from "./GetAnotherButton";
 import { useAppSelector } from "../../store/hooks";
 import { selectAdvice } from "../../features/adviceSlice";
+import { fetchAdviceSlip } from "../../api/lib/fetchAdvice";
 
 export const CardComponent = () => {
   const { isError } = useAppSelector(selectAdvice);
+
+  const { data } = useQuery({ queryKey: ["advice"], queryFn: fetchAdviceSlip });
+  console.log("tanstack", data);
 
   return (
     <Card
