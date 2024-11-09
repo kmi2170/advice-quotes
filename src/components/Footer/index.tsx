@@ -5,7 +5,14 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "row" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Typography
         component="footer"
         variant="subtitle1"

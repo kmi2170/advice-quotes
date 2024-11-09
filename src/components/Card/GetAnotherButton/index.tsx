@@ -2,7 +2,6 @@ import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
 import { memo } from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 
 import { keyframes } from "@emotion/react";
 

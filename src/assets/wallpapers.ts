@@ -41,5 +41,3 @@ export const wallpapers = [
   { id: 18, wallpaper: wallpaper_19 },
   { id: 19, wallpaper: wallpaper_20 },
 ];
-
-export const numOfWallpapers = wallpapers.length;
