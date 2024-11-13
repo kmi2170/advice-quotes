@@ -2,26 +2,32 @@ import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
 import { memo } from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-
-import { keyframes } from "@emotion/react";
+import { keyframes, styled } from "@mui/material/styles";
 
 const rotate = keyframes`
   0% {
     transform: rotate(0deg) translate3d(0, 0, 0);
-  }
-  25% {
-    transform: rotate(3deg) translate3d(0, 0, 0);
+    scale: 1.0;
   }
   50% {
-    transform: rotate(-3deg) translate3d(0, 0, 0);
-  }
-  75% {
-    transform: rotate(1deg) translate3d(0, 0, 0);
+    transform: rotate(10deg) translate3d(0, 0, 0);
+    scale: 1.1;
   }
   100% {
     transform: rotate(0deg) translate3d(0, 0, 0);
+    scale: 1.0;
   }
 `;
+
+const AnimateButton = styled(Button)({
+  padding: "0.5rem 1rem 0.5rem 1rem",
+  borderRadius: "0.5rem",
+  textTransform: "capitalize",
+  "&:active": {
+    animation: `${rotate} 0.7s ease-in-out both`,
+  },
+  fontSize: "1.25rem",
+});
 
 type RefetchType = (
   options?: RefetchOptions
@@ -46,23 +52,15 @@ const GetAnotherButton = (props: GetAnotherButtonProps) => {
         margin: "1.5rem 0 0.25rem 0",
       }}
     >
-      <Button
+      <AnimateButton
         variant="contained"
         color="primary"
         size="small"
         onClick={handleGetAnother}
-        sx={{
-          padding: "0.5rem 1rem 0.5rem 1rem",
-          borderRadius: "0.5rem",
-          textTransform: "capitalize",
-          "&:hover": {
-            animation: `${rotate} 0.7s ease-in-out both`,
-          },
-          fontSize: "1.25rem",
-        }}
+        sx={{}}
       >
         Get another
-      </Button>
+      </AnimateButton>
     </Box>
   );
 };

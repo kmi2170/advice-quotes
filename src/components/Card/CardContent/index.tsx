@@ -1,8 +1,8 @@
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
 
-import { keyframes } from "@emotion/react";
+import { keyframes, styled } from "@mui/material/styles";
+import LoadingIndicator from "../../LoadingIndicator";
 
 const fadeIn = keyframes`
   0% {
@@ -15,9 +15,14 @@ const fadeIn = keyframes`
   }
 `;
 
+const AnimateText = styled(Typography)({
+  fontWeight: "bold",
+  animation: `${fadeIn} 1s ease-out`,
+});
+
 type CardContentProps = {
-  content?: string;
   isFetching: boolean;
+  content?: string;
 };
 
 const CardContent = (props: CardContentProps) => {
@@ -35,16 +40,11 @@ const CardContent = (props: CardContentProps) => {
       }}
     >
       {isFetching ? (
-        <CircularProgress size={50} thickness={8} />
+        <LoadingIndicator />
       ) : (
-        <Typography
-          variant="h3"
-          component="p"
-          align="center"
-          sx={{ fontWeight: "bold", animation: `${fadeIn} 1s ease-out` }}
-        >
+        <AnimateText variant="h3" align="center">
           {content}
-        </Typography>
+        </AnimateText>
       )}
     </Box>
   );
