@@ -4,18 +4,15 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { keyframes, styled } from "@mui/material/styles";
 
-const rotate = keyframes`
+const button_animation = keyframes`
   0% {
-    transform: rotate(0deg) translate3d(0, 0, 0);
-    scale: 1.0;
+    transform: scale(1) rotate(0deg) translate3d(0, 0, 0);
   }
   50% {
-    transform: rotate(10deg) translate3d(0, 0, 0);
-    scale: 1.1;
+    transform: scale(1.5) rotate(0deg) translate3d(0, 0, 0);
   }
   100% {
-    transform: rotate(0deg) translate3d(0, 0, 0);
-    scale: 1.0;
+    transform:scale(1) rotate(0deg) translate3d(0, 0, 0);
   }
 `;
 
@@ -24,7 +21,7 @@ const AnimateButton = styled(Button)({
   borderRadius: "0.5rem",
   textTransform: "capitalize",
   "&:active": {
-    animation: `${rotate} 0.7s ease-in-out both`,
+    animation: `${button_animation} 0.7s ease-in-out both`,
   },
   fontSize: "1.25rem",
 });
