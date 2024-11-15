@@ -1,4 +1,4 @@
-import Typography from "@mui/material/Typography";
+import Typography, { TypographyProps } from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 import { keyframes, styled } from "@mui/material/styles";
@@ -15,7 +15,7 @@ const fadeIn = keyframes`
   }
 `;
 
-const AnimateText = styled(Typography)({
+const AnimateText = styled(Typography)<TypographyProps>({
   fontWeight: "bold",
   animation: `${fadeIn} 1s ease-out`,
 });
@@ -42,7 +42,7 @@ const CardContent = (props: CardContentProps) => {
       {isFetching ? (
         <LoadingIndicator />
       ) : (
-        <AnimateText variant="h3" align="center">
+        <AnimateText variant="h3" component="p" align="center">
           {content}
         </AnimateText>
       )}
