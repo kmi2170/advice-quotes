@@ -1,7 +1,6 @@
 import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
 import { memo } from "react";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
 import { keyframes, styled } from "@mui/material/styles";
 
 const button_animation = keyframes`
@@ -42,23 +41,14 @@ const GetAnotherButton = (props: GetAnotherButtonProps) => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        margin: "1.5rem 0 0.25rem 0",
-      }}
+    <AnimateButton
+      variant="contained"
+      color="primary"
+      size="small"
+      onClick={handleGetAnother}
     >
-      <AnimateButton
-        variant="contained"
-        color="primary"
-        size="small"
-        onClick={handleGetAnother}
-        sx={{}}
-      >
-        Get another
-      </AnimateButton>
-    </Box>
+      Get another
+    </AnimateButton>
   );
 };
 

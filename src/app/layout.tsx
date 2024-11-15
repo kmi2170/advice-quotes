@@ -1,9 +1,11 @@
 import { Metadata } from "next";
 import { ThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
+import CssBaseline from "@mui/material/CssBaseline";
+import TanstackQueryClientProvider from "./QueryClientProvider";
+
 import theme from "../styles/theme";
 import "../styles/global.css";
-import CssBaseline from "@mui/material/CssBaseline";
 
 export const metadata: Metadata = {
   title: "Advice App",
@@ -22,7 +24,9 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            {children}
+            <TanstackQueryClientProvider>
+              {children}
+            </TanstackQueryClientProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

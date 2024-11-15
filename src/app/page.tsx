@@ -1,13 +1,16 @@
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
-import Card from "../components/Card";
 import Footer from "../components/Footer";
 import BackgroundImage from "../components/backgroundImage";
+import Card from "../components/Card";
 
 const Home = () => {
   return (
-    <Container maxWidth="lg">
+    <Container
+      maxWidth="lg"
+      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <BackgroundImage />
 
       <Typography
