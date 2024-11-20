@@ -54,12 +54,18 @@ const CardContent = (props: CardContentProps) => {
 
 export default CardContent;
 
+const QuoteContent = styled("div")({
+  "& footer": {
+    marginTop: "2rem",
+  },
+});
+
 const renderContent = (type: ApiType, content) => {
   switch (type) {
     case "advice":
       return content;
     case "quote":
-      return <div dangerouslySetInnerHTML={{ __html: content }} />;
+      return <QuoteContent dangerouslySetInnerHTML={{ __html: content }} />;
     default:
       return "Not Found";
   }
