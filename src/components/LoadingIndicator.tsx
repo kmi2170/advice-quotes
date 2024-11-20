@@ -73,13 +73,18 @@ const DotIndicatorRight = styled(Dot)({
   animation: `${pulseR} ${period}s infinite ease-in-out`,
 });
 
+const Wrapper = styled("div")({
+  display: "flex",
+  flexDirection: "row",
+});
+
 const LoadingIndicator = () => {
   return (
-    <>
+    <Wrapper>
       <DotIndicatorLeft />
       <DotIndicatorMiddle />
       <DotIndicatorRight />
-    </>
+    </Wrapper>
   );
 };
 
