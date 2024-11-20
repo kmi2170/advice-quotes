@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 
 import { keyframes, styled } from "@mui/material/styles";
 import LoadingIndicator from "../../LoadingIndicator";
+import { ApiType } from "../../../api/types";
 
 const fadeIn = keyframes`
   0% {
@@ -23,27 +24,32 @@ const AnimateText = styled(Typography)<TypographyProps>({
 type CardContentProps = {
   isFetching: boolean;
   content?: string;
+  apiType: ApiType;
 };
 
 const CardContent = (props: CardContentProps) => {
-  const { isFetching, content } = props;
+  const { isFetching, content, apiType } = props;
 
   return (
     <Box
       sx={{
         overflowY: "auto",
         display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         minHeight: "30vh",
         maxHeight: "50vh",
       }}
     >
+      <Typography variant="h2" sx={{ fontWeight: "bold", mb: "2rem" }}>
+        {renderTitle(apiType)}
+      </Typography>
       {isFetching ? (
         <LoadingIndicator />
       ) : (
         <AnimateText variant="h3" component="p" align="center">
-          {content}
+          {renderContent(apiType, content)}
         </AnimateText>
       )}
     </Box>
@@ -51,3 +57,29 @@ const CardContent = (props: CardContentProps) => {
 };
 
 export default CardContent;
+
+const QuoteContent = styled("div")({
+  "& footer": {
+    marginTop: "2rem",
+  },
+});
+
+const renderContent = (type: ApiType, content) => {
+  switch (type) {
+    case "advice":
+      return content;
+    case "quote":
+      return <QuoteContent dangerouslySetInnerHTML={{ __html: content }} />;
+    default:
+      return "Not Found";
+  }
+};
+
+const renderTitle = (type: ApiType) => {
+  switch (type) {
+    case "advice":
+      return "Advice";
+    case "quote":
+      return "Quote";
+  }
+};
