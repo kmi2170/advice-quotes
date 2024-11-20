@@ -6,6 +6,7 @@ import axios from "axios";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 import CardContent from "./CardContent";
 import GetAnotherButton from "./GetAnotherButton";
@@ -46,14 +47,27 @@ const CardComponent = () => {
           size="large"
           onClick={() => setApiType("advice")}
           disabled={apiType === "advice"}
+          sx={{
+            "&:disabled": {
+              color: "white",
+              backgroundColor: "grey",
+            },
+          }}
         >
           Advice
         </Button>
         <Button
           variant="contained"
+          color="secondary"
           size="large"
           onClick={() => setApiType("quote")}
           disabled={apiType === "quote"}
+          sx={{
+            "&:disabled": {
+              color: "white",
+              backgroundColor: "grey",
+            },
+          }}
         >
           Quote
         </Button>

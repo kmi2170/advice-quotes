@@ -35,12 +35,16 @@ const CardContent = (props: CardContentProps) => {
       sx={{
         overflowY: "auto",
         display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         minHeight: "30vh",
         maxHeight: "50vh",
       }}
     >
+      <Typography variant="h2" sx={{ fontWeight: "bold", mb: "2rem" }}>
+        {renderTitle(apiType)}
+      </Typography>
       {isFetching ? (
         <LoadingIndicator />
       ) : (
@@ -68,5 +72,14 @@ const renderContent = (type: ApiType, content) => {
       return <QuoteContent dangerouslySetInnerHTML={{ __html: content }} />;
     default:
       return "Not Found";
+  }
+};
+
+const renderTitle = (type: ApiType) => {
+  switch (type) {
+    case "advice":
+      return "Advice";
+    case "quote":
+      return "Quote";
   }
 };
