@@ -3,7 +3,7 @@ import { AdviceSlipType } from "../types";
 
 export const fetchAdviceSlip = async (): Promise<string> => {
   const advice = await fetchFnc();
-  const filteredText = filterText(advice);
+  const filteredText = await filterText(advice);
   return filteredText;
 };
 

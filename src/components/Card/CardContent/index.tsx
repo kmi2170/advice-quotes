@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 
 import { keyframes, styled } from "@mui/material/styles";
 import LoadingIndicator from "../../LoadingIndicator";
+import { ApiType } from "../../../api/types";
 
 const fadeIn = keyframes`
   0% {
@@ -23,10 +24,11 @@ const AnimateText = styled(Typography)<TypographyProps>({
 type CardContentProps = {
   isFetching: boolean;
   content?: string;
+  apiType: ApiType;
 };
 
 const CardContent = (props: CardContentProps) => {
-  const { isFetching, content } = props;
+  const { isFetching, content, apiType } = props;
 
   return (
     <Box
@@ -43,7 +45,7 @@ const CardContent = (props: CardContentProps) => {
         <LoadingIndicator />
       ) : (
         <AnimateText variant="h3" component="p" align="center">
-          {content}
+          {renderContent(apiType, content)}
         </AnimateText>
       )}
     </Box>
@@ -51,3 +53,14 @@ const CardContent = (props: CardContentProps) => {
 };
 
 export default CardContent;
+
+const renderContent = (type: ApiType, content) => {
+  switch (type) {
+    case "advice":
+      return content;
+    case "quote":
+      return <div dangerouslySetInnerHTML={{ __html: content }} />;
+    default:
+      return "Not Found";
+  }
+};
