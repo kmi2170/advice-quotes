@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 
 import { keyframes, styled } from "@mui/material/styles";
 import LoadingIndicator from "../../LoadingIndicator";
-import { ApiType } from "../../../api/types";
+import { API_NAMES, ApiCategoryType, ApiNameType } from "../../../api/types";
 
 const fadeIn = keyframes`
   0% {
@@ -23,8 +23,8 @@ const AnimateText = styled(Typography)<TypographyProps>({
 
 type CardContentProps = {
   isFetching: boolean;
-  content?: string;
-  apiType: ApiType;
+  content: string;
+  apiType: ApiNameType;
 };
 
 const CardContent = (props: CardContentProps) => {
@@ -64,22 +64,22 @@ const QuoteContent = styled("div")({
   },
 });
 
-const renderContent = (type: ApiType, content) => {
+const renderContent = (type: ApiNameType, content: string) => {
   switch (type) {
-    case "advice":
+    case API_NAMES.ADVICE:
       return content;
-    case "quote":
+    case API_NAMES.QUOTES:
       return <QuoteContent dangerouslySetInnerHTML={{ __html: content }} />;
     default:
       return "Not Found";
   }
 };
 
-const renderTitle = (type: ApiType) => {
+const renderTitle = (type: ApiNameType) => {
   switch (type) {
-    case "advice":
+    case API_NAMES.ADVICE:
       return "Advice";
-    case "quote":
+    case API_NAMES.QUOTES:
       return "Quote";
   }
 };

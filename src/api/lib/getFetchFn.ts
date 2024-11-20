@@ -1,12 +1,12 @@
-import { ApiType } from "../types";
+import { API_NAMES, ApiNameType } from "../types";
 import { fetchAdviceSlip } from "./fetchAdvice";
-import { fetchQuotes } from "./fetchQuote";
+import { fetchQuotes } from "./fetchViewBits";
 
-export const getFetchFn = (type: ApiType) => {
+export const getFetchFn = (type: ApiNameType) => {
   switch (type) {
-    case "advice":
+    case API_NAMES.ADVICE:
       return fetchAdviceSlip;
-    case "quote":
+    case API_NAMES.QUOTES:
       return fetchQuotes;
   }
 };

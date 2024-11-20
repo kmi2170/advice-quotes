@@ -2,13 +2,13 @@
 
 import { NextResponse } from "next/server";
 import { getFetchFn } from "../../api/lib/getFetchFn";
-import { ApiType } from "../../api/types";
+import { ApiCategoryType } from "../../api/types";
 
 export async function GET(req: Request) {
   try {
     const url = new URL(req.url as string);
     const searchParams = url.searchParams;
-    const type = searchParams.get("type") as ApiType;
+    const type = searchParams.get("type") as ApiCategoryType;
 
     const fetchFn = getFetchFn(type);
 

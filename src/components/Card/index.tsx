@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import CardContent from "./CardContent";
 import GetAnotherButton from "./GetAnotherButton";
 import { useState } from "react";
-import { ApiType } from "../../api/types";
+import { API_NAMES, ApiNameType } from "../../api/types";
 import { styled } from "@mui/material/styles";
 
 const ButtonGroup = styled("div")({
@@ -21,18 +21,17 @@ const ButtonGroup = styled("div")({
   alignItems: "center",
 });
 
-const fetchFn = async (type: ApiType) => {
+const fetchFn = async (type: ApiNameType) => {
   const { data } = await axios.get(`/api?type=${type}`);
-
   return data;
 };
 
 const CardComponent = () => {
-  const [apiType, setApiType] = useState<ApiType>("quote");
+  const [apiName, setApiName] = useState<ApiNameType>(API_NAMES.ADVICE);
 
   const { data, isFetching, isError, refetch } = useQuery({
-    queryKey: [apiType, apiType],
-    queryFn: () => fetchFn(apiType),
+    queryKey: [apiName, apiName],
+    queryFn: () => fetchFn(apiName),
     refetchOnMount: false,
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
@@ -44,8 +43,8 @@ const CardComponent = () => {
         <Button
           variant="contained"
           size="large"
-          onClick={() => setApiType("advice")}
-          disabled={apiType === "advice"}
+          onClick={() => setApiName(API_NAMES.ADVICE)}
+          disabled={apiName === API_NAMES.ADVICE}
           sx={{
             "&:disabled": {
               color: "white",
@@ -59,8 +58,8 @@ const CardComponent = () => {
           variant="contained"
           color="secondary"
           size="large"
-          onClick={() => setApiType("quote")}
-          disabled={apiType === "quote"}
+          onClick={() => setApiName(API_NAMES.QUOTES)}
+          disabled={apiName === API_NAMES.QUOTES}
           sx={{
             "&:disabled": {
               color: "white",
@@ -92,7 +91,11 @@ const CardComponent = () => {
             "linear-gradient(to bottom, rgb(255,255,255,1.0),rgba(255,255,255,0.0))",
         }}
       >
-        <CardContent isFetching={isFetching} content={data} apiType={apiType} />
+        <CardContent
+          isFetching={isFetching}
+          content={data as string}
+          apiType={apiName}
+        />
         <GetAnotherButton refetch={refetch} />
         {isError && (
           <Typography variant="h6" color="error">
