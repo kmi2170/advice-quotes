@@ -8,15 +8,25 @@ import {
 } from "../../../api/types";
 import { styled } from "@mui/material/styles";
 
-const ButtonGroup = styled("div")({
+const ButtonGroup = styled("div")(({ theme }) => ({
   marginBottom: "2rem",
-  width: "60%",
+  [theme.breakpoints.down("sm")]: {
+    width: "80%",
+  },
+  [theme.breakpoints.up("sm")]: {
+    width: "60%",
+  },
   display: "flex",
-  justifyContent: "space-between",
+  justifyContent: "space-around",
   alignItems: "center",
-});
+  flexWrap: "wrap",
+  gap: "0.5rem",
+}));
 
 const ApiButton = styled(Button)({
+  minWidth: "8rem",
+  fontWeight: "bold",
+  "&:hover": {},
   "&:disabled": {
     color: "white",
     backgroundColor: "grey",
@@ -24,9 +34,21 @@ const ApiButton = styled(Button)({
 });
 
 const CategoryButton = styled(Button)({
+  minWidth: "7rem",
+  color: "orange",
+  borderColor: "orange",
+  borderWidth: "4px",
+  fontWeight: "bold",
+  backgroundColor: "rgba(0, 0, 0, 0.6)",
+  "&:hover": {
+    borderWidth: "4px",
+    borderColor: "orange",
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+  },
   "&:disabled": {
-    color: "white",
-    backgroundColor: "grey",
+    color: "lightgrey",
+    borderColor: "lightgrey",
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
   },
 });
 
@@ -43,7 +65,7 @@ const Buttons = (props: ButtonsProps) => {
     <>
       <ButtonGroup>
         <CategoryButton
-          variant="contained"
+          variant="outlined"
           size="large"
           onClick={() => handleChangeCategory(API_CATEGORIES.PRACTICAL)}
           disabled={category === API_CATEGORIES.PRACTICAL}
@@ -52,7 +74,7 @@ const Buttons = (props: ButtonsProps) => {
           Practical
         </CategoryButton>
         <CategoryButton
-          variant="contained"
+          variant="outlined"
           size="large"
           onClick={() => handleChangeCategory(API_CATEGORIES.FUN)}
           disabled={category === API_CATEGORIES.FUN}
@@ -84,11 +106,12 @@ const Buttons = (props: ButtonsProps) => {
           </ApiButton>
           <ApiButton
             variant="contained"
-            color="secondary"
             size="large"
             onClick={() => handleChangeApi(API_NAMES.LIFE_HACKS)}
             disabled={api === API_NAMES.LIFE_HACKS}
-            sx={{}}
+            sx={{
+              backgroundColor: "mediumaquamarine",
+            }}
           >
             Life Hacks
           </ApiButton>
@@ -100,7 +123,10 @@ const Buttons = (props: ButtonsProps) => {
             size="large"
             onClick={() => handleChangeApi(API_NAMES.FORTUNE_COOKIE)}
             disabled={api === API_NAMES.FORTUNE_COOKIE}
-            sx={{}}
+            sx={{
+              color: "black",
+              backgroundColor: "darkorange",
+            }}
           >
             Fortune Cookie
           </ApiButton>
@@ -109,7 +135,10 @@ const Buttons = (props: ButtonsProps) => {
             size="large"
             onClick={() => handleChangeApi(API_NAMES.USELESS_FACTS)}
             disabled={api === API_NAMES.USELESS_FACTS}
-            sx={{}}
+            sx={{
+              color: "black",
+              backgroundColor: "lightcyan",
+            }}
           >
             Useless Facts
           </ApiButton>
@@ -118,9 +147,12 @@ const Buttons = (props: ButtonsProps) => {
             size="large"
             onClick={() => handleChangeApi(API_NAMES.JESTER)}
             disabled={api === API_NAMES.JESTER}
-            sx={{}}
+            sx={{
+              color: "black",
+              backgroundColor: "palegoldenrod",
+            }}
           >
-            Jester
+            Joke
           </ApiButton>
         </ButtonGroup>
       )}
