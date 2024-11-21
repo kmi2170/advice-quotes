@@ -18,6 +18,6 @@ export const fetchQuotes = async (): Promise<string> => {
 
 export const fetchLifeHacks = async (): Promise<string> => {
   const url = getUrl(API_NAMES.LIFE_HACKS);
-  const { data } = await axios.get<LifeHacksReturnType[]>(url);
-  return data[0].html;
+  const { data } = await axios.get<LifeHacksReturnType>(url);
+  return data.html;
 };

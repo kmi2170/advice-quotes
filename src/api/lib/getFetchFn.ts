@@ -1,6 +1,6 @@
 import { API_NAMES, ApiNameType } from "../types";
 import { fetchAdviceSlip } from "./fetchAdvice";
-import { fetchQuotes } from "./fetchViewBits";
+import { fetchLifeHacks, fetchQuotes } from "./fetchViewBits";
 
 export const getFetchFn = (
   type: ApiNameType
@@ -10,6 +10,8 @@ export const getFetchFn = (
       return fetchAdviceSlip;
     case API_NAMES.QUOTES:
       return fetchQuotes;
+    case API_NAMES.LIFE_HACKS:
+      return fetchLifeHacks;
     default:
       return "No Fetch Function Found";
   }

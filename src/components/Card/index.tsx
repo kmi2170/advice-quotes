@@ -21,6 +21,13 @@ const ButtonGroup = styled("div")({
   alignItems: "center",
 });
 
+const ApiButton = styled(Button)({
+  "&:disabled": {
+    color: "white",
+    backgroundColor: "grey",
+  },
+});
+
 const fetchFn = async (type: ApiNameType) => {
   const { data } = await axios.get(`/api?type=${type}`);
   return data;
@@ -40,35 +47,35 @@ const CardComponent = () => {
   return (
     <>
       <ButtonGroup>
-        <Button
+        <ApiButton
           variant="contained"
           size="large"
           onClick={() => setApiName(API_NAMES.ADVICE)}
           disabled={apiName === API_NAMES.ADVICE}
-          sx={{
-            "&:disabled": {
-              color: "white",
-              backgroundColor: "grey",
-            },
-          }}
+          sx={{}}
         >
           Advice
-        </Button>
-        <Button
+        </ApiButton>
+        <ApiButton
           variant="contained"
           color="secondary"
           size="large"
           onClick={() => setApiName(API_NAMES.QUOTES)}
           disabled={apiName === API_NAMES.QUOTES}
-          sx={{
-            "&:disabled": {
-              color: "white",
-              backgroundColor: "grey",
-            },
-          }}
+          sx={{}}
         >
           Quote
-        </Button>
+        </ApiButton>
+        <ApiButton
+          variant="contained"
+          color="secondary"
+          size="large"
+          onClick={() => setApiName(API_NAMES.LIFE_HACKS)}
+          disabled={apiName === API_NAMES.LIFE_HACKS}
+          sx={{}}
+        >
+          Life Hack
+        </ApiButton>
       </ButtonGroup>
       <Card
         elevation={6}

@@ -34,7 +34,7 @@ const CardContent = (props: CardContentProps) => {
       )}
 
       {!isFetching && isError && (
-        <Typography variant="h6" color="error">
+        <Typography variant="h4" color="error" align="center">
           Fetching Data Failed. Please try again later.
         </Typography>
       )}
@@ -66,6 +66,12 @@ const QuoteContent = styled("div")({
   },
 });
 
+const LifeHackContent = styled("div")({
+  "& footer": {
+    display: "none",
+  },
+});
+
 const Content = ({
   apiName,
   content,
@@ -79,6 +85,10 @@ const Content = ({
         return content;
       case API_NAMES.QUOTES:
         return <QuoteContent dangerouslySetInnerHTML={{ __html: content }} />;
+      case API_NAMES.LIFE_HACKS:
+        return (
+          <LifeHackContent dangerouslySetInnerHTML={{ __html: content }} />
+        );
       default:
         return "Not Found";
     }
