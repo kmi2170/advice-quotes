@@ -1,32 +1,21 @@
 "use client";
 
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-
-import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
-import Button from "@mui/material/Button";
-
-import CardContent from "./CardContent";
-import GetAnotherButton from "./GetAnotherButton";
-import { useState } from "react";
-import { API_NAMES, ApiNameType } from "../../api/types";
 import { styled } from "@mui/material/styles";
 
-const ButtonGroup = styled("div")({
-  marginBottom: "2rem",
-  width: "60%",
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-});
-
-const ApiButton = styled(Button)({
-  "&:disabled": {
-    color: "white",
-    backgroundColor: "grey",
-  },
-});
+import Title from "../Title";
+import Buttons from "./Buttons";
+import CardContent from "./CardContent";
+import GetAnotherButton from "./GetAnotherButton";
+import {
+  API_CATEGORIES,
+  API_NAMES,
+  ApiCategoryType,
+  ApiNameType,
+} from "../../api/types";
 
 const fetchFn = async (type: ApiNameType) => {
   const { data } = await axios.get(`/api?type=${type}`);
@@ -34,49 +23,41 @@ const fetchFn = async (type: ApiNameType) => {
 };
 
 const CardComponent = () => {
-  const [apiName, setApiName] = useState<ApiNameType>(API_NAMES.ADVICE);
+  const [category, setCategory] = useState<ApiCategoryType>(
+    API_CATEGORIES.PRACTICAL
+  );
+  const [api, setApi] = useState<ApiNameType>(API_NAMES.ADVICE);
 
+  console.log(api);
   const { data, isFetching, isError, refetch } = useQuery({
-    queryKey: [apiName, apiName],
-    queryFn: () => fetchFn(apiName),
+    queryKey: [api, api],
+    queryFn: () => fetchFn(api),
     refetchOnMount: false,
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   });
 
+  const handleChangeCategory = (category: ApiCategoryType) => {
+    setCategory(category);
+    const newApi =
+      category === API_CATEGORIES.PRACTICAL
+        ? API_NAMES.ADVICE
+        : API_NAMES.FORTUNE_COOKIE;
+    setApi(newApi);
+  };
+
+  const handleChangeApi = (api: ApiNameType) => {
+    setApi(api);
+  };
+
   return (
     <>
-      <ButtonGroup>
-        <ApiButton
-          variant="contained"
-          size="large"
-          onClick={() => setApiName(API_NAMES.ADVICE)}
-          disabled={apiName === API_NAMES.ADVICE}
-          sx={{}}
-        >
-          Advice
-        </ApiButton>
-        <ApiButton
-          variant="contained"
-          color="secondary"
-          size="large"
-          onClick={() => setApiName(API_NAMES.QUOTES)}
-          disabled={apiName === API_NAMES.QUOTES}
-          sx={{}}
-        >
-          Quote
-        </ApiButton>
-        <ApiButton
-          variant="contained"
-          color="secondary"
-          size="large"
-          onClick={() => setApiName(API_NAMES.LIFE_HACKS)}
-          disabled={apiName === API_NAMES.LIFE_HACKS}
-          sx={{}}
-        >
-          Life Hack
-        </ApiButton>
-      </ButtonGroup>
+      <Buttons
+        category={category}
+        api={api}
+        handleChangeCategory={handleChangeCategory}
+        handleChangeApi={handleChangeApi}
+      />
       <Card
         elevation={6}
         component="main"
@@ -98,13 +79,13 @@ const CardComponent = () => {
             "linear-gradient(to bottom, rgb(255,255,255,1.0),rgba(255,255,255,0.0))",
         }}
       >
-        <Title apiName={apiName} />
+        <Title apiName={api} />
 
         <CardContent
           isFetching={isFetching}
           isError={isError}
           content={data as string}
-          apiName={apiName}
+          apiName={api}
         />
         <GetAnotherButton refetch={refetch} />
       </Card>
@@ -113,20 +94,3 @@ const CardComponent = () => {
 };
 
 export default CardComponent;
-
-const Title = ({ apiName }: { apiName: ApiNameType }) => {
-  const renderTitle = (type: ApiNameType) => {
-    switch (type) {
-      case API_NAMES.ADVICE:
-        return "Advice";
-      case API_NAMES.QUOTES:
-        return "Quote";
-    }
-  };
-
-  return (
-    <Typography variant="h2" sx={{ fontWeight: "bold" }}>
-      {renderTitle(apiName)}
-    </Typography>
-  );
-};
