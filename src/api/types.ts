@@ -1,7 +1,5 @@
 export type AdviceSlipType = { slip: { advice: string } };
 
-// export type ViewBitsApiNameType = "quotes" | "lifehacks";
-
 export const API_NAMES = {
   ADVICE: "advice",
   QUOTES: "zenquotes",

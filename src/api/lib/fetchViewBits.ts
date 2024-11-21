@@ -5,7 +5,6 @@ import {
   API_NAMES,
   ApiNameType,
 } from "../types";
-import { getuid } from "process";
 
 const getUrl = (api_name: ApiNameType) =>
   `https://api.viewbits.com/v1/${api_name}?mode=random`;

@@ -91,20 +91,35 @@ const CardComponent = () => {
             "linear-gradient(to bottom, rgb(255,255,255,1.0),rgba(255,255,255,0.0))",
         }}
       >
+        <Title apiName={apiName} />
+
         <CardContent
           isFetching={isFetching}
+          isError={isError}
           content={data as string}
-          apiType={apiName}
+          apiName={apiName}
         />
         <GetAnotherButton refetch={refetch} />
-        {isError && (
-          <Typography variant="h6" color="error">
-            Fetching Data Failed. Please try again later.
-          </Typography>
-        )}
       </Card>
     </>
   );
 };
 
 export default CardComponent;
+
+const Title = ({ apiName }: { apiName: ApiNameType }) => {
+  const renderTitle = (type: ApiNameType) => {
+    switch (type) {
+      case API_NAMES.ADVICE:
+        return "Advice";
+      case API_NAMES.QUOTES:
+        return "Quote";
+    }
+  };
+
+  return (
+    <Typography variant="h2" sx={{ fontWeight: "bold" }}>
+      {renderTitle(apiName)}
+    </Typography>
+  );
+};

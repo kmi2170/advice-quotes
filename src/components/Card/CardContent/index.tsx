@@ -23,12 +23,13 @@ const AnimateText = styled(Typography)<TypographyProps>({
 
 type CardContentProps = {
   isFetching: boolean;
+  isError: boolean;
   content: string;
-  apiType: ApiNameType;
+  apiName: ApiNameType;
 };
 
 const CardContent = (props: CardContentProps) => {
-  const { isFetching, content, apiType } = props;
+  const { isFetching, isError, content, apiName } = props;
 
   return (
     <Box
@@ -42,15 +43,18 @@ const CardContent = (props: CardContentProps) => {
         maxHeight: "50vh",
       }}
     >
-      <Typography variant="h2" sx={{ fontWeight: "bold", mb: "2rem" }}>
-        {renderTitle(apiType)}
-      </Typography>
-      {isFetching ? (
-        <LoadingIndicator />
-      ) : (
+      {isFetching && <LoadingIndicator />}
+
+      {!isFetching && !isError && (
         <AnimateText variant="h3" component="p" align="center">
-          {renderContent(apiType, content)}
+          {renderContent(apiName, content)}
         </AnimateText>
+      )}
+
+      {!isFetching && isError && (
+        <Typography variant="h6" color="error">
+          Fetching Data Failed. Please try again later.
+        </Typography>
       )}
     </Box>
   );
@@ -72,14 +76,5 @@ const renderContent = (type: ApiNameType, content: string) => {
       return <QuoteContent dangerouslySetInnerHTML={{ __html: content }} />;
     default:
       return "Not Found";
-  }
-};
-
-const renderTitle = (type: ApiNameType) => {
-  switch (type) {
-    case API_NAMES.ADVICE:
-      return "Advice";
-    case API_NAMES.QUOTES:
-      return "Quote";
   }
 };
