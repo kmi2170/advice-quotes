@@ -3,23 +3,7 @@ import Box from "@mui/material/Box";
 
 import { keyframes, styled } from "@mui/material/styles";
 import LoadingIndicator from "../../LoadingIndicator";
-import { API_NAMES, ApiCategoryType, ApiNameType } from "../../../api/types";
-
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-    filter: blur(3px);
-  }
-  100% {
-    opacity: 1;
-    filter: blur(0);
-  }
-`;
-
-const AnimateText = styled(Typography)<TypographyProps>({
-  fontWeight: "bold",
-  animation: `${fadeIn} 1s ease-out`,
-});
+import { API_NAMES, ApiNameType } from "../../../api/types";
 
 type CardContentProps = {
   isFetching: boolean;
@@ -46,9 +30,7 @@ const CardContent = (props: CardContentProps) => {
       {isFetching && <LoadingIndicator />}
 
       {!isFetching && !isError && (
-        <AnimateText variant="h3" component="p" align="center">
-          {renderContent(apiName, content)}
-        </AnimateText>
+        <Content apiName={apiName} content={content} />
       )}
 
       {!isFetching && isError && (
@@ -62,19 +44,49 @@ const CardContent = (props: CardContentProps) => {
 
 export default CardContent;
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+`;
+
+const AnimateText = styled(Typography)<TypographyProps>({
+  fontWeight: "bold",
+  animation: `${fadeIn} 1s ease-out`,
+});
+
 const QuoteContent = styled("div")({
   "& footer": {
     marginTop: "2rem",
   },
 });
 
-const renderContent = (type: ApiNameType, content: string) => {
-  switch (type) {
-    case API_NAMES.ADVICE:
-      return content;
-    case API_NAMES.QUOTES:
-      return <QuoteContent dangerouslySetInnerHTML={{ __html: content }} />;
-    default:
-      return "Not Found";
-  }
+const Content = ({
+  apiName,
+  content,
+}: {
+  apiName: ApiNameType;
+  content: string;
+}) => {
+  const renderContent = (apiName, content) => {
+    switch (apiName) {
+      case API_NAMES.ADVICE:
+        return content;
+      case API_NAMES.QUOTES:
+        return <QuoteContent dangerouslySetInnerHTML={{ __html: content }} />;
+      default:
+        return "Not Found";
+    }
+  };
+
+  return (
+    <AnimateText variant="h3" component="p" align="center">
+      {renderContent(apiName, content)}
+    </AnimateText>
+  );
 };
