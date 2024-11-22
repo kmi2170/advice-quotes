@@ -1,7 +1,12 @@
-import Typography, { TypographyProps } from "@mui/material/Typography";
+import Typography from "@mui/material/Typography";
 
 import { keyframes, styled } from "@mui/material/styles";
-import { API_NAMES, ApiNameType } from "../../../api/types";
+import {
+  AdviceResponseType,
+  API_NAMES,
+  ApiNameType,
+  QuotesResponseType,
+} from "../../../api/types";
 
 const fadeIn = keyframes`
   0% {
@@ -14,75 +19,65 @@ const fadeIn = keyframes`
   }
 `;
 
-const AnimateText = styled(Typography)<TypographyProps>({
-  fontWeight: "bold",
+const Animation = styled("div")({
   animation: `${fadeIn} 1s ease-out`,
 });
 
-const BaseContentWithFooter = styled("div")({
-  "& footer": {
-    marginTop: "2rem",
-  },
-});
+const AdviceContent = ({ content }: AdviceResponseType) => {
+  return (
+    <Typography
+      variant="h3"
+      component="p"
+      align="center"
+      sx={{ fontWeight: "bold" }}
+    >
+      {content}
+    </Typography>
+  );
+};
 
-const BaseContentWithoutFooter = styled("div")({
-  "& footer": {
-    display: "none",
-  },
-});
-
-const QuoteContent = styled(BaseContentWithFooter)({});
-
-const LifeHacksContent = styled(BaseContentWithoutFooter)({});
-
-const FortuneCookieContent = styled(BaseContentWithoutFooter)({
-  "& small": {
-    display: "block",
-    marginTop: "2rem",
-  },
-});
-
-const UselessFactsContent = styled(BaseContentWithoutFooter)({});
-
-const JesterContent = styled(BaseContentWithoutFooter)({});
+const QuoteContent = ({ content, author }: QuotesResponseType) => {
+  return (
+    <>
+      <Typography
+        variant="h3"
+        component="p"
+        align="center"
+        sx={{ fontWeight: "bold", mb: "2rem" }}
+      >
+        {content}
+      </Typography>
+      <Typography
+        variant="h4"
+        component="p"
+        align="center"
+        sx={{ fontWeight: "bold" }}
+      >
+        {author}
+      </Typography>
+    </>
+  );
+};
 
 const Content = ({
   apiName,
-  content,
+  data,
 }: {
   apiName: ApiNameType;
-  content: string;
+  data: AdviceResponseType | QuotesResponseType;
 }) => {
-  const renderContent = (apiName, content) => {
+  const renderContent = (apiName, data) => {
     switch (apiName) {
       case API_NAMES.ADVICE:
-        return content;
+        return <AdviceContent content={data.content} />;
       case API_NAMES.QUOTES:
-        return <QuoteContent dangerouslySetInnerHTML={{ __html: content }} />;
-      case API_NAMES.LIFE_HACKS:
-        return (
-          <LifeHacksContent dangerouslySetInnerHTML={{ __html: content }} />
-        );
-      case API_NAMES.FORTUNE_COOKIE:
-        return (
-          <FortuneCookieContent dangerouslySetInnerHTML={{ __html: content }} />
-        );
-      case API_NAMES.USELESS_FACTS:
-        return (
-          <UselessFactsContent dangerouslySetInnerHTML={{ __html: content }} />
-        );
-      case API_NAMES.JESTER:
-        return <JesterContent dangerouslySetInnerHTML={{ __html: content }} />;
+        return <QuoteContent content={data.content} author={data.author} />;
       default:
         return "Not Found";
     }
   };
 
-  return (
-    <AnimateText variant="h3" component="p" align="center">
-      {renderContent(apiName, content)}
-    </AnimateText>
-  );
+  return <Animation>{renderContent(apiName, data)}</Animation>;
 };
 
 export default Content;

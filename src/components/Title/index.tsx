@@ -9,14 +9,6 @@ const Title = ({ apiName }: { apiName: ApiNameType }) => {
         return "Advice";
       case API_NAMES.QUOTES:
         return "Quote";
-      case API_NAMES.LIFE_HACKS:
-        return "Life Hacks";
-      case API_NAMES.FORTUNE_COOKIE:
-        return "Fortune Cookie";
-      case API_NAMES.USELESS_FACTS:
-        return "Useless Facts";
-      case API_NAMES.JESTER:
-        return "Joke";
     }
   };
 

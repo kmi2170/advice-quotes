@@ -1,10 +1,10 @@
 import axios from "axios";
-import { AdviceSlipType } from "../types";
+import { AdviceResponseType, AdviceSlipType } from "../types";
 
-export const fetchAdviceSlip = async (): Promise<string> => {
+export const fetchAdviceSlip = async (): Promise<AdviceResponseType> => {
   const advice = await fetchFnc();
   const filteredText = await filterText(advice);
-  return filteredText;
+  return { content: filteredText };
 };
 
 const url = "https://api.adviceslip.com/advice";

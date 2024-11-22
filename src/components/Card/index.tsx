@@ -4,18 +4,12 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Card from "@mui/material/Card";
-import { styled } from "@mui/material/styles";
 
 import Title from "../Title";
 import Buttons from "./Buttons";
 import CardContent from "./CardContent";
 import GetAnotherButton from "./GetAnotherButton";
-import {
-  API_CATEGORIES,
-  API_NAMES,
-  ApiCategoryType,
-  ApiNameType,
-} from "../../api/types";
+import { API_NAMES, ApiNameType } from "../../api/types";
 
 const fetchFn = async (type: ApiNameType) => {
   const { data } = await axios.get(`/api?type=${type}`);
@@ -23,12 +17,8 @@ const fetchFn = async (type: ApiNameType) => {
 };
 
 const CardComponent = () => {
-  const [category, setCategory] = useState<ApiCategoryType>(
-    API_CATEGORIES.PRACTICAL
-  );
   const [api, setApi] = useState<ApiNameType>(API_NAMES.ADVICE);
 
-  console.log(api);
   const { data, isFetching, isError, refetch } = useQuery({
     queryKey: [api, api],
     queryFn: () => fetchFn(api),
@@ -37,27 +27,13 @@ const CardComponent = () => {
     refetchOnWindowFocus: false,
   });
 
-  const handleChangeCategory = (category: ApiCategoryType) => {
-    setCategory(category);
-    const newApi =
-      category === API_CATEGORIES.PRACTICAL
-        ? API_NAMES.ADVICE
-        : API_NAMES.FORTUNE_COOKIE;
-    setApi(newApi);
-  };
-
   const handleChangeApi = (api: ApiNameType) => {
     setApi(api);
   };
 
   return (
     <>
-      <Buttons
-        category={category}
-        api={api}
-        handleChangeCategory={handleChangeCategory}
-        handleChangeApi={handleChangeApi}
-      />
+      <Buttons api={api} handleChangeApi={handleChangeApi} />
       <Card
         elevation={6}
         component="main"
@@ -84,7 +60,7 @@ const CardComponent = () => {
         <CardContent
           isFetching={isFetching}
           isError={isError}
-          content={data as string}
+          data={data}
           apiName={api}
         />
         <GetAnotherButton refetch={refetch} />

@@ -2,7 +2,11 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 
 import LoadingIndicator from "../../LoadingIndicator";
-import { ApiNameType } from "../../../api/types";
+import {
+  AdviceResponseType,
+  ApiNameType,
+  QuotesResponseType,
+} from "../../../api/types";
 import Content from "./Content";
 
 const CartContentWrapper = styled("div")({
@@ -18,20 +22,18 @@ const CartContentWrapper = styled("div")({
 type CardContentProps = {
   isFetching: boolean;
   isError: boolean;
-  content: string;
+  data: AdviceResponseType | QuotesResponseType;
   apiName: ApiNameType;
 };
 
 const CardContent = (props: CardContentProps) => {
-  const { isFetching, isError, content, apiName } = props;
+  const { isFetching, isError, data, apiName } = props;
 
   return (
     <CartContentWrapper>
       {isFetching && <LoadingIndicator />}
 
-      {!isFetching && !isError && (
-        <Content apiName={apiName} content={content} />
-      )}
+      {!isFetching && !isError && <Content apiName={apiName} data={data} />}
 
       {!isFetching && isError && (
         <Typography variant="h4" color="error" align="center">

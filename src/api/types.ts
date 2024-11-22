@@ -1,37 +1,32 @@
-export type AdviceSlipType = { slip: { advice: string } };
-
 export const API_NAMES = {
   ADVICE: "advice",
   QUOTES: "zenquotes",
-  LIFE_HACKS: "lifehacks",
-  FORTUNE_COOKIE: "fortunecookie",
-  USELESS_FACTS: "uselessfacts",
-  JESTER: "jester",
 } as const;
 
 export type ApiNameType = (typeof API_NAMES)[keyof typeof API_NAMES];
 
+export type AdviceSlipType = { slip: { advice: string } };
+
+export type AdviceResponseType = { content: string };
+
 export type QuotesReturnType = {
-  q: string;
-  a: string;
-  h: string;
-};
-
-type BaseReturnType = {
-  text: string;
-  source: string;
+  id: number;
+  originator: {
+    id: number;
+    language_code: "en";
+    description: string;
+    master_id: number;
+    name: string;
+    url: string;
+  };
+  content: string;
   url: string;
-  html: string;
+  tags: string[];
 };
 
-export type LifeHacksReturnType = BaseReturnType;
-
-export type UselessFactsReturnType = BaseReturnType;
-
-export type JesterReturnType = BaseReturnType;
-
-export type FortuneCookieReturnType = BaseReturnType & {
-  numbers: string;
+export type QuotesResponseType = {
+  content: string;
+  author: string;
 };
 
 export const API_CATEGORIES = {
