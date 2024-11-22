@@ -39,6 +39,11 @@ export type FortuneCookieResponseType = {
   content: string;
 };
 
+export type DataResponseType =
+  | AdviceResponseType
+  | QuotesResponseType
+  | FortuneCookieResponseType;
+
 export const API_CATEGORIES = {
   PRACTICAL: "Practical",
   FUN: "Fun",

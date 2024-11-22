@@ -9,10 +9,10 @@ import Title from "../Title";
 import Buttons from "./Buttons";
 import CardContent from "./CardContent";
 import GetAnotherButton from "./GetAnotherButton";
-import { API_NAMES, ApiNameType } from "../../api/types";
+import { API_NAMES, ApiNameType, DataResponseType } from "../../api/types";
 
 const fetchFn = async (type: ApiNameType) => {
-  const { data } = await axios.get(`/api?type=${type}`);
+  const { data } = await axios.get<DataResponseType>(`/api?type=${type}`);
   return data;
 };
 

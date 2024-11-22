@@ -2,12 +2,7 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 
 import LoadingIndicator from "../../LoadingIndicator";
-import {
-  AdviceResponseType,
-  ApiNameType,
-  FortuneCookieResponseType,
-  QuotesResponseType,
-} from "../../../api/types";
+import { ApiNameType, DataResponseType } from "../../../api/types";
 import Content from "./Content";
 
 const CartContentWrapper = styled("div")({
@@ -23,7 +18,7 @@ const CartContentWrapper = styled("div")({
 type CardContentProps = {
   isFetching: boolean;
   isError: boolean;
-  data: AdviceResponseType | QuotesResponseType | FortuneCookieResponseType;
+  data?: DataResponseType;
   apiName: ApiNameType;
 };
 

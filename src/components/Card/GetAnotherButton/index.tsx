@@ -2,6 +2,7 @@ import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
 import { memo } from "react";
 import Button from "@mui/material/Button";
 import { keyframes, styled } from "@mui/material/styles";
+import { DataResponseType } from "../../../api/types";
 
 const button_animation = keyframes`
   0% {
@@ -27,17 +28,17 @@ const AnimateButton = styled(Button)({
 
 type RefetchType = (
   options?: RefetchOptions
-) => Promise<QueryObserverResult<string, Error>>;
+) => Promise<QueryObserverResult<DataResponseType, Error>>;
 
 type GetAnotherButtonProps = {
-  refetch: RefetchType;
+  refetch?: RefetchType;
 };
 
 const GetAnotherButton = (props: GetAnotherButtonProps) => {
   const { refetch } = props;
 
   const handleGetAnother = async () => {
-    refetch();
+    if (refetch) refetch();
   };
 
   return (

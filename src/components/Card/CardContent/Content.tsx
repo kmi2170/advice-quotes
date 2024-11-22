@@ -5,6 +5,7 @@ import {
   AdviceResponseType,
   API_NAMES,
   ApiNameType,
+  DataResponseType,
   FortuneCookieResponseType,
   QuotesResponseType,
 } from "../../../api/types";
@@ -24,54 +25,34 @@ const Animation = styled("div")({
   animation: `${fadeIn} 1s ease-out`,
 });
 
-const AdviceContent = ({ content }: AdviceResponseType) => {
-  return (
-    <Typography
-      variant="h3"
-      component="p"
-      align="center"
-      sx={{ fontWeight: "bold" }}
-    >
-      {content}
-    </Typography>
-  );
-};
-
-const QuoteContent = ({ content, author }: QuotesResponseType) => {
+const DisplayContent = ({
+  content,
+  secondContent,
+}: {
+  content: string;
+  secondContent?: string;
+}) => {
   return (
     <>
       <Typography
         variant="h3"
         component="p"
         align="center"
-        sx={{ fontWeight: "bold", mb: "2rem" }}
+        sx={{ fontWeight: "bold" }}
       >
         {content}
       </Typography>
-      <Typography
-        variant="h4"
-        component="p"
-        align="center"
-        sx={{ fontWeight: "bold" }}
-      >
-        {author}
-      </Typography>
+      {secondContent && (
+        <Typography
+          variant="h4"
+          component="p"
+          align="center"
+          sx={{ fontWeight: "bold", mt: "2rem" }}
+        >
+          {secondContent}
+        </Typography>
+      )}
     </>
-  );
-};
-
-const FortuneCookieContent = ({ content }: FortuneCookieResponseType) => {
-  const _content = content?.split(":")?.[1];
-  const text = _content?.split("'")?.[1];
-  return (
-    <Typography
-      variant="h3"
-      component="p"
-      align="center"
-      sx={{ fontWeight: "bold" }}
-    >
-      {text}
-    </Typography>
   );
 };
 
@@ -80,16 +61,18 @@ const Content = ({
   data,
 }: {
   apiName: ApiNameType;
-  data: AdviceResponseType | QuotesResponseType | FortuneCookieResponseType;
+  data?: DataResponseType;
 }) => {
   const renderContent = (apiName, data) => {
     switch (apiName) {
       case API_NAMES.ADVICE:
-        return <AdviceContent content={data.content} />;
+        return <DisplayContent content={data.content} />;
       case API_NAMES.QUOTES:
-        return <QuoteContent content={data.content} author={data.author} />;
+        return (
+          <DisplayContent content={data.content} secondContent={data.author} />
+        );
       case API_NAMES.FORTUNE_COOKIE:
-        return <FortuneCookieContent content={data.content} />;
+        return <DisplayContent content={data.content} />;
       default:
         return "Not Found";
     }
