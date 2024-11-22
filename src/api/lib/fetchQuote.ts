@@ -5,7 +5,7 @@ const options: AxiosRequestConfig = {
   method: "GET",
   url: "https://quotes15.p.rapidapi.com/quotes/random/?language_code=en",
   headers: {
-    "x-rapidapi-host": process.env.NEXT_X_RAPID_API_HOST,
+    "x-rapidapi-host": process.env.NEXT_X_RAPID_API_HOST_QUOTES,
     "x-rapidapi-key": process.env.NEXT_X_RAPID_API_KEY,
   },
 };

@@ -56,6 +56,15 @@ const Buttons = (props: ButtonsProps) => {
       >
         Quote
       </ApiButton>
+      <ApiButton
+        variant="contained"
+        size="large"
+        onClick={() => handleChangeApi(API_NAMES.FORTUNE_COOKIE)}
+        disabled={api === API_NAMES.FORTUNE_COOKIE}
+        sx={{ backgroundColor: "darkorange" }}
+      >
+        Fortune Cookie
+      </ApiButton>
     </ButtonGroup>
   );
 };

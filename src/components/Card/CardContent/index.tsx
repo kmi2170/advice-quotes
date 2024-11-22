@@ -5,6 +5,7 @@ import LoadingIndicator from "../../LoadingIndicator";
 import {
   AdviceResponseType,
   ApiNameType,
+  FortuneCookieResponseType,
   QuotesResponseType,
 } from "../../../api/types";
 import Content from "./Content";
@@ -22,7 +23,7 @@ const CartContentWrapper = styled("div")({
 type CardContentProps = {
   isFetching: boolean;
   isError: boolean;
-  data: AdviceResponseType | QuotesResponseType;
+  data: AdviceResponseType | QuotesResponseType | FortuneCookieResponseType;
   apiName: ApiNameType;
 };
 

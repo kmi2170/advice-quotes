@@ -5,6 +5,7 @@ import {
   AdviceResponseType,
   API_NAMES,
   ApiNameType,
+  FortuneCookieResponseType,
   QuotesResponseType,
 } from "../../../api/types";
 
@@ -59,12 +60,27 @@ const QuoteContent = ({ content, author }: QuotesResponseType) => {
   );
 };
 
+const FortuneCookieContent = ({ content }: FortuneCookieResponseType) => {
+  const _content = content?.split(":")?.[1];
+  const text = _content?.split("'")?.[1];
+  return (
+    <Typography
+      variant="h3"
+      component="p"
+      align="center"
+      sx={{ fontWeight: "bold" }}
+    >
+      {text}
+    </Typography>
+  );
+};
+
 const Content = ({
   apiName,
   data,
 }: {
   apiName: ApiNameType;
-  data: AdviceResponseType | QuotesResponseType;
+  data: AdviceResponseType | QuotesResponseType | FortuneCookieResponseType;
 }) => {
   const renderContent = (apiName, data) => {
     switch (apiName) {
@@ -72,6 +88,8 @@ const Content = ({
         return <AdviceContent content={data.content} />;
       case API_NAMES.QUOTES:
         return <QuoteContent content={data.content} author={data.author} />;
+      case API_NAMES.FORTUNE_COOKIE:
+        return <FortuneCookieContent content={data.content} />;
       default:
         return "Not Found";
     }

@@ -1,6 +1,7 @@
 export const API_NAMES = {
   ADVICE: "advice",
   QUOTES: "zenquotes",
+  FORTUNE_COOKIE: "fortune_cookie",
 } as const;
 
 export type ApiNameType = (typeof API_NAMES)[keyof typeof API_NAMES];
@@ -27,6 +28,15 @@ export type QuotesReturnType = {
 export type QuotesResponseType = {
   content: string;
   author: string;
+};
+
+export type FortuneCookieReturnType = {
+  response_type: string;
+  text: string;
+};
+
+export type FortuneCookieResponseType = {
+  content: string;
 };
 
 export const API_CATEGORIES = {

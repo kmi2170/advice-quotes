@@ -9,6 +9,8 @@ const Title = ({ apiName }: { apiName: ApiNameType }) => {
         return "Advice";
       case API_NAMES.QUOTES:
         return "Quote";
+      case API_NAMES.FORTUNE_COOKIE:
+        return "Fortune Cookie";
     }
   };
 
