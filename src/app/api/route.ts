@@ -1,13 +1,12 @@
 "use server";
 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getFetchFn } from "../../api/lib/getFetchFn";
 import { ApiNameType } from "../../api/types";
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   try {
-    const url = new URL(req.url as string);
-    const searchParams = url.searchParams;
+    const searchParams = req.nextUrl.searchParams;
     const type = searchParams.get("type") as ApiNameType;
 
     const fetchFn = getFetchFn(type);

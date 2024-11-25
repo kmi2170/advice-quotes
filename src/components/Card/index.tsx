@@ -19,7 +19,7 @@ const fetchFn = async (type: ApiNameType) => {
 const CardComponent = () => {
   const [api, setApi] = useState<ApiNameType>(API_NAMES.ADVICE);
 
-  const { data, isFetching, isError, refetch } = useQuery({
+  const { data, isFetching, isError, refetch } = useQuery<DataResponseType>({
     queryKey: [api, api],
     queryFn: () => fetchFn(api),
     refetchOnMount: false,
