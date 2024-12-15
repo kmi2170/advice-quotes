@@ -1,14 +1,18 @@
-import Image from "next/image";
-import { wallpapers } from "../assets/wallpapers";
+"use client";
 
-const imageLoader = () => {
-  const pickedId = Math.floor(Math.random() * wallpapers.length);
-  let imageUrl = wallpapers[pickedId].wallpaper;
-  return imageUrl;
-};
+import Image, { StaticImageData } from "next/image";
+import { imageLoader } from "../lib/imageLoader";
+import { useEffect, useState } from "react";
 
 export default function BackgroundImage() {
-  const img = imageLoader();
+  const [img, setImg] = useState<StaticImageData | null>(null);
+
+  useEffect(() => {
+    const img = imageLoader();
+    setImg(img);
+  }, []);
+
+  if (!img) return;
 
   return (
     <Image
