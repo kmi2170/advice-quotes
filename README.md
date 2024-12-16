@@ -1,33 +1,25 @@
-# Adice Quotes App
+# Adice App
 
 A very simple app to display
-randomly chosen advice/quotes.
+randomly chosen advice/quote/fortune cookie
 
 ## Features
 
-- Randomly pick up advice/quotes (switchable bwtween them)
-- Narrow down quotes by categories.
-- Two types of background images (flowers/bamboos)
+- Randomly pick up advice/quote/fortune cookie (switchable bwtween them)
+- Hitting 'Get Another' button to get new one
+- Randomly chosen back ground image on every load
 
-## Technicals
+## Techs
 
-This project is built with [Next.js](https://nextjs.org/), TypeScript, [Redux-Toolkit](https://redux-toolkit.js.org/) and [Material-UI](https://mui.com/).
+Built with Next.js, TypeScript, Tanstack query and Material UI
 
 ### API Calls
-
-Completely free. No app-key is required.
-
-- [Advice Slip JSON API](https://api.adviceslip.com/)
-- [Quatable](https://github.com/lukePeavey/quotable)
+- [Advice Slip JSON API](https://api.adviceslip.com/) (free, no api key is required)
+- [Quote](https://rapidapi.com/martin.svoboda/api/Quotes) (free, api key is requred)
+- [Fortune Cookie](https://rapidapi.com/wh-iterabb-it-wh-iterabb-it-default/api/Fortune%20Cookie) (free, api key is required)
 
 ## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Local enviroment
+  - Put your api keys in .env.local
+  - yarn dev or yarn start (after yarn build)
+  - Open http://localhost:3000 (or use appropriate address) in browser to see the result.
