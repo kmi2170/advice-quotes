@@ -6,7 +6,7 @@ import axios from "axios";
 import Card from "@mui/material/Card";
 
 import Title from "../Title";
-import Buttons from "./Buttons";
+import CategoryButtons from "./CategoryButtons";
 import CardContent from "./CardContent";
 import GetAnotherButton from "./GetAnotherButton";
 import { API_NAMES, ApiNameType, DataResponseType } from "../../api/types";
@@ -33,14 +33,14 @@ const CardComponent = () => {
 
   return (
     <>
-      <Buttons api={api} handleChangeApi={handleChangeApi} />
+      <CategoryButtons api={api} handleChangeApi={handleChangeApi} />
       <Card
         elevation={6}
         component="main"
         sx={{
           width: "80vw",
           maxWidth: "1024px",
-          minHeight: "50vh",
+          heigh: "50vh",
           pl: "1rem",
           pr: "1rem",
           pt: "1.5rem",

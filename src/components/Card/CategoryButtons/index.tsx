@@ -33,7 +33,7 @@ type ButtonsProps = {
   handleChangeApi: (api: ApiNameType) => void;
 };
 
-const Buttons = (props: ButtonsProps) => {
+const CategoryButtons = (props: ButtonsProps) => {
   const { api, handleChangeApi } = props;
   return (
     <ButtonGroup>
@@ -69,4 +69,4 @@ const Buttons = (props: ButtonsProps) => {
   );
 };
 
-export default Buttons;
+export default CategoryButtons;
