@@ -6,7 +6,7 @@ import { styled } from "@mui/material/styles";
 const ButtonGroup = styled("div")(({ theme }) => ({
   marginBottom: "2rem",
   [theme.breakpoints.down("sm")]: {
-    width: "80%",
+    width: "90%",
   },
   [theme.breakpoints.up("sm")]: {
     width: "60%",
@@ -39,7 +39,7 @@ const CategoryButtons = (props: ButtonsProps) => {
     <ButtonGroup>
       <ApiButton
         variant="contained"
-        size="large"
+        size="medium"
         onClick={() => handleChangeApi(API_NAMES.ADVICE)}
         disabled={api === API_NAMES.ADVICE}
         sx={{}}
@@ -49,7 +49,7 @@ const CategoryButtons = (props: ButtonsProps) => {
       <ApiButton
         variant="contained"
         color="secondary"
-        size="large"
+        size="medium"
         onClick={() => handleChangeApi(API_NAMES.QUOTES)}
         disabled={api === API_NAMES.QUOTES}
         sx={{}}
@@ -58,7 +58,7 @@ const CategoryButtons = (props: ButtonsProps) => {
       </ApiButton>
       <ApiButton
         variant="contained"
-        size="large"
+        size="medium"
         onClick={() => handleChangeApi(API_NAMES.FORTUNE_COOKIE)}
         disabled={api === API_NAMES.FORTUNE_COOKIE}
         sx={{ backgroundColor: "darkorange" }}
