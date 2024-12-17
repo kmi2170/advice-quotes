@@ -40,7 +40,7 @@ const CardComponent = () => {
         sx={{
           width: "80vw",
           maxWidth: "1024px",
-          heigh: "50vh",
+          minHeight: "50vh",
           pl: "1rem",
           pr: "1rem",
           pt: "1.5rem",

@@ -1,14 +1,7 @@
 import Typography from "@mui/material/Typography";
 
 import { keyframes, styled } from "@mui/material/styles";
-import {
-  AdviceResponseType,
-  API_NAMES,
-  ApiNameType,
-  DataResponseType,
-  FortuneCookieResponseType,
-  QuotesResponseType,
-} from "../../../api/types";
+import { API_NAMES, ApiNameType, DataResponseType } from "../../../api/types";
 
 const fadeIn = keyframes`
   0% {
@@ -25,6 +18,32 @@ const Animation = styled("div")({
   animation: `${fadeIn} 1s ease-out`,
 });
 
+const Content = ({
+  apiName,
+  data,
+}: {
+  apiName: ApiNameType;
+  data?: DataResponseType;
+}) => {
+  const renderContent = (apiName, data) => {
+    switch (apiName) {
+      case API_NAMES.ADVICE:
+        return <DisplayContent content={data.content} />;
+      case API_NAMES.QUOTES:
+        return (
+          <DisplayContent content={data.content} secondContent={data.author} />
+        );
+      case API_NAMES.FORTUNE_COOKIE:
+        return <DisplayContent content={data.content} />;
+      default:
+        return "Not Found";
+    }
+  };
+
+  return <Animation>{renderContent(apiName, data)}</Animation>;
+};
+
+export default Content;
 const DisplayContent = ({
   content,
   secondContent,
@@ -55,30 +74,3 @@ const DisplayContent = ({
     </>
   );
 };
-
-const Content = ({
-  apiName,
-  data,
-}: {
-  apiName: ApiNameType;
-  data?: DataResponseType;
-}) => {
-  const renderContent = (apiName, data) => {
-    switch (apiName) {
-      case API_NAMES.ADVICE:
-        return <DisplayContent content={data.content} />;
-      case API_NAMES.QUOTES:
-        return (
-          <DisplayContent content={data.content} secondContent={data.author} />
-        );
-      case API_NAMES.FORTUNE_COOKIE:
-        return <DisplayContent content={data.content} />;
-      default:
-        return "Not Found";
-    }
-  };
-
-  return <Animation>{renderContent(apiName, data)}</Animation>;
-};
-
-export default Content;
