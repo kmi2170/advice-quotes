@@ -39,7 +39,7 @@ const CategoryButtons = (props: ButtonsProps) => {
     <ButtonGroup>
       <ApiButton
         variant="contained"
-        size="medium"
+        size="large"
         onClick={() => handleChangeApi(API_NAMES.ADVICE)}
         disabled={api === API_NAMES.ADVICE}
         sx={{}}
@@ -49,7 +49,7 @@ const CategoryButtons = (props: ButtonsProps) => {
       <ApiButton
         variant="contained"
         color="secondary"
-        size="medium"
+        size="large"
         onClick={() => handleChangeApi(API_NAMES.QUOTES)}
         disabled={api === API_NAMES.QUOTES}
         sx={{}}
@@ -58,7 +58,7 @@ const CategoryButtons = (props: ButtonsProps) => {
       </ApiButton>
       <ApiButton
         variant="contained"
-        size="medium"
+        size="large"
         onClick={() => handleChangeApi(API_NAMES.FORTUNE_COOKIE)}
         disabled={api === API_NAMES.FORTUNE_COOKIE}
         sx={{ backgroundColor: "darkorange" }}

@@ -23,26 +23,8 @@ const Footer = () => {
           textShadow: "2px 2px black",
         }}
       >
-        &copy; {year} Kemmei H. | Powered by&nbsp;
+        &copy; {year} Kemmei H.
       </Typography>
-      <a
-        href="https://api.adviceslip.com"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        <Typography
-          component="footer"
-          variant="subtitle1"
-          align="center"
-          sx={{
-            marginTop: "2rem",
-            color: "#fff",
-            textShadow: "2px 2px black",
-          }}
-        >
-          Advice Slip
-        </Typography>
-      </a>
     </Box>
   );
 };

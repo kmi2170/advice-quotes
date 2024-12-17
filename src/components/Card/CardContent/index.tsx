@@ -11,8 +11,7 @@ const CartContentWrapper = styled("div")({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  minHeight: "30vh",
-  maxHeight: "50vh",
+  height: "min(500px, 40vh)",
 });
 
 type CardContentProps = {

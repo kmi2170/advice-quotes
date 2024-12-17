@@ -1,3 +1,4 @@
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import { keyframes, styled } from "@mui/material/styles";
@@ -52,7 +53,7 @@ const DisplayContent = ({
   secondContent?: string;
 }) => {
   return (
-    <>
+    <Box sx={{ mt: "2rem", mb: "1rem" }}>
       <Typography
         variant="h3"
         component="p"
@@ -71,6 +72,6 @@ const DisplayContent = ({
           {secondContent}
         </Typography>
       )}
-    </>
+    </Box>
   );
 };

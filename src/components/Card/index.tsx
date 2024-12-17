@@ -38,9 +38,8 @@ const CardComponent = () => {
         elevation={6}
         component="main"
         sx={{
-          width: "80vw",
+          width: "90vw",
           maxWidth: "1024px",
-          minHeight: "50vh",
           pl: "1rem",
           pr: "1rem",
           pt: "1.5rem",
